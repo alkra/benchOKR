@@ -1,0 +1,57 @@
+Projet Géomatique
+Alban Kraus
+11 février 2015
+
+Avant :
+-------
+Ébauche de recherche biblio
+mail au commanditaire la veille, pas de réponse
+
+Pendant :
+---------
+9h : Échange entre les membres de l’équipe et élection du chef de projet
+9h30 : le commanditaire n'est pas là.
+Clément Delgrange, du Valilab, nous accueille et ne peut pas nous aider
+Raphaëlle Héno, du DIAS, nous fournit le rapport du projet précédent le nôtre
+-> 12h : recherche bibliographique.
+
+Décisions prises :
+-----------------
+Il faudra prévoir du temps pour la formation : à la maison ou durant les séances ?
+On essaiera de réviser (C++ par ex.) à la maison, mais on n'hésitera pas à employer les séances de travail pour le développement des connaissances.
+
+Bibliographie :
+--------------
+
+Cours d'algorithmique (David)
+http://www.irisa.fr/prive/kadi/DIIC/SDI-2-annee/Expose_KdTree.pdf (Kd-tree pour le lancer de rayon)
+http://www.alrj.org/docs/3D/octree.php (approche simple de l'octree)
+http://www.autonlab.org/autonweb/14665/version/2/part/5/data/moore-tutorial.pdf [en] (tutoriel pour utiliser l'octree (plus proche voisin))
+http://www.danielgm.net/cc/doc/qCC/Documentation_CloudCompare_version_2_4.pdf (Documentation de CloudCompare)
+
+Rapport d'Estelle Grémion : plateforme de visualisation de nuages de points 3D (2014, DIAS-ENSG)
+	CloudCompare choisi car libre, C++/Qt, octree. Le développeur est disponible
+	Système de stockage des données (probablemen le nôtre ?)
+
+Documentation du format PLY : http://reference.wolfram.com/language/ref/format/PLY.html
+
+Synthèse bibliographie (David) :
+-----------------------
+
+III.	Etude bibliographique sur les  méthodes de subdivision spatiale
+Etude dans cette partie de 3 structures de données que sont :
+1.	Méthode Kd-Tree (K-dimensional Tree)
+ L'espace est divisé en son centre en k dimensions. Il faut définir la hauteur de l’arbre pour ne pas que la subdivision se poursuive à l’infini.
+3 algorithmes sont usuellement utilisés :
+?	Algorithme général : arbres binaires
+?	Méthodes basiques
+?	Méthodes utilisant la  « Surface Area Heuristic »
+http://www.irisa.fr/prive/kadi/DIIC/SDI-2-annee/Expose_KdTree.pdf
+2.	Méthode Octree
+Ils permettent d'indexer tous les types de géométries et en 3 dimensions. L'espace est divisé en son centre en 8 parties égales. Il faut définir la hauteur de l’arbre pour ne pas que la subdivision se poursuive à l’infini.
+3.	Méthode R-Tree
+
+
+Après :
+------
+Algorithmique : arbres, et listes (http://openclassrooms.com/courses/les-listes-chainees-2), pointeurs, récursion
