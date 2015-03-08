@@ -1,0 +1,17 @@
+Proposition d'organisation des répertoires sur la branche devel :
+
+/doc/ : contient toute la documentation du projet
+     bib/  : contient les documents à vocation bibliographique
+     proj/ : contient les documents liés à la gestion du projet (1)
+     	   cr/ : contient les comptes-rendus de chaque séance (2)
+
+/src/ : contiendra les fichiers source, on verra plus tard
+
+(1) Les fichiers 18-02-15.Gantt.* concernent le Gantt à la date du 18-02.
+À ouvrir avec Gantt Project (www.ganttproject.biz) (nécessite Java)
+(2) Je propose de les nommer j-mm-aa[.Titre][.Version].ext
+    Par contre il va falloir se renseigner sur la gestion des modifications
+    concurrentes proposée par Word ou bien passer à un format texte...
+
+Merci de me faire parvenir vos remarques.
+     	   
