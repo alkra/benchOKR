@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="KdTree" version="3">
+  <DEPS>
+    <ID name="KdTree" mc="Class" uid="04a9c20c-f14e-4bb6-9a67-b9fa40386871"/>
+    <EXTID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="KdTree" mc="Class" uid="04a9c20c-f14e-4bb6-9a67-b9fa40386871"/>
+    <PID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[KdTree]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Parent">
+        <OBJECT>
+          <ID name="Generalization" mc="Generalization" uid="fe990f06-cc46-4662-b8f9-60baa4f19ccc"/>
+          <PID name="KdTree" mc="Class" uid="04a9c20c-f14e-4bb6-9a67-b9fa40386871"/>
+          <ATTRIBUTES>
+            <ATT name="Discriminator"></ATT>
+            <ATT name="Name"><![CDATA[Generalization]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SuperType">
+              <ID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

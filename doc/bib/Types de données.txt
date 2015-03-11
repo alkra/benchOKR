@@ -1,0 +1,4 @@
+http://www.cplusplus.com/reference/deque/deque/
+http://www.cplusplus.com/reference/list/list/
+http://www.cplusplus.com/reference/array/array/
+http://www.cplusplus.com/reference/vector/vector/

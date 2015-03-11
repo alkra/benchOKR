@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="NoeudR" version="3">
+  <DEPS>
+    <ID name="NoeudR" mc="Class" uid="165d9e65-095f-44d9-88e7-454f4067b37f"/>
+    <EXTID name="Noeud" mc="Class" uid="be81d704-587a-45d7-9164-1f25213149fa"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="NoeudR" mc="Class" uid="165d9e65-095f-44d9-88e7-454f4067b37f"/>
+    <PID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[NoeudR]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Parent">
+        <OBJECT>
+          <ID name="Generalization" mc="Generalization" uid="993de9e9-23c5-46ae-9b48-c8aa5e576933"/>
+          <PID name="NoeudR" mc="Class" uid="165d9e65-095f-44d9-88e7-454f4067b37f"/>
+          <ATTRIBUTES>
+            <ATT name="Discriminator"></ATT>
+            <ATT name="Name"><![CDATA[Generalization]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SuperType">
+              <ID name="Noeud" mc="Class" uid="be81d704-587a-45d7-9164-1f25213149fa"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
