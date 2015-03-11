@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="projetinfo" version="3">
+  <DEPS>
+    <ID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <COMPID name="Afficher les données" mc="UseCase" uid="fac67795-fa9d-4815-be67-2b4875ccffb0"/>
+    <COMPID name="Découper les données" mc="UseCase" uid="6e533041-f4a6-48de-b6df-ded194d3619e"/>
+    <COMPID name="Lire les données" mc="UseCase" uid="c1c4e1ac-7fdc-4b22-bd4b-91f13ef00444"/>
+    <COMPID name="overview diagram" mc="ClassDiagram" uid="95c54f0a-f673-402a-af98-bc50ced5326e"/>
+    <COMPID name="projetinfo Use Case diagram" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <PID name="projetInfo" mc="Project" uid="cfcf698f-62ce-4f4d-8cf0-2df6a7781656"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[projetinfo]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Lire les données" mc="UseCase" uid="c1c4e1ac-7fdc-4b22-bd4b-91f13ef00444"/>
+        <COMPID name="Découper les données" mc="UseCase" uid="6e533041-f4a6-48de-b6df-ded194d3619e"/>
+        <COMPID name="Afficher les données" mc="UseCase" uid="fac67795-fa9d-4815-be67-2b4875ccffb0"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="overview diagram" mc="ClassDiagram" uid="95c54f0a-f673-402a-af98-bc50ced5326e"/>
+        <COMPID name="projetinfo Use Case diagram" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
