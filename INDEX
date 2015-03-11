@@ -4,6 +4,7 @@ Proposition d'organisation des répertoires sur la branche devel :
      bib/  : contient les documents à vocation bibliographique
      proj/ : contient les documents liés à la gestion du projet (1)
      	   cr/ : contient les comptes-rendus de chaque séance (2)
+     uml/  : contient les fichiers de Modelio (UML)
 
 /src/ : contiendra les fichiers source, on verra plus tard
 
