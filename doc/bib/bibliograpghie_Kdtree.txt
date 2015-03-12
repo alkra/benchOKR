@@ -1,0 +1,3 @@
+Algorithme : http://www.irisa.fr/prive/kadi/DIIC/SDI-2-annee/Expose_KdTree.pdf 
+
+Explication détaillées de la méthode : http://cedric.fleu.free.fr/media/rapportCTR_cfleury.pdf
