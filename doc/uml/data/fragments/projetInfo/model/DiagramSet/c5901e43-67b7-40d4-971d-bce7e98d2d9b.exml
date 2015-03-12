@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="projetInfo" version="3">
+  <DEPS>
+    <ID name="projetInfo" mc="DiagramSet" uid="c5901e43-67b7-40d4-971d-bce7e98d2d9b"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="projetInfo" mc="DiagramSet" uid="c5901e43-67b7-40d4-971d-bce7e98d2d9b"/>
+    <PID name="projetInfo" mc="Project" uid="cfcf698f-62ce-4f4d-8cf0-2df6a7781656"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[projetInfo]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>

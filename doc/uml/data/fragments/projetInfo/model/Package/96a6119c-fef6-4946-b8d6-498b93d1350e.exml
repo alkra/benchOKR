@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="projetinfo" version="3">
+  <DEPS>
+    <ID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <COMPID name="Afficher les données" mc="UseCase" uid="fac67795-fa9d-4815-be67-2b4875ccffb0"/>
+    <COMPID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
+    <COMPID name="Camera" mc="Class" uid="b6a2ac95-9a47-4a85-9b30-d4841f90bcfd"/>
+    <COMPID name="Diagramme de classes" mc="ClassDiagram" uid="68eaf1c4-16a7-4ef5-bd98-e80cf62fc720"/>
+    <COMPID name="Découper les données" mc="UseCase" uid="6e533041-f4a6-48de-b6df-ded194d3619e"/>
+    <COMPID name="Fichier" mc="Class" uid="e5f54ba1-709d-40f7-8787-9583c434b132"/>
+    <COMPID name="KdTree" mc="Class" uid="04a9c20c-f14e-4bb6-9a67-b9fa40386871"/>
+    <COMPID name="Lire les données" mc="UseCase" uid="c1c4e1ac-7fdc-4b22-bd4b-91f13ef00444"/>
+    <COMPID name="Noeud" mc="Class" uid="be81d704-587a-45d7-9164-1f25213149fa"/>
+    <COMPID name="NoeudKd" mc="Class" uid="a0b6166e-3d17-4593-bd41-d7bcaeb18625"/>
+    <COMPID name="NoeudOctree" mc="Class" uid="6d907784-f6d7-4ca7-932e-2a5e7d6bbc3e"/>
+    <COMPID name="NoeudR" mc="Class" uid="165d9e65-095f-44d9-88e7-454f4067b37f"/>
+    <COMPID name="Octree" mc="Class" uid="8adabafb-cf08-4767-9be5-b53ed433773e"/>
+    <COMPID name="PlanSeparateur" mc="Class" uid="8b7d19fc-3cf5-48a8-ac45-eb9acd0589ee"/>
+    <COMPID name="Point" mc="Class" uid="df393677-22c0-4dff-b588-e45af89f3357"/>
+    <COMPID name="Point3D" mc="DataType" uid="c2d9a490-b8aa-497d-b991-08d6c4204523"/>
+    <COMPID name="RTree" mc="Class" uid="4ac57d25-331b-45e4-8e69-f84fe2e48a6c"/>
+    <COMPID name="Voxel" mc="Class" uid="c6329cd0-f2cc-439a-b8e7-b2d915660926"/>
+    <COMPID name="overview diagram" mc="ClassDiagram" uid="95c54f0a-f673-402a-af98-bc50ced5326e"/>
+    <COMPID name="projetinfo Use Case diagram" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <PID name="projetInfo" mc="Project" uid="cfcf698f-62ce-4f4d-8cf0-2df6a7781656"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[projetinfo]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Lire les données" mc="UseCase" uid="c1c4e1ac-7fdc-4b22-bd4b-91f13ef00444"/>
+        <COMPID name="Découper les données" mc="UseCase" uid="6e533041-f4a6-48de-b6df-ded194d3619e"/>
+        <COMPID name="Afficher les données" mc="UseCase" uid="fac67795-fa9d-4815-be67-2b4875ccffb0"/>
+        <COMPID name="KdTree" mc="Class" uid="04a9c20c-f14e-4bb6-9a67-b9fa40386871"/>
+        <COMPID name="Octree" mc="Class" uid="8adabafb-cf08-4767-9be5-b53ed433773e"/>
+        <COMPID name="RTree" mc="Class" uid="4ac57d25-331b-45e4-8e69-f84fe2e48a6c"/>
+        <COMPID name="NoeudKd" mc="Class" uid="a0b6166e-3d17-4593-bd41-d7bcaeb18625"/>
+        <COMPID name="NoeudOctree" mc="Class" uid="6d907784-f6d7-4ca7-932e-2a5e7d6bbc3e"/>
+        <COMPID name="NoeudR" mc="Class" uid="165d9e65-095f-44d9-88e7-454f4067b37f"/>
+        <COMPID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
+        <COMPID name="Noeud" mc="Class" uid="be81d704-587a-45d7-9164-1f25213149fa"/>
+        <COMPID name="Fichier" mc="Class" uid="e5f54ba1-709d-40f7-8787-9583c434b132"/>
+        <COMPID name="Point" mc="Class" uid="df393677-22c0-4dff-b588-e45af89f3357"/>
+        <COMPID name="PlanSeparateur" mc="Class" uid="8b7d19fc-3cf5-48a8-ac45-eb9acd0589ee"/>
+        <COMPID name="Voxel" mc="Class" uid="c6329cd0-f2cc-439a-b8e7-b2d915660926"/>
+        <COMPID name="Point3D" mc="DataType" uid="c2d9a490-b8aa-497d-b991-08d6c4204523"/>
+        <COMPID name="Camera" mc="Class" uid="b6a2ac95-9a47-4a85-9b30-d4841f90bcfd"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="overview diagram" mc="ClassDiagram" uid="95c54f0a-f673-402a-af98-bc50ced5326e"/>
+        <COMPID name="projetinfo Use Case diagram" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
+        <COMPID name="Diagramme de classes" mc="ClassDiagram" uid="68eaf1c4-16a7-4ef5-bd98-e80cf62fc720"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="RTree" version="3">
+  <DEPS>
+    <ID name="RTree" mc="Class" uid="4ac57d25-331b-45e4-8e69-f84fe2e48a6c"/>
+    <EXTID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="RTree" mc="Class" uid="4ac57d25-331b-45e4-8e69-f84fe2e48a6c"/>
+    <PID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[RTree]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Parent">
+        <OBJECT>
+          <ID name="Generalization" mc="Generalization" uid="0a4b08ee-7fce-4fbb-9749-3d7fbfabfef8"/>
+          <PID name="RTree" mc="Class" uid="4ac57d25-331b-45e4-8e69-f84fe2e48a6c"/>
+          <ATTRIBUTES>
+            <ATT name="Discriminator"></ATT>
+            <ATT name="Name"><![CDATA[Generalization]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SuperType">
+              <ID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
