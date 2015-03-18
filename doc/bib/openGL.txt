@@ -3,6 +3,19 @@
 !-------------------!
 
 
+
+Sources :
+---------
+
+http://openclassrooms.com/courses/creez-des-programmes-en-3d-avec-opengl
+(Surtout partie 1)
+https://fr.wikipedia.org/wiki/OpenGL
+https://fr.wikipedia.org/wiki/OpenGL_utility_library
+https://fr.wikipedia.org/wiki/OpenGL_utility_toolkit
+
+
+
+
 Définition
 ----------
 
@@ -10,3 +23,62 @@ OpenGL (pour Open Graphics Library) est une interface de programmation
 ouverte permettant de calculer des images 2D et 3D. À partir d'objets
 graphiques déclarés, OpenGL se charge d'effectuer les calculs de
 projection et l'affichage à l'écran.
+
+Les primitives d'openGL sont :
+-- des points
+-- des segments
+-- une ligne (brisée)
+-- une ligne (brisée) fermée
+-- des triangles
+-- un réseau de triangles ayant deux à deux un côté en commun
+-- un réseau de triangles ayant tous un sommet en commun
+-- des quadrilatères
+-- un réseau de quadrilatères ayant deux à deux un côté en commun
+-- un polygone
+
+GLU (OpenGL Utility library) apporte des fonctionnalités
+supplémentaires, parmi lesquelles la gestion de la matrice de
+projection (GluOrtho ou GluPerspective) et de visualisation (caméra).
+
+Code:C
+|
+|   gluLookAt(camX, camY, camZ, // Position de la caméra
+|             cibleX, cibleY, cibleZ, // Coords du point visé
+|                                     // (centre de l'écran)
+|             vertX, vertY, vertZ); // Coords du vecteur verticale
+|
+
+Les premiers paramètres servent à translater la caméra, les deuxièmes
+à la tourner (selon l'axe d'un trépied fictif) et les troisièmes à
+l'incliner.
+
+GLut (OpenGL Utility Toolkit) permet de gérer les fenêtres et les
+intéractions avec le système d'exploitation.
+
+
+
+Les Caméras
+-----------
+
+Il existe plusieurs types de caméra.
+Une caméra Trackball est fixe et fait tourner le monde autour
+d'elle. Elle est utilisée par exemple dans Google Earth.
+Une caméra FreeFly est mobile dans un monde fixe.
+
+Étant donné que notre monde est un immense nuage de points, il sera
+plus rentable d'utiliser une caméra mobile (car faire bouger le monde
+revient à appliquer une matrice de rotation sur chaque point du
+monde).
+
+
+
+Implémentation
+--------------
+
+   OS   |   include   |      lib
+xxxxxxxx|xxxxxxxxxxxxx|xxxxxxxxxxxxxx
+Windows |   GL/gl.h   | libopengl32.a
+        |  GL/glu.h   | libglu32.a
+--------|-------------|--------------
+ Unix   | libopengl.a |
+        |   libglu.a  |
