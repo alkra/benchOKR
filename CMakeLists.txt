@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 project(projet_geomatique)
-find_package(Qt4 REQUIRED)
+find_package(Qt5 REQUIRED)
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 

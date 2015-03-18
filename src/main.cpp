@@ -1,5 +1,4 @@
 #include <QtGui/QApplication>
-#include "Projet_Geomatique.h"
 
 
 int main(int argc, char** argv)
