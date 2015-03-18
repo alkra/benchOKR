@@ -76,3 +76,80 @@ Pendant la séance
 -----------------
 
 Mail pour le CoPil : tout créneau horaire conviendra.
+
+Maryame a travaillé sur le système de fichier :
+-- lecture d'un fichier texte basique
+-- stockage dans une matrice.
+Elle a commencé a travailler sur la récupération de la médiane, mais
+se heurte au problème suivant (classique) : une fois le tableau trié,
+impossible de connaître l'indice originel de la médiane.
+Nous devons nous documenter sur le sujet : existe-t-il une fonction de
+tri renvoyant un tableau de correspondance entre l'indice après tri et
+l'indice originel ? Sinon, il faudra l'écrire.
+
+David a écrit les prototypes des classes du projet.
+
+Alban s'est renseigné sur OpenGL : /doc/bib/openGL.txt
+
+Pour préparer le comité de pilotage, nous avons décidé d'une réunion
+supplémentaire ce samedi 21 mars à 9h en M209 (pensez à vos badges).
+
+Nous sommes en retard sur le planning.
+
+
+
+Réunion de fin de séance
+------------------------
+
+Avec Emmanuel, nous avons discuté des indicateurs de performance.
+-- un arbre peut être équilibré ou non ; selon le cas, la place prise
+   en mémoire est différente. Indicateur ?: place en mémoire ;
+-- indicateur sur la recherche des voisins
+-- indicateur sur l'ajout de données : est-ce pertinent ?
+-- montée en charge : les performances relatives sur un petit nuage
+   peuvent être différentes sur un gros nuage. Exemple de CloudCompare
+   versus Meshlab.
+
+Il faudra également hiérarchiser les indicateurs.
+
+Au vu de notre diagramme de classe, Emmanuel notre référent technique
+a souligné la différence entre le diagramme de classe d'application
+(ce que nous avons fait) et le diagramme de classe de stockage (par
+exemple, pour une base de données relationnelle, on indique les clés
+mais pas forcément les méthodes).
+Dans notre cas, un diagramme de déploiement ne sera pas forcément
+nécessaire, car nous déployons un programme sur une machine. La seule
+contrainte que doit respecter cette machine est qu'elle doit disposer
+d'une carte graphique compatible avec OpenGL.
+
+
+
+Après la séance
+---------------
+
+Nous devons continuer le travail commencé aujourd'hui :
+-- lecture des fichiers .ply en plus de .txt (prioritaire car utilisé
+   par toutes les méthodes, et transversal) ;
+-- recherche de librairies implémentant nos arbres (chacun pour sa
+   méthode, mais essayer de prendre la même pour éviter les conflits ;
+   nous avons déjà parlé de pcl ...) ;
+-- résolution du problème de Maryame
+
+Pour préparer la réunion de samedi (priorité absolue) :
+-- rédiger sa part de présentation : David se charge de la
+   présentation du contexte (tout le monde peut venir avec des idées sur
+   le sujet), de la présentation des acteurs, du besoin, et des
+   fonctionnalités (dans l'ordre) ; Maryame s'occupe de la solution
+   technique (les trois méthodes d'arbre, le langage et les librairies
+   choisies, les indicateurs choisis ; Alban s'occupe de ce qui
+   concerne la gestion de projet (et de mettre à jour le Gantt).
+-- réfléchir à un nom pour le projet
+-- réfléchir aux indicateurs
+
+Ce samedi, on définira d'abord les indicateurs choisis. Ensuite, on
+mettra bout à bout les présentations de chacun (format MS PowerPoint,
+ne pas s'occuper du style) et on définira le style et la gestion de la
+présentation.
+
+Le comité de pilotage a lieu le mardi 24 mars au matin. Les documents
+doivent être envoyés avant lundi matin.
