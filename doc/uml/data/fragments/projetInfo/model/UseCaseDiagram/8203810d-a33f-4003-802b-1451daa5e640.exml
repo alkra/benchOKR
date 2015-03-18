@@ -1,16 +1,16 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="projetinfo Use Case diagram" version="3">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Diagramme des cas d'utilisation général" version="3">
   <DEPS>
-    <ID name="projetinfo Use Case diagram" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
+    <ID name="Diagramme des cas d'utilisation général" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
   </DEPS>
   <OBJECT>
-    <ID name="projetinfo Use Case diagram" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
+    <ID name="Diagramme des cas d'utilisation général" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
     <PID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
     <ATTRIBUTES>
       <ATT name="UiDataVersion">74</ATT>
       <ATT name="UiData"><![CDATA[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]]></ATT>
       <ATT name="PdeProperties"></ATT>
-      <ATT name="Name"><![CDATA[projetinfo Use Case diagram]]></ATT>
+      <ATT name="Name"><![CDATA[Diagramme des cas d'utilisation général]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES></DEPENDENCIES>
