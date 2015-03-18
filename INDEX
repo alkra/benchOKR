@@ -1,18 +1,16 @@
-Proposition d'organisation des répertoires sur la branche devel :
+Organisation des répertoires sur la branche devel :
 
-/doc/ : contient toute la documentation du projet
+/doc/     : contient toute la documentation du projet
      bib/  : contient les documents à vocation bibliographique
      proj/ : contient les documents liés à la gestion du projet (1)
-     	   cr/ : contient les comptes-rendus de chaque séance (2)
+     	   cr/ : contient les comptes-rendus de chaque séance
      uml/  : contient les fichiers de Modelio (UML)
+     Etude Fonctionnelle.docx : remarques en complément de l'UML
 
-/src/ : contiendra les fichiers source, on verra plus tard
+/include/ : contient les fichiers d'en-tête
+/src/     : contient les fichiers source
+/x86_64-gnulinux/ : contient les binaires pour la machine d'Alban
+projetDev.cbp : une idée de fichier projet Code::Blocks
 
 (1) Les fichiers 18-02-15.Gantt.* concernent le Gantt à la date du 18-02.
 À ouvrir avec Gantt Project (www.ganttproject.biz) (nécessite Java)
-(2) Je propose de les nommer j-mm-aa[.Titre][.Version].ext
-    Par contre il va falloir se renseigner sur la gestion des modifications
-    concurrentes proposée par Word ou bien passer à un format texte...
-
-Merci de me faire parvenir vos remarques.
-     	   
