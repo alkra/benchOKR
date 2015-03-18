@@ -1,0 +1,12 @@
+!-------------------!
+! Étude pour OpenGL !
+!-------------------!
+
+
+Définition
+----------
+
+OpenGL (pour Open Graphics Library) est une interface de programmation
+ouverte permettant de calculer des images 2D et 3D. À partir d'objets
+graphiques déclarés, OpenGL se charge d'effectuer les calculs de
+projection et l'affichage à l'écran.
