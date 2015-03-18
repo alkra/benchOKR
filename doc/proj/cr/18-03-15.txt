@@ -1,0 +1,78 @@
+!--------------------------------------!
+! COMPTE-RENDU DE LA SÉANCE DE TRAVAIL !
+!--------------------------------------!
+
+Date : 18 mars 2015
+Lieu : M209
+
+
+
+Avant la séance
+---------------
+
+La dernière fois, nous avons réalisé le diagramme de classes, une étude sur
+les différents langages possibles.
+
+
+
+Objectifs de la séance
+----------------------
+
+Il nous faut un nom et un logo.
+
+Nous devons choisir des indicateurs de performance.
+
+Lors de l'étude technique, nous n'avons pas réussi à tester le langages Python
+compilé.
+
+Nous allons orienter la séance sur la lecture et l'écriture en C++ dans un
+système de fichiers. Nous devons aussi nous renseigner sur OpenGL.
+
+Enfin, la réunion avec Emmanuel a fait ressortir le problème de la récursivité.
+Nos structures de données étant fondammentalement récursives, est-il envisa-
+geable de conserver ce style de programmation ?
+
+
+
+Réunion du début avec Emmanuel
+------------------------------
+
+Pour réaliser nos diagrammes de classes, nous avons utilisé Modélio. À titre
+personnel, Emmanuel nous a mentionné un autre logiciel, Yed.
+
+Emmanuel ne pourra pas venir à notre comité de pilotage (il a cours). Il se
+fera remplacer.
+
+Concernant nos tests sur les langages, Emmanuel nous a appris que le
+compilateur C était capable de générer du code débogable (par défaut) ou
+optimisé. Nous avions compilé du code débogable, mais cela n'influencera pas
+le choix de la solution technique. Nous avons aussi parlé des fils d'exécution
+parallèles, et il s'est avéré que lors de nos trois tests nous avons utilisé un
+seul fil d'exécution : cela n'a donc pas influencé nos performances. Nous avons
+enfin parlé de la recopie de contexte : lors d'un appel récursif, l'ensemble de
+la fonction est recopié en mémoire. Un programme récursif est par conséquent
+certes plus lisible, mais aussi plus gourmand en espace mémoire.
+
+Ensuite, nous avons parlé d'OpenGL. Nous avons en effet identifié le besoin
+d'une caméra ; nous devons donc nous poser la question suivante : existerait-il
+déjà une caméra répondant à notre besoin ? Emmanuel a lancé le nom de
+libQGLviewer. Il existe des caméras fixes où le reste du monde se déplace
+(1 multiplication matricielle par élément du monde) ou des caméras mobiles (par
+exemple Glulookat). Nous devons également choisir une matrice de projection :
+GluOrtho ou GluPerspective ? Nous avons finalement souligné qu'une caractéris-
+tique importante d'OpenGL est sa capacité à utiliser la carte graphique de
+l'ordinateur (et aussi de ne pas afficher les faces cachées).
+
+Nous avons synthétisé notre discussion sous la forme d'un diagramme d'activité.
+
+Finalement, nous avons isolé des idées d'indicateurs :
+-- le temps de calcul (de quoi ?)
+-- la vitesse de requête
+-- pour l'affichage, le nombre d'images par secondes.
+
+
+
+Pendant la séance
+-----------------
+
+Mail pour le CoPil : tout créneau horaire conviendra.
