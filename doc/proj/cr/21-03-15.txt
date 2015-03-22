@@ -1,0 +1,93 @@
+!------------------------------------------!
+! Compte-rendu de la séance exceptionnelle !
+!------------------------------------------!
+
+Date : 21 mars 2015
+Lieu : M209
+
+
+
+
+Objectifs de la séance
+----------------------
+
+-- Fixer les indicateurs
+-- Fixer le nom du projet
+-- Préparer la présentation du Copil
+-- Enlever la caméra dans le diag Classes
+-- Rajouter les acteurs dans le Use Case
+
+
+
+
+Indicateurs
+-----------
+
+Les indicateurs sont des fonctions de la méthode utilisée et de la taille
+du nuage.
+
+1. Nombre d'images par seconde (lors d'un déplacement codifié de la caméra)
+1. -> Temps de calcul affichage (entre demande de requête et fin de la
+      mise à jour de l'afffichage)
+1. -> Temps/Vitesse des requêtes (entre réception de la demande et retour
+      de la réponse)
+1. Espace en mémoire vive maximal utilisé lors des requêtes
+2. Temps de calcul de création du découpage (depuis l'ouverture du
+   fichier initial jusqu'à la fin de la création de l'arbre)
+2. Rapport espace disque du nuage découpé / espace disque du nuage initial
+2. Espace mémoire vive maximal utilisé lors de la construction de l'arbre
+2. -> Espace mémoire vive maximal utilisé lors de la lecture des données
+2. -> Hauteur de l'arbre
+3. Temps de rééquilibrage = reconstruction de l'arbre lors d'ajout de
+point
+
+
+
+Nom du projet : BenchOKR
+-------------
+
+
+Tests informatique (rappel)
+--------------------------
+
+Tests de performance
+Tests de montée en charge
+Tests de stress
+Tests d'endurance
+Tests de fiabilité
+
+
+
+
+Paramètres
+----------
+
+Nombre de points dans un fichier feuille
+R-tree: Nombre max d'enfants par noeud
+Comment définit-on un voisinage ?
+
+
+
+
+Tableau des fonctionnalités
+---------------------------
+
+cf. docx
+
+
+
+
+A faire
+-------
+
+Journal de bord
+Logo
+
+
+
+A envoyer
+---------
+
+Le journal de bord
+Etude fonctionnelle.docx
+Lien vers le GitHub

@@ -3,9 +3,9 @@
   <DEPS>
     <ID name="projetinfo" mc="Package" uid="96a6119c-fef6-4946-b8d6-498b93d1350e"/>
     <COMPID name="Activity" mc="Activity" uid="1761ea1c-b23a-4bec-b0a8-a8458555cbcf"/>
+    <COMPID name="Administrateur" mc="Actor" uid="8473316a-aa95-490b-8efa-711caf1e94b3"/>
     <COMPID name="Afficher les données" mc="UseCase" uid="fac67795-fa9d-4815-be67-2b4875ccffb0"/>
     <COMPID name="Arbre" mc="Class" uid="014fa420-96f3-412f-86f0-8706cd9266f8"/>
-    <COMPID name="Camera" mc="Class" uid="b6a2ac95-9a47-4a85-9b30-d4841f90bcfd"/>
     <COMPID name="Diagramme de classes" mc="ClassDiagram" uid="68eaf1c4-16a7-4ef5-bd98-e80cf62fc720"/>
     <COMPID name="Diagramme des cas d'utilisation général" mc="UseCaseDiagram" uid="8203810d-a33f-4003-802b-1451daa5e640"/>
     <COMPID name="Découper les données" mc="UseCase" uid="6e533041-f4a6-48de-b6df-ded194d3619e"/>
@@ -21,6 +21,7 @@
     <COMPID name="Point" mc="Class" uid="df393677-22c0-4dff-b588-e45af89f3357"/>
     <COMPID name="Point3D" mc="DataType" uid="c2d9a490-b8aa-497d-b991-08d6c4204523"/>
     <COMPID name="RTree" mc="Class" uid="4ac57d25-331b-45e4-8e69-f84fe2e48a6c"/>
+    <COMPID name="Utilisateur" mc="Actor" uid="65fc1bef-99c9-402c-8b89-0ae6618d3484"/>
     <COMPID name="Voxel" mc="Class" uid="c6329cd0-f2cc-439a-b8e7-b2d915660926"/>
     <COMPID name="overview diagram" mc="ClassDiagram" uid="95c54f0a-f673-402a-af98-bc50ced5326e"/>
   </DEPS>
@@ -57,7 +58,8 @@
         <COMPID name="PlanSeparateur" mc="Class" uid="8b7d19fc-3cf5-48a8-ac45-eb9acd0589ee"/>
         <COMPID name="Voxel" mc="Class" uid="c6329cd0-f2cc-439a-b8e7-b2d915660926"/>
         <COMPID name="Point3D" mc="DataType" uid="c2d9a490-b8aa-497d-b991-08d6c4204523"/>
-        <COMPID name="Camera" mc="Class" uid="b6a2ac95-9a47-4a85-9b30-d4841f90bcfd"/>
+        <COMPID name="Utilisateur" mc="Actor" uid="65fc1bef-99c9-402c-8b89-0ae6618d3484"/>
+        <COMPID name="Administrateur" mc="Actor" uid="8473316a-aa95-490b-8efa-711caf1e94b3"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="overview diagram" mc="ClassDiagram" uid="95c54f0a-f673-402a-af98-bc50ced5326e"/>
