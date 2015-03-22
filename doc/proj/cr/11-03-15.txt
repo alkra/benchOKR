@@ -1,0 +1,82 @@
+!--------------------------------------!
+! COMPTE-RENDU DE LA SÉANCE DE TRAVAIL !
+!--------------------------------------!
+
+Date : 11 mars 2015
+Lieu : M209
+
+
+
+Avant la séance
+---------------
+
+La fois précédente, nous avons fini la bibliographie.
+Nous avons déterminé les fonctionnalités du système.
+
+L’objectif de cette séance a été de réaliser le diagramme de classe,
+et de rechercher des informations techniques.
+
+
+
+Réunion avec Emmanuel
+---------------------
+
+La séance a commencé par une brève réunion avec le commanditaire,
+qui nous a rappelé l’importance du choix des indicateurs,
+et que la solution technique doit être assortie de comparaisons entre plusieurs
+solutions concurrentes.
+
+
+
+Pendant la séance
+-----------------
+
+Nous avons réalisé le diagramme de classe.
+Afin de ne pas trop préjuger de la solution technique choisie,
+nous avons conservé le vocabulaire des arbres.
+Selon la solution technique envisagée, on pourra considérer les équivalences
+suivantes :
+
+Solution |      Système de fichier     |   BD points    |  BD fichiers   |
+xxxxxxxxx|xxxxxxxxxxxxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxx|
+  Arbre  | Arborescence de répertoires |       BD       |  BD ou Schéma  |
+---------|-----------------------------|----------------|----------------|
+  Nœud   |          Répertoire         |     Schéma     |     Table      |
+---------|-----------------------------|----------------|----------------|
+ Feuille |           Fichier           |     Table      | Enregistrement |
+---------|-----------------------------|----------------|----------------|
+         |            Point            | Enregistrement |                |
+         
+Il nous semblait que des interfaces seraient appropriées pour représenter
+les arbres et nœuds, car cela permettrait ensuite à chaque méthode d'implémen-
+ter sa propre version de ces types de base. Cependant, nous ne sommes pas
+parvenus à les représenter correctement, donc pour l'instant nous décrivons
+une simple généralisation.
+
+Nous avons mené des recherches sur les différentes méthodes de stockage, et
+il nous semble que, premièrement, nous n'avons pas besoin des avantages
+conférés par une base de données et, deuxièmement, un système de fichier est
+suffisamment simple à manipuler.
+
+Nous avons également mené un test de performances. Nous avons implémenté
+un algorithme récursif dans trois langages différents :
+C compilé en   gcc [source] -o [sortie]  ;
+Javascript interprété sous Firefox 36 ;
+Python interprété avec la version 3.4.
+L'algorithme choisi fut la suite de Fibonacci en complexité exponentielle,
+car il générait un grand nombre d'appels mais des nombres pas trop grands.
+Le 40e terme fut calculé sur ma machine (Windows 8 - 64bits) en :
+C  | 2 secondes (mesuré avec time.h)
+JS | > 30 secondes (mesuré à la louche)
+Py | > 30 secondes (mesuré à la louche)
+
+
+
+
+Après la séance
+---------------
+
+Nous avons organisé une réunion pour se former à Git.
+Nous avons eu une question concernant les caméras OpenGL : faut-il la
+représenter dans notre diagramme de classe ?
+Il nous faut également un nom pour notre projet et un logo.
