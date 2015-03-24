@@ -1,0 +1,24 @@
+Etude fonctionnelle
+
+La fonctionnalité n°1 est "Lire les données". Cela signifie,
+chronologiquement :
+ 1. être capable de stocker le nuage sur un support
+    physique : hors de notre projet
+ 2. être capable de l'ouvrir : opération réalisée par le système
+    d'exploitation, hors du projet
+ 3. être capable de le comprendre : connaître la structure du format
+    de fichier.
+ 4. être capable de le stocker en mémoire : cela suppose de définir
+    une structure de données adaptée. En pratique, il sera impossible
+    de stocker le nuage entier en mémoire (hors méta-données, un point
+    est constitué, sur une machine 64 bits, de :
+     -- un indice (int) = 64bits = 8 octets
+     -- trois coordonnées : 3*
+          - une coordonnée (double) = 128 bits = 16 octets
+        soit 48 octets,
+    donc un point a une taille en mémoire de 56 octets. Un nuage d'un
+    milliard de points a donc une taille de 56 milliards d'octets soit
+    une cinquantaine de Go, pour une mémoire vive de 4 à 8 Go), il
+    faudra donc soit utiliser l'espace d'échange, soit ne lire qu'une
+    partie du nuage. La structure de données devra dans tous les cas
+    être adaptée à un grand nombre de points.
