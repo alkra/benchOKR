@@ -12,13 +12,32 @@ chronologiquement :
     une structure de données adaptée. En pratique, il sera impossible
     de stocker le nuage entier en mémoire (hors méta-données, un point
     est constitué, sur une machine 64 bits, de :
-     -- un indice (int) = 64bits = 8 octets
+     -- un indice (int) = 32bits = 4 octets
      -- trois coordonnées : 3*
           - une coordonnée (double) = 128 bits = 16 octets
         soit 48 octets,
-    donc un point a une taille en mémoire de 56 octets. Un nuage d'un
-    milliard de points a donc une taille de 56 milliards d'octets soit
+    donc un point a une taille en mémoire de 52 octets. Un nuage d'un
+    milliard de points a donc une taille de 52 milliards d'octets soit
     une cinquantaine de Go, pour une mémoire vive de 4 à 8 Go), il
     faudra donc soit utiliser l'espace d'échange, soit ne lire qu'une
     partie du nuage. La structure de données devra dans tous les cas
     être adaptée à un grand nombre de points.
+
+
+La fonctionnalité n°2 est "Découper les données". Cette fonctionnalité
+sera implémentée trois fois, par nos trois méthodes. Quelle que soit
+la manière dont on les codera (trois exécutables ou un seul ?),
+l'opérateur chargé de l'étude doit être capable de sélectionner une
+méthode (fonctionnalité 2.1.). Le point commun de nos trois méthodes
+de découpage est qu'elles sont arborescentes : il faut donc définir ce
+que représente l'arbre, et plus précisément ce que sont les noeuds
+(fonctionnalité 2.3.) et les feuilles (fonctionnalité 2.2). D'un point
+de vue programmeur, la définition de ces deux éléments est lié à la
+spécification des structures de données associées. La définition de la
+structure de données des feuilles recquiert de définir le mode de
+stockage (base de données ou système de fichiers) (fonctionnalité
+2.2.2), et de définir le nombre de points par fichier (fonctionnalité
+2.2.1). En ce qui concerne les noeuds, la définition de la taille des
+feuilles permet de déduire la hauteur de l'arbre (fonctionnalité
+2.3.1), et il faut définir la structure de données pour les noeuds
+différente pour chaque méthode.
