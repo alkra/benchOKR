@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Projet développement" company="École nationale des sciences géographiques" webLink="http://" view-date="2015-02-09" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.7" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet développement" company="École nationale des sciences géographiques" webLink="http://" view-date="2015-02-09" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.7" locale="fr">
     <description><![CDATA[« Benchmarks de navigation dans un nuage de points 3D »]]></description>
     <view zooming-state="default:7" id="gantt-chart">
         <field id="tpd3" name="Nom" width="57" order="0"/>
         <field id="tpd4" name="Date de début" width="21" order="1"/>
         <field id="tpd5" name="Date de fin" width="21" order="2"/>
-        <option id="color.recent"><![CDATA[#999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999]]></option>
+        <option id="color.recent"><![CDATA[#ff9999 #999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="56" order="0"/>
-        <field id="1" name="Rôle par défaut" width="43" order="1"/>
+        <field id="0" name="Nom" width="52" order="0"/>
+        <field id="1" name="Rôle par défaut" width="47" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="Aucun">
@@ -26,8 +26,8 @@
         <date year="2015" month="3" date="4" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="3" date="11" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="3" date="18" type="WORKING_DAY" color="#999999"/>
-        <date year="2015" month="3" date="24" type="NEUTRAL" color="#ff9999"><![CDATA[Comité de pilotage]]></date>
-        <date year="2015" month="3" date="25" type="WORKING_DAY" color="#999999"/>
+        <date year="2015" month="3" date="24" type="WORKING_DAY" color="#999999"/>
+        <date year="2015" month="3" date="25" type="NEUTRAL" color="#ff9999"><![CDATA[Comité de pilotage]]></date>
         <date year="2015" month="4" date="1" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="4" date="8" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="4" date="15" type="WORKING_DAY" color="#999999"/>
@@ -58,7 +58,6 @@
         </task>
         <task id="2" name="Synthèse" color="#8cb6ce" meeting="false" start="2015-03-11" duration="1" complete="0" expand="true">
             <depend id="4" type="2" difference="0" hardness="Rubber"/>
-            <depend id="6" type="2" difference="0" hardness="Strong"/>
             <depend id="7" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="4" name="Codage" color="#8cb6ce" meeting="false" start="2015-03-18" duration="4" complete="0" expand="true">
@@ -80,19 +79,16 @@
         <allocation task-id="0" resource-id="0" function="1" responsible="false" load="100.0"/>
         <allocation task-id="2" resource-id="0" function="1" responsible="false" load="100.0"/>
         <allocation task-id="4" resource-id="0" function="1" responsible="false" load="100.0"/>
-        <allocation task-id="6" resource-id="0" function="1" responsible="true" load="100.0"/>
         <allocation task-id="16" resource-id="0" function="1" responsible="true" load="100.0"/>
         <allocation task-id="7" resource-id="0" function="1" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="2" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="4" resource-id="1" function="1" responsible="false" load="100.0"/>
-        <allocation task-id="6" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="16" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="7" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="2" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="4" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
-        <allocation task-id="6" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="16" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="7" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
     </allocations>
