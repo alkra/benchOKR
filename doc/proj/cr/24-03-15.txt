@@ -1,0 +1,93 @@
+!---------------------------!
+! Compte-rendu de la séance !
+!---------------------------!
+
+Date : 24 mars 2015
+Lieu : M209
+
+
+
+
+Objectifs de la séance
+----------------------
+
+--> format .ply
+--> étude de bibliothèques
+--> problème de Maryame (sort / médiane)
+--> prototypes de David
+
+
+Réunion de début avec Emmanuel
+------------------------------
+
+Il n'existe pas que libQGLViewer, essayer de trouver d'autres caméras
+FreeFly (libres) et de les comparer.
+
+Comment avons-nous isolé les sous-fonctionnalités ? Rédaction d'un
+texte explicatif, surtout pour le rapport final mais bonus au CoPil.
+
+Expliquer pourquoi nos choix techniques ?
+
+Indicateurs :
+
+Le déplacement de la caméra doit être défini par sa trajectoire et sa
+vitesse, de manière indépendante de la méthode. Il faut définir une
+méthodologie de comparaison. Par exemple, utiliser le même jeu de
+données, tester par paliers (2^10, 2^11, ...). Synthétiser cette
+méthodologie sous la forme d'un tableau tel que :
+	     	 | Indicateur 1 | Indicateur 2 | ...
+-----------------|--------------|--------------|
+Quel nuage       |              |              |
+-----------------|--------------|--------------|
+Nombre de points |              |              |
+-----------------|--------------|--------------|
+Autre critère ...|              |              |
+
++ Symbologie graphique
+
+Eventuellement, calculer une fonction de coût qui est une combinaison
+des différents indicateurs. Elle permet de trouver un coût optimal.
+
+
+
+1. Nombre d'images par seconde (lors d'un déplacement codifié de la
+caméra)
+1. Nombre d'images par secondes en caméra statique.
+(1. -> Temps de calcul affichage (entre demande de requête et fin de la
+      mise à jour de l'affichage) -> ce n'est pas un bon indicateur
+      car il dépend de deux opérations différentes : d'une part la
+      librairie qui implémente la caméra, et d'autre part nos propres
+      méthodes de requête.)
+1. -> Temps/Vitesse des requêtes (entre réception de la demande et retour
+      de la réponse)
+1. Espace en mémoire vive maximal utilisé lors des requêtes
+   Remarque : on ne pourra pas tout stocker en mémoire : faire le calcul
+2. Temps de calcul de création du découpage (depuis l'ouverture du
+   fichier initial jusqu'à la fin de la création de l'arbre)
+2. Rapport espace disque du nuage découpé / espace disque du nuage initial
+2. Espace mémoire vive maximal utilisé lors de la construction de l'arbre
+2. -> Espace mémoire vive maximal utilisé lors de la lecture des données
+2. -> Hauteur de l'arbre
+(3. Temps de rééquilibrage = reconstruction de l'arbre lors d'ajout de
+point) hors contexte (sauf si construction par insertion (déconseillé))
+
+
+
+
+Méthodologie
+------------
+
+Conditions initiales :
+
+-> Le jeu de données utilisées (choisir un nuage de points, le
+   restreindre à un nombre de points moindre (2^10, 11, ...)
+-> Le matériel utilisé : travailler sur une même machine
+    -> Taille de mémoire vive
+    -> Utilisation d'un fichier d'échange (quelle taille ?)
+    -> Quelle carte graphique ?
+    -> Caractéristiques du disque dur
+    (éventuellement, type de processeur)
+    -> Le système d'exploitation : quantité mémoire utilisée, impact
+   sur le processeur graphique, ...
+-> Le logiciel : quelle caméra openGL utilisée
+
