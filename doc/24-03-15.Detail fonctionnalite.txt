@@ -1,5 +1,11 @@
 Etude fonctionnelle
 
+
+
+Fonctionnalités et sous-fonctionnalités
+---------------------------------------
+
+
 La fonctionnalité n°1 est "Lire les données". Cela signifie,
 chronologiquement :
  1. être capable de stocker le nuage sur un support
@@ -32,7 +38,7 @@ méthode (fonctionnalité 2.1.). Le point commun de nos trois méthodes
 de découpage est qu'elles sont arborescentes : il faut donc définir ce
 que représente l'arbre, et plus précisément ce que sont les noeuds
 (fonctionnalité 2.3.) et les feuilles (fonctionnalité 2.2). D'un point
-de vue programmeur, la définition de ces deux éléments est lié à la
+de vue programmeur, la définition de ces deux éléments est liée à la
 spécification des structures de données associées. La définition de la
 structure de données des feuilles recquiert de définir le mode de
 stockage (base de données ou système de fichiers) (fonctionnalité
@@ -41,3 +47,59 @@ stockage (base de données ou système de fichiers) (fonctionnalité
 feuilles permet de déduire la hauteur de l'arbre (fonctionnalité
 2.3.1), et il faut définir la structure de données pour les noeuds
 différente pour chaque méthode.
+
+
+La fonctionnalité n°3 est "Afficher les données". Cette fonctionnalité
+fait le lien entre le nuage de points et l'écran de
+l'utilisateur. L'utilisateur définit préalablement un champ de vision,
+il nous faut d'abord récupérer tous les points qui doivent y être
+affichés (fonctionnalité 3.1). Selon la demande de l'utilisateur, on
+peut distinguer deux méthodes pour récupérer les bons points : soit
+l'utilisateur vient de lancer le logiciel, et nous devons donc
+récupérer les points qui se situent dans son volume de vision
+(fonctionnalité 3.1.1) ; soit l'utilisateur vient de déplacer
+légèrement son champ de vision, et une requête sur un voisinage
+pourrait suffire (fonctionnalité 3.1.2). Une fois tous les points
+pertinents récupérés, nous devons être capables de les afficher à
+l'écran (fonctionnalité 3.2).
+
+
+
+Caractérisation des fonctionnalités
+-----------------------------------
+
+La lecture du nuage revient à lire un fichier : c'est une opération de
+base très documentée, donc facile. Un test intuitif est de vérifier la
+correspondance entre les données en mémoire (à afficher) et ce qui est
+contenu dans le fichier (ouverture avec un autre programme).
+
+Tout le reste de notre démarche se fonde sur une structure
+arborescente. Il est primordial que cette structure soit valide afin
+que les algorithmes restent prévisibles. Stocker les feuilles signifie
+que tous les points doivent être représentés dans notre nouveau
+système. La taille des fichiers influe directement et indirectement
+sur la vitesse des requêtes ; c'est un paramètre de la méthode. Ce
+paramètre influe également sur la hauteur de l'arbre, donc encore une
+fois sur la vitesse des requêtes. Le mode de stockage est une solution
+technique, et doit permettre de stocker durablement le nuage de points
+et permettre un grand nombre d'accès en lecture. Dans l'idéal, on
+souhaiterait que la taille du nuage découpé n'augmente pas trop. La
+structure de l'arbre a une forte influence sur la durée des requêtes ;
+dans la plupart des méthodes de découpage, la hiérarchie est définie
+et la hauteur est paramétrée. Ces fonctionnalités ne sont pas si
+faciles, car dans l'hypothèse où elles sont déjà codées, nous devons
+avoir un regard critique sur la manière dont elles le sont ; et nous
+devront peut-être les coder nous-même. Néanmoins, nous n'avons pas de
+contrainte forte sur le temps mis pour découper le nuage.
+
+La troisième partie concerne la requête des points et leur
+affichage. C'est cette partie qui est la cible de l'étude de
+performances, et elle doit donc être particulièrement soignée. Dans
+l'hypothèse où on n'aurait pas le temps de coder deux méthodes de
+requête (par voisinage et par volume englobant), on peut noter qu'il
+est toujours possible de récupérer facilement des points dans un
+volume, alors qu'une méthode par voisinage nécessite de définir
+rigoureusement ce qu'est le voisinage. L'affichage des points
+proprement dit nécessite de bonnes connaissances en matériel
+graphique, à moins que cette fonctionnalité ne soit déléguée à une
+biliothèque existante.
