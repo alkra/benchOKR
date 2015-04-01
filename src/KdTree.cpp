@@ -1,4 +1,4 @@
-#include "KdTree.h"
+#include "include/KdTree.h"
 
 KdTree::KdTree()
 {

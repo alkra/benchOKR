@@ -1,0 +1,13 @@
+set(INCLUDES
+    Arbre.h
+    Fichier.h
+    KdTree.h
+    Noeud.h
+    NoeudKd.h
+    NoeudOctree.h
+    NoeudR.h
+    Octree.h
+    Point3D.h
+    Point.h
+    RTree.h
+)

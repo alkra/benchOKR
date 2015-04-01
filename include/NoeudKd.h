@@ -1,7 +1,7 @@
 #ifndef NOEUDKD_H
 #define NOEUDKD_H
 
-#include <Noeud.h>
+#include <include/Noeud.h>
 
 
 class NoeudKd : public Noeud

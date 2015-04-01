@@ -1,4 +1,4 @@
-#include "Fichier.h"
+#include "../include/Fichier.h"
 
 Fichier::Fichier()
 {
@@ -10,7 +10,7 @@ Fichier::~Fichier()
     //dtor
 }
 
-Fichier::getPoint()
+Point Fichier::getPoint()
 {
     //ctor
 }
