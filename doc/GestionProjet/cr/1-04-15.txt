@@ -1,0 +1,41 @@
+########################################
+# COMPTE-RENDU DE LA SÉANCE DE TRAVAIL #
+########################################
+
+Date : mercredi 1er avril 2015
+Salle : M209, ENSG
+
+
+Bilan du comité de pilotage et travail à (re)faire
+--------------------------------------------------
+
+ -- Méthode de construction du R-Tree
+ -- Rédiger structure de stockage des données
+ -- Préciser JavaScript dans Firefox
+ -- Tester Cython
+ -- Tester nodejs
+ -- Se renseigner sur libQGLViewer
+ -- D'autres caméras ?
+ -- D'autres indicateurs ?
+ -- Spécifier le déplacement de la caméra (et les autres variables mesurées)
+ -- Présentation :
+      - Pas besoin d'insertion
+      - Décrire la donnée en entrée
+      - Croiser les indicateurs avec le type de donnée en entrée
+      - Préciser le livrable
+      - Préciser les sources : nous / autre ?
+ -- Comprendre le matériel
+
+
+Objectif de la séance
+---------------------
+
+Codage
+
+
+
+Travail réalisé
+---------------
+
+Maryame : lecture d'un fichier .ply et création d'un répertoire adapté
+au kd-tree.
