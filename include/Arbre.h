@@ -24,8 +24,8 @@ class Arbre  // déclaration de la classe Abstraite Arbre
 
     private:
 
-     int const nombreNoeud(1);// taille du tableau
-     int m_tabNoeud[nombreNoeud]; // déclaration du tableau
+        const int nombreNoeud = 1;// taille du tableau
+        int m_tabNoeud[]; // déclaration du tableau
 
 
 
