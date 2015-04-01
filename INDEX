@@ -1,11 +1,18 @@
 Organisation des répertoires sur la branche devel :
 
-/doc/     : contient toute la documentation du projet
-     bib/  : contient les documents à vocation bibliographique
-     proj/ : contient les documents liés à la gestion du projet (1)
-     	   cr/ : contient les comptes-rendus de chaque séance
-     uml/  : contient les fichiers de Modelio (UML)
-     Etude Fonctionnelle.docx : remarques en complément de l'UML
+/doc/ : contient toute la documentation du projet
+      Bibliographie/ : contient les documents à vocation
+          bibliographique
+      ComitePilotage/ : contient les documents présentés au comité de
+          pilotage
+      ComparaisonLangages/ : contient les fichiers source des tests
+          effectués sur les langages
+      GestionProjet/ : contient les documents liés à la gestion du
+          projet (1)
+            cr/ : contient les comptes-rendus de chaque séance
+      uml/ : contient les fichiers de Modelio (UML)
+      Etude Fonctionnelle.docx : remarques en complément de l'UML
+      24-03-15.Detail Fonctionnalite.txt : support pour le docx
 
 /include/ : contient les fichiers d'en-tête
 /src/     : contient les fichiers source
