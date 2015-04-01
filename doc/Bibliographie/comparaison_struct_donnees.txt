@@ -1,0 +1,63 @@
+!---------------------------------------------!
+! COMPARAISON de trois structures de donnnées !
+! dans l'objectif de stocker le nuage découpé !
+!---------------------------------------------!
+
+1. Rappel du besoin
+-------------------
+
+La démarche classique d'utilisation de notre projet est la suivante :
+ -- Un technicien réalise le découpage du nuage
+ -- Les utilisateurs affichent le nuage
+La première étape est faite une seule fois. Il s'agit d'un accès en
+écriture sur le nuage modifié.
+La deuxième étape se répète un grand nombre de fois. Il s'agit d'un
+accès en lecture seule sur le nuage découpé.
+
+
+
+2. Présentation des candidats
+-----------------------------
+
+Nous avons le choix entre utiliser une base de données ou un système
+de fichier. Si nous choisissons la base de donnée, nous pourrons en
+plus déterminer si nous stockons des fichiers de points dans les
+tables ou directement des points.
+
+
+
+
+3. Fonctionnalités, avantages, et inconvénients
+-----------------------------------------------
+
+Les deux systèmes répondent à notre besoin de stocker la donnée.
+
+Pour optimiser l'accès en lecture sur nos données, les deux systèmes
+présentent des approches différentes :
+ -- La base de données fabrique un index ; les données peuvent être
+    indexées plusieurs fois (redondance), voire dupliquées
+    (réplication)
+ -- Le système de fichier est une structure arborescente : l'accès des
+    voisins (frères, parents, enfants) est considérablement simplifié.
+La solution mise en avant par la base de données est intéressante,
+mais paraît un peu compliquée à mettre en place dans le temps qu'il
+nous reste et vu les exigences de performance. La solution mise en
+avant par le système de fichier est plus intuitive, et est
+particulièrement adaptée à nos structures d'arbre.
+
+Les deux solutions permettent un accès fin à la sécurité des données :
+ -- Gestion logicielle des droits, à base de privilèges
+ -- Protection intellectuelle, par exemple grâce au chiffrement
+Notre projet ne requiert pas une telle sécurité.
+
+La base de données garantie en plus l'intégrité des données lors des
+accès en écriture, grâce à un système de transactions. Étant donné que
+nos données ne sont écrites qu'une seule fois par une seule personne,
+nous n'avons pas besoin de ce mécanisme.
+
+
+4. Conclusion
+-------------
+
+Pour sa simplicité, après avoir vérifié qu'il répondait à notre
+besoin, nous choisissons un système de fichiers.
