@@ -4,11 +4,11 @@
         <field id="tpd3" name="Nom" width="57" order="0"/>
         <field id="tpd4" name="Date de début" width="21" order="1"/>
         <field id="tpd5" name="Date de fin" width="21" order="2"/>
-        <option id="color.recent"><![CDATA[#cccccc #999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999 #999999]]></option>
+        <option id="color.recent"><![CDATA[#999999 #ff9999 #cccccc #999999 #999999 #999999 #999999 #999999 #999999 #999999]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="52" order="0"/>
-        <field id="1" name="Rôle par défaut" width="47" order="1"/>
+        <field id="0" name="Nom" width="50" order="0"/>
+        <field id="1" name="Rôle par défaut" width="49" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="Aucun">
@@ -26,8 +26,8 @@
         <date year="2015" month="3" date="4" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="3" date="11" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="3" date="18" type="WORKING_DAY" color="#999999"/>
-        <date year="2015" month="3" date="24" type="WORKING_DAY" color="#ff9999"><![CDATA[Comité de pilotage]]></date>
-        <date year="2015" month="3" date="25" type="WORKING_DAY" color="#999999"/>
+        <date year="2015" month="3" date="24" type="WORKING_DAY" color="#999999"/>
+        <date year="2015" month="3" date="25" type="WORKING_DAY" color="#ff9999"><![CDATA[Comité de pilotage]]></date>
         <date year="2015" month="4" date="1" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="4" date="8" type="WORKING_DAY" color="#999999"/>
         <date year="2015" month="4" date="15" type="WORKING_DAY" color="#999999"/>
@@ -54,9 +54,7 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Bibliographie sur les arbres" color="#8cb6ce" meeting="false" start="2015-02-11" duration="3" complete="0" priority="2" expand="true">
-            <depend id="2" type="2" difference="0" hardness="Strong"/>
-        </task>
+        <task id="0" name="Bibliographie sur les arbres" color="#8cb6ce" meeting="false" start="2015-02-11" duration="3" complete="0" priority="2" expand="true"/>
         <task id="17" name="Etude du besoin" color="#8cb6ce" meeting="false" start="2015-03-04" duration="2" complete="0" expand="true">
             <depend id="18" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -79,17 +77,14 @@
     </resources>
     <allocations>
         <allocation task-id="0" resource-id="0" function="1" responsible="false" load="100.0"/>
-        <allocation task-id="2" resource-id="0" function="1" responsible="false" load="100.0"/>
         <allocation task-id="4" resource-id="0" function="1" responsible="false" load="100.0"/>
         <allocation task-id="16" resource-id="0" function="1" responsible="true" load="100.0"/>
         <allocation task-id="7" resource-id="0" function="1" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="1" function="1" responsible="false" load="100.0"/>
-        <allocation task-id="2" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="4" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="16" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="7" resource-id="1" function="1" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
-        <allocation task-id="2" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="4" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="16" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="7" resource-id="2" function="Default:1" responsible="false" load="100.0"/>

@@ -1,4 +1,5 @@
 Notre étude du besoin satisfait-elle le commanditaire ?
 Notre solution technique répond-elle aux exigences du commanditaire ?
+Voyez-vous d'autres indicateurs ?
 
 (Le temps alloué aux tâches restantes est-il cohérent ?) <- si pas de remarque des experts à ce sujet
