@@ -1,5 +1,6 @@
 QT  += core
-SOURCES += src/main.cpp \
+SOURCES += src/Arbre.cpp \
+    src/main.cpp \
     src/Fichier.cpp \
     src/KdTree.cpp \
     src/Noeud.cpp \
@@ -9,8 +10,8 @@ SOURCES += src/main.cpp \
     src/Octree.cpp \
     src/Point.cpp \
     src/Point3D.cpp \
-    src/RTree.cpp
-SOURCES += src/Arbre.cpp
+    src/RTree.cpp \
+    src/Voxel.cpp
 HEADERS += include/Arbre.h \
     include/Fichier.h \
     include/KdTree.h \
@@ -21,4 +22,5 @@ HEADERS += include/Arbre.h \
     include/Octree.h \
     include/Point.h \
     include/Point3D.h \
-    include/RTree.h
+    include/RTree.h \
+    include/Voxel.h

@@ -1,1 +1,41 @@
+#include "include/Voxel.h"
 
+Voxel::Voxel() : m_debut(), m_fin() {} // constructeur par défaut
+Voxel::Voxel(const Point3D &min, const Point3D &max) : m_debut(min), m_fin(max) {}
+Voxel::Voxel(double xdeb, double ydeb, double zdeb,
+             double xfin, double yfin, double zfin) : m_debut(xdeb, ydeb, zdeb),
+                                                      m_fin(xfin, yfin, zfin) {
+}
+
+Voxel::Voxel(const Voxel &modele) { // constructeur de recopie
+    m_debut(modele.getDebut());
+    m_fin(modele.getFin());
+}
+
+/* Méthode */
+bool Voxel::intersecte(const Point &candidat, bool strict) const { // revoie true si le point est dans le voxel
+    // ...
+}
+
+/* Accesseurs et mutateurs */
+Point3D Voxel::getDebut() const {
+    return m_debut;
+}
+Point3D Voxel::getFin() const {
+    return m_fin;
+}
+void Voxel::setDebut(const Point3D &point) {
+    m_debut(point);
+}
+
+void Voxel::setDebut(double x, double y, double z) {
+    m_debut(x, y, z);
+}
+
+void Voxel::setFin(const Point3D &point) {
+    m_fin(point);
+}
+
+void Voxel::setFin(double x, double y, double z) {
+    m_fin(x, y, z);
+}
