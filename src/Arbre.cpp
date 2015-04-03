@@ -1,27 +1,10 @@
 #include "include/Arbre.h"
 
-Arbre::Arbre()
-{
-    //ctor
+Noeud* Arbre::getRacine() const {
+    return racine;
 }
 
-Arbre::~Arbre()
-{
-    //dtor
-}
-
-void Arbre::construire()
-{
-
-}
-
-void Arbre::requeteVoisinage()
-{
-
-}
-
-void Arbre::requeteContenu()
-{
-
+void Arbre::setRacine(Noeud* nouvelle) {
+    racine = nouvelle;
 }
 

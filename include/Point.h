@@ -6,8 +6,15 @@ class Point
 {
     public:
         Point();
-        virtual ~Point();
+        Point(double x, double y, double z);
+        ~Point();
 
+        double getX() const;
+        double getY() const;
+        double getZ() const;
+        void setX(double x);
+        void setY(double y);
+        void setZ(double z);
     protected:
     private:
 

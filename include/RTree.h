@@ -2,14 +2,19 @@
 #define RTREE_H
 
 #include "include/Arbre.h"
-
+#include "include/NoeudR.h"
+#include "include/Point.h"
 
 class RTree : public Arbre
-// Création d'une classe RTree qui hérite de la classe Arbre
+// CrÃ©ation d'une classe RTree qui hÃ©rite de la classe Arbre
 {
     public:
         RTree();
-        virtual ~RTree();
+        ~RTree();
+
+        void construire();
+        Point* requete(const Point &centre, double distance) const; // voisinage
+        Point* requete(const Voxel &conteneur) const; // dans un voxel
     protected:
     private:
 };
