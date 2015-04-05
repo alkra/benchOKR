@@ -1,6 +1,15 @@
 #ifndef RTREE_H
 #define RTREE_H
 
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier définit la classe RTree. */
+
 #include "include/Arbre.h"
 #include "include/NoeudR.h"
 #include "include/Point.h"

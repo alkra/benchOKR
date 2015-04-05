@@ -1,3 +1,12 @@
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier contient l'implémentation des méthodes de la classe NoeudR. */
+
 #include "include/NoeudR.h"
 
 /*
@@ -56,7 +65,8 @@ Point* NoeudR::requete(const Voxel &conteneur) const {
 }
 
 /* Accesseur */
-void NoeudR::setEnfant(long pos, NoeudR &noeud) {  // remplace le pos-ième enfant par "noeud"
+void NoeudR::setEnfant(long pos, NoeudR &noeud) {
+    // remplace le pos-ième enfant par "noeud"
     if(m_terminal) {
         throw termAffectErreur;
     } else {

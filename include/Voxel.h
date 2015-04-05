@@ -1,6 +1,13 @@
 #ifndef VOXEL_H
 #define VOXEL_H
 
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
 #include "include/Point3D.h"
 #include "include/Point.h"
 

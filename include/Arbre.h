@@ -1,6 +1,17 @@
 #ifndef ARBRE_H
 #define ARBRE_H
 
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier déclare la classe abstraite Arbre.
+ * Cette classe sera héritée par nos trois méthodes de construction.
+ * Elle représente l'arbre en train d'être construit. */
+
 #include "include/Noeud.h"
 #include "include/Point.h"
 #include "include/Point.h"
@@ -38,7 +49,7 @@ class Arbre  // déclaration de la classe Abstraite Arbre
 
     // attributs de la classe arbre
     protected:
-        Noeud* racine;
+        Noeud* racine; // Pointe vers le début de l'arbre
 
     private:
 

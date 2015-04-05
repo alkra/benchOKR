@@ -1,3 +1,12 @@
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier contient l'implémentation des méthodes de la classe Noeud. */
+
 #include "include/Noeud.h"
 
 /* Méthodes virtuelles *
@@ -5,7 +14,8 @@ Noeud::Noeud() : m_terminal(false), m_boite() { // construit un noeud normal
     m_enfants.fils = new Noeud[1];
     m_taille_enfants = 1;
 }
-Noeud::Noeud(bool terminal = false) : m_terminal(terminal), m_boite() { // construit un noeud terminal (ou non)
+Noeud::Noeud(bool terminal = false) : m_terminal(terminal), m_boite() {
+    // construit un noeud terminal (ou non)
     if(terminal) {
         m_enfants.feuille = new Fichier[1];
         m_taille_enfants = 1;
@@ -15,7 +25,8 @@ Noeud::Noeud(bool terminal = false) : m_terminal(terminal), m_boite() { // const
     }
 }
 
-Noeud::Noeud(Voxel &boite, bool terminal = false) : m_boite(boite), m_terminal(terminal) {
+Noeud::Noeud(Voxel &boite, bool terminal = false) :
+       m_boite(boite), m_terminal(terminal) {
     if(terminal) {
         m_enfants.feuille = new Fichier[1];
         m_taille_enfants = 1;
@@ -52,11 +63,13 @@ Noeud::~Noeud() { // destructeur
     delete[] m_enfants;
 }
 
-long Noeud::getTailleEnfants() const { // renvoie la longueur du tableau d'enfants
+long Noeud::getTailleEnfants() const {
+    // renvoie la longueur du tableau d'enfants
     return m_taille_enfants;
 }
 
-Noeud& Noeud::getFils(long pos) const { // retourne le pos-ième enfant si c'est un noeud
+Noeud& Noeud::getFils(long pos) const {
+    // retourne le pos-ième enfant si c'est un noeud
     if(m_terminal) {
         throw intermedAccesErreur;
     } else {
@@ -64,7 +77,8 @@ Noeud& Noeud::getFils(long pos) const { // retourne le pos-ième enfant si c'est
     }
 }
 
-Fichier& Noeud::getFeuille(long pos) const { // retourne le pos-ième enfant si c'est une feuille
+Fichier& Noeud::getFeuille(long pos) const {
+    // retourne le pos-ième enfant si c'est une feuille
     if(m_terminal) {
         return m_enfants[pos].feuille;
     } else {
@@ -72,7 +86,8 @@ Fichier& Noeud::getFeuille(long pos) const { // retourne le pos-ième enfant si 
     }
 }
 
-void Noeud::setEnfant(long pos, Noeud &noeud) { // remplace le pos-ième enfant par "noeud"
+void Noeud::setEnfant(long pos, Noeud &noeud) {
+    // remplace le pos-ième enfant par "noeud"
     if(m_terminal) {
         throw termAffectErreur;
     } else {
@@ -80,7 +95,8 @@ void Noeud::setEnfant(long pos, Noeud &noeud) { // remplace le pos-ième enfant 
     }
 }
 
-void Noeud::setEnfant(long pos, Fichier &feuille) { // remplace le pos-ième enfant par "feuille"
+void Noeud::setEnfant(long pos, Fichier &feuille) {
+    // remplace le pos-ième enfant par "feuille"
     if(m_terminal) {
         m_enfants[pos].feuille = feuille;
     } else {
@@ -88,11 +104,14 @@ void Noeud::setEnfant(long pos, Fichier &feuille) { // remplace le pos-ième enf
     }
 }
 
-const Noeud::NoeudSelonProfondeur *Noeud::getEnfants() const { // retourne le tableau d'enfants (pourquoi faire ?)
+const Noeud::NoeudSelonProfondeur *Noeud::getEnfants() const {
+    // retourne le tableau d'enfants (pourquoi faire ?)
     return m_enfants;
 }
 
-void Noeud::setEnfants(union NoeudSelonProfondeur enfants[], long taille, bool terminal) { // remplace le tableau d'enfants (DANGEREUX !)
+void Noeud::setEnfants(union NoeudSelonProfondeur enfants[], long taille,
+                       bool terminal) {
+    // remplace le tableau d'enfants (DANGEREUX !)
     m_enfants = enfants;
     m_terminal = terminal;
     m_taille_enfants = taille;

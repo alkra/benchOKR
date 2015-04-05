@@ -1,6 +1,25 @@
 #ifndef NOEUD_H
 #define NOEUD_H
 
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier définit la classe générique Noeud et les exceptions qui y sont
+ * associées.
+ * Le Noeud d'un arbre peut être soit un noeud intermédiaire qui contient un
+ * tableau de Noeud (penser à redéfinir les accesseurs et mutateurs lors de la
+ * généralisation), soit un noeud terminal qui contient un tableau de feuilles
+ * (de type Fichier).
+ * Cette alternative doit être gérée proprement : comme toutes nos méthodes
+ * font intervenir des arbres presque équilibrés, on impose que tous les
+ * enfants d'un noeud sont de même type. Nos méthodes définissent toujours un
+ * nombre maximum d'enfants. Lorsqu'on tente une opération incorrecte, une des
+ * quatre exceptions est levée : à récupérer ! */
+
 #include "include/Point.h"
 #include "include/Voxel.h"
 #include "include/Fichier.h"
@@ -30,6 +49,8 @@ class ErreurAccesIntermediaire : public std::runtime_error {
     }
 } intermedAccesErreur;
 
+
+
 class Noeud
 {
     public:
@@ -56,14 +77,14 @@ class Noeud
         bool est_terminal() const; // (accesseur) renvoie vrai si le noeud est terminal (composé de feuilles = fichiers)
 
         union NoeudSelonProfondeur {
-            Noeud *fils;
-            Fichier *feuille;
+            Noeud *fils; // un tableau de noeuds
+            Fichier *feuille; // un tableau de feuilles
         };
 
     protected:
     private:
         NoeudSelonProfondeur m_enfants;
-        long m_taille_enfants;
+        long m_taille_enfants; // on stocke un tableau => on garde sa taille
         Voxel m_boite;
         bool m_terminal;
 };

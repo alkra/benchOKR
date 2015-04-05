@@ -1,11 +1,23 @@
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier contient l'implémentation des méthodes de la classe NoeudOctree
+ */
+
 #include "include/NoeudOctree.h"
 
 /*
-NoeudOctree::NoeudOctree() : m_terminal(false), m_boite() { // construit un noeud normal
+NoeudOctree::NoeudOctree() : m_terminal(false), m_boite() {
+    // construit un noeud normal
     m_enfants.fils = new NoeudOctree[];
     m_taille_enfants = ;
 }
-NoeudOctree::NoeudOctree(bool terminal = false) : m_terminal(terminal), m_boite() { // construit un noeud terminal (ou non)
+NoeudOctree::NoeudOctree(bool terminal = false) : m_terminal(terminal), m_boite() {
+    // construit un noeud terminal (ou non)
     if(terminal) {
         m_enfants.feuille = new Fichier[];
         m_taille_enfants = ;
@@ -15,7 +27,8 @@ NoeudOctree::NoeudOctree(bool terminal = false) : m_terminal(terminal), m_boite(
     }
 }
 
-NoeudOctree::NoeudOctree(Voxel &boite, bool terminal = false) : m_boite(boite), m_terminal(terminal) {
+NoeudOctree::NoeudOctree(Voxel &boite, bool terminal = false): m_boite(boite),
+             m_terminal(terminal) {
     if(terminal) {
         m_enfants.feuille = new Fichier[];
         m_taille_enfants = ;
@@ -25,7 +38,8 @@ NoeudOctree::NoeudOctree(Voxel &boite, bool terminal = false) : m_boite(boite), 
     }
 }*/
 
-NoeudOctree::NoeudOctree(const NoeudOctree &modele) { // Constructeur de recopie
+NoeudOctree::NoeudOctree(const NoeudOctree &modele) {
+    // Constructeur de recopie
     m_terminal = modele.est_terminal();
     m_boite = modele.getVoxel();
     m_taille_enfants = modele.getTailleEnfants();
@@ -56,7 +70,8 @@ Point* NoeudOctree::requete(const Voxel &conteneur) const {
 }
 
 /* Accesseur */
-void NoeudOctree::setEnfant(long pos, NoeudOctree &noeud) {  // remplace le pos-ième enfant par "noeud"
+void NoeudOctree::setEnfant(long pos, NoeudOctree &noeud) {
+    // remplace le pos-ième enfant par "noeud"
     if(m_terminal) {
         throw termAffectErreur;
     } else {

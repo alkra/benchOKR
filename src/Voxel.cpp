@@ -1,10 +1,20 @@
+/* ©ENSG 2015
+ * École nationale des sciences géographiques
+ * 6-8 avenue Blaise Pascal
+ * Cité Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * FRANCE */
+
+/* Ce fichier contient l'implémentation des méthodes de la classe Voxel */
+
 #include "include/Voxel.h"
 
 Voxel::Voxel() : m_debut(), m_fin() {} // constructeur par défaut
-Voxel::Voxel(const Point3D &min, const Point3D &max) : m_debut(min), m_fin(max) {}
+Voxel::Voxel(const Point3D &min, const Point3D &max) :
+    m_debut(min), m_fin(max) {}
 Voxel::Voxel(double xdeb, double ydeb, double zdeb,
-             double xfin, double yfin, double zfin) : m_debut(xdeb, ydeb, zdeb),
-                                                      m_fin(xfin, yfin, zfin) {
+             double xfin, double yfin, double zfin): m_debut(xdeb, ydeb,zdeb),
+                                                     m_fin(xfin, yfin, zfin) {
 }
 
 Voxel::Voxel(const Voxel &modele) { // constructeur de recopie
@@ -13,7 +23,8 @@ Voxel::Voxel(const Voxel &modele) { // constructeur de recopie
 }
 
 /* Méthode */
-bool Voxel::intersecte(const Point &candidat, bool strict) const { // revoie true si le point est dans le voxel
+bool Voxel::intersecte(const Point &candidat, bool strict) const {
+    /* revoie true si le point est dans le voxel */
     // ...
 }
 
