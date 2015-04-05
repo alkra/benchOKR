@@ -9,51 +9,54 @@
 
 #include "include/NoeudKd.h"
 
-/*
-NoeudKd::NoeudKd() : m_terminal(false), m_boite() { // construit un noeud normal
+
+NoeudKd::NoeudKd() : Noeud() { /* // construit un noeud normal
     m_enfants.fils = new NoeudKd[];
-    m_taille_enfants = ;
+    m_taille_enfants = ;*/
 }
-NoeudKd::NoeudKd(bool terminal = false) : m_terminal(terminal), m_boite() { // construit un noeud terminal (ou non)
+NoeudKd::NoeudKd(bool terminal) : Noeud(terminal) { /* // construit un noeud terminal (ou non)
     if(terminal) {
         m_enfants.feuille = new Fichier[];
         m_taille_enfants = ;
     } else {
         m_enfants.fils = new NoeudKd[];
         m_taille_enfants = ;
-    }
+    }*/
 }
 
-NoeudKd::NoeudKd(Voxel &boite, bool terminal = false) : m_boite(boite), m_terminal(terminal) {
+NoeudKd::NoeudKd(Voxel &boite, bool terminal) : Noeud(boite, terminal) {/*
     if(terminal) {
         m_enfants.feuille = new Fichier[];
         m_taille_enfants = ;
     } else {
         m_enfants.fils = new NoeudKd[];
         m_taille_enfants = ;
-    }
-}*/
+    }*/
+}
 
 
-NoeudKd::NoeudKd(const NoeudKd &modele) { // Constructeur de recopie
+NoeudKd::NoeudKd(const NoeudKd &modele) : Noeud(modele) { // Constructeur de recopie
     m_terminal = modele.est_terminal();
     m_boite = modele.getVoxel();
     m_taille_enfants = modele.getTailleEnfants();
-    if(terminal) {
-        m_enfants.feuille = new Fichier[m_taille_enfants];
+    if(m_terminal) {
+        m_enfants.feuille = new Fichier[m_taille_enfants]();
     } else {
-        m_enfants.fils = new NoeudKd[m_taille_enfants];
+        m_enfants.fils = new NoeudKd[m_taille_enfants]();
     }
     long i = 0;
-    union NoeudSelonProfondeur *enfantsModele = modele.getEnfants();
+    const union Noeud::NoeudSelonProfondeur enfantsModele = modele.getEnfants();
 
     for(i=0 ; i<m_taille_enfants ; i++) { // recopie du tableau
-        if(terminal) {
-            m_enfants.feuille[i] = enfantsModele->feuille[i];
+        if(m_terminal) {
+            m_enfants.feuille[i] = enfantsModele.feuille[i];
         } else {
-            m_enfants.fils[i] = enfantsModele->fils[i];
+            m_enfants.fils[i] = enfantsModele.fils[i];
         }
     }
+}
+
+NoeudKd::~NoeudKd() {
 }
 
 /* Les fonctions de requête */
@@ -66,10 +69,10 @@ Point* NoeudKd::requete(const Voxel &conteneur) const {
 }
 
 /* Accesseur */
-void NoeudKd::setEnfant(long pos, NoeudKd &noeud) {  // remplace le pos-ième enfant par "noeud"
+void NoeudKd::setEnfant(long pos, NoeudKd &noeud) throw(ErreurAffectationTerminal) {  // remplace le pos-ième enfant par "noeud"
     if(m_terminal) {
-        throw termAffectErreur;
+        throw new ErreurAffectationTerminal;
     } else {
-        m_enfants[pos].fils = noeud;
+        m_enfants.fils[pos] = noeud;
     }
 }

@@ -9,7 +9,11 @@
 
 #include "../include/Fichier.h"
 
-Fichier::Fichier(QString chemin)
+Fichier::Fichier() {
+    // euh
+}
+
+Fichier::Fichier(const QString chemin)
 {
     // ouvrir le fichier "chemin"
 }
@@ -24,10 +28,10 @@ Point Fichier::getPoint(long pos)
     // renvoie le pos-ième point du fichier
 }
 
-Point* requete(const Point &centre, double distance) const {
+Point* requete(const Point &centre, double distance) {
     // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
 }
 
-Point* requete(const Voxel &conteneur) const {
+Point* requete(const Voxel &conteneur) {
     // renvoie tous les points du fichier contenus dans 'conteneur'
 }

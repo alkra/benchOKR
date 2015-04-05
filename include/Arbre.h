@@ -14,7 +14,6 @@
 
 #include "include/Noeud.h"
 #include "include/Point.h"
-#include "include/Point.h"
 #include "include/Voxel.h"
 
 class Arbre  // déclaration de la classe Abstraite Arbre
@@ -30,8 +29,7 @@ class Arbre  // déclaration de la classe Abstraite Arbre
          * Ici, le constructeur est virtuel, donc on ne pourra même pas instancier un objet de type Arbre.
          */
 
-        virtual Arbre(); // constructeur d'Arbre
-        virtual ~Arbre(); // destructeur d'Arbre
+        Arbre(); // constructeur d'Arbre
 
         /*création de fonction virtuelle pour rendre la classe abstraite pour la résolution dynamique des liens:
         2 possibilités s'offrents à nous
@@ -39,9 +37,9 @@ class Arbre  // déclaration de la classe Abstraite Arbre
         - utilisation de fonction virtuelle comme c'est le cas ici
         */ // (Alban) euh bon...
 
-        virtual void construire();
-        virtual Point* requete(const Point &centre, double distance) const; // voisinage
-        virtual Point* requete(const Voxel &conteneur) const; // dans un voxel
+        virtual void construire() =0;
+        virtual Point* requete(const Point &centre, double distance) const =0; // voisinage
+        virtual Point* requete(const Voxel &conteneur) const =0; // dans un voxel
 
         /* Accesseurs et mutateurs */
         Noeud* getRacine() const; // renvoie un pointeur vers la racine
@@ -52,11 +50,6 @@ class Arbre  // déclaration de la classe Abstraite Arbre
         Noeud* racine; // Pointe vers le début de l'arbre
 
     private:
-
-
-
-
-
 
 };
 

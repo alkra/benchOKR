@@ -18,7 +18,7 @@ class NoeudOctree : public Noeud
 {
     public:
         NoeudOctree(); // construit un noeud normal
-        NoeudOctree(bool terminal = false); // construit un noeud terminal
+        NoeudOctree(bool terminal); // construit un noeud terminal
         NoeudOctree(Voxel &boite, bool terminal = false);
         NoeudOctree(const NoeudOctree &modele); // constructeur de recopie
 
@@ -31,7 +31,7 @@ class NoeudOctree : public Noeud
             Fichier *feuille;
         };
 
-        void setEnfant(long pos, NoeudOctree &noeud) throw termAffectErreur; // remplace le pos-ième enfant par "noeud"
+        void setEnfant(long pos, NoeudOctree &noeud) throw(ErreurAffectationTerminal); // remplace le pos-ième enfant par "noeud"
     protected:
     private:
 };

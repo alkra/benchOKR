@@ -9,50 +9,51 @@
 
 #include "include/NoeudR.h"
 
-/*
-NoeudR::NoeudR() : m_terminal(false), m_boite() { // construit un noeud normal
-    m_enfants.fils = new NoeudR[];
-    m_taille_enfants = ;
+
+NoeudR::NoeudR() : Noeud() { // construit un noeud normal
+    /*m_enfants.fils = new NoeudR[];
+    m_taille_enfants = ;*/
 }
-NoeudR::NoeudR(bool terminal = false) : m_terminal(terminal), m_boite() { // construit un noeud terminal (ou non)
+
+NoeudR::NoeudR(bool terminal) : Noeud(terminal) { /* // construit un noeud terminal (ou non)
     if(terminal) {
         m_enfants.feuille = new Fichier[];
         m_taille_enfants = ;
     } else {
         m_enfants.fils = new NoeudR[];
         m_taille_enfants = ;
-    }
+    }*/
 }
 
-NoeudR::NoeudR(Voxel &boite, bool terminal = false) : m_boite(boite), m_terminal(terminal) {
+NoeudR::NoeudR(Voxel &boite, bool terminal) : Noeud(boite, terminal) {/*
     if(terminal) {
         m_enfants.feuille = new Fichier[];
         m_taille_enfants = ;
     } else {
         m_enfants.fils = new NoeudR[];
         m_taille_enfants = ;
-    }
-}*/
+    }*/
+}
 
-NoeudR::NoeudR(const NoeudR &modele) { // Constructeur de recopie
+NoeudR::NoeudR(const NoeudR &modele) : Noeud(modele) { /* // Constructeur de recopie
     m_terminal = modele.est_terminal();
     m_boite = modele.getVoxel();
     m_taille_enfants = modele.getTailleEnfants();
-    if(terminal) {
-        m_enfants.feuille = new Fichier[m_taille_enfants];
+    if(m_terminal) {
+        m_enfants.feuille = new Fichier[m_taille_enfants]();
     } else {
-        m_enfants.fils = new NoeudR[m_taille_enfants];
+        m_enfants.fils = new NoeudR[m_taille_enfants]();
     }
     long i = 0;
-    union NoeudSelonProfondeur *enfantsModele = modele.getEnfants();
+    const union Noeud::NoeudSelonProfondeur enfantsModele = modele.getEnfants();
 
     for(i=0 ; i<m_taille_enfants ; i++) { // recopie du tableau
-        if(terminal) {
-            m_enfants.feuille[i] = enfantsModele->feuille[i];
+        if(m_terminal) {
+            m_enfants.feuille[i] = enfantsModele.feuille[i];
         } else {
-            m_enfants.fils[i] = enfantsModele->fils[i];
+            m_enfants.fils[i] = enfantsModele.fils[i];
         }
-    }
+    }*/
 }
 
 /* Les fonctions de requête */
@@ -65,11 +66,11 @@ Point* NoeudR::requete(const Voxel &conteneur) const {
 }
 
 /* Accesseur */
-void NoeudR::setEnfant(long pos, NoeudR &noeud) {
+void NoeudR::setEnfant(long pos, NoeudR &noeud) throw(ErreurAffectationTerminal) {
     // remplace le pos-ième enfant par "noeud"
     if(m_terminal) {
-        throw termAffectErreur;
+        throw new ErreurAffectationTerminal;
     } else {
-        m_enfants[pos].fils = noeud;
+        m_enfants.fils[pos] = noeud;
     }
 }

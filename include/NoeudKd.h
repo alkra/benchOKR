@@ -18,9 +18,10 @@ class NoeudKd : public Noeud
 {
     public:
         NoeudKd(); // construit un noeud normal
-        NoeudKd(bool terminal = false); // construit un noeud terminal
+        NoeudKd(bool terminal); // construit un noeud terminal
         NoeudKd(Voxel &boite, bool terminal = false); // construit un noeud terminal en lui affectant un voxel
         NoeudKd(const NoeudKd &modele); // constructeur de recopie
+        ~NoeudKd(); // destructeur
 
         /* Les fonctions de requête */
         Point* requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
@@ -31,7 +32,7 @@ class NoeudKd : public Noeud
             Fichier *feuille;
         };
 
-        void setEnfant(long pos, NoeudKd &noeud) throw termAffectErreur; // remplace le pos-ième enfant par "noeud"
+        void setEnfant(long pos, NoeudKd &noeud) throw(ErreurAffectationTerminal); // remplace le pos-ième enfant par "noeud"
     protected:
     private:
 };

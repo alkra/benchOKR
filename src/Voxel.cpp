@@ -18,8 +18,8 @@ Voxel::Voxel(double xdeb, double ydeb, double zdeb,
 }
 
 Voxel::Voxel(const Voxel &modele) { // constructeur de recopie
-    m_debut(modele.getDebut());
-    m_fin(modele.getFin());
+    m_debut = modele.getDebut();
+    m_fin = modele.getFin();
 }
 
 /* Méthode */
@@ -36,17 +36,21 @@ Point3D Voxel::getFin() const {
     return m_fin;
 }
 void Voxel::setDebut(const Point3D &point) {
-    m_debut(point);
+    m_debut = point;
 }
 
 void Voxel::setDebut(double x, double y, double z) {
-    m_debut(x, y, z);
+    m_debut.setX(x);
+    m_debut.setY(y);
+    m_debut.setZ(z);
 }
 
 void Voxel::setFin(const Point3D &point) {
-    m_fin(point);
+    m_fin = point;
 }
 
 void Voxel::setFin(double x, double y, double z) {
-    m_fin(x, y, z);
+    m_fin.setX(x);
+    m_fin.setY(y);
+    m_fin.setZ(z);
 }

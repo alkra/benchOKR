@@ -9,6 +9,9 @@
 
 #include "include/Arbre.h"
 
+Arbre::Arbre() : racine(NULL) {
+}
+
 Noeud* Arbre::getRacine() const {
     return racine;
 }

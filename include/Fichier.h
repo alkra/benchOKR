@@ -25,13 +25,13 @@
 
 #include "Point.h"
 #include "Voxel.h"
-#include "Noeud.h"
 #include <QString>
 
 class Fichier
 {
     public:
-        Fichier(QString chemin); // constructeur
+        Fichier();
+        Fichier(const QString chemin); // constructeur
         ~Fichier(); // destructeur
 
         Point getPoint(long pos); // renvoie le pos-ième point du fichier
