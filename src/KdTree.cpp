@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation de la classe KdTree. */
 
-#include "include/KdTree.h"
+#include "../include/KdTree.h"
 
 KdTree::KdTree()
 {

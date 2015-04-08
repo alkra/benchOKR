@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe NoeudR. */
 
-#include "include/NoeudR.h"
+#include "../include/NoeudR.h"
 
 
 NoeudR::NoeudR() : Noeud() { // construit un noeud normal

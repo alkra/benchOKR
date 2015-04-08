@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe NoeudKd. */
 
-#include "include/NoeudKd.h"
+#include "../include/NoeudKd.h"
 
 
 NoeudKd::NoeudKd() : Noeud() { /* // construit un noeud normal

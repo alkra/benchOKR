@@ -10,7 +10,7 @@
 
 /* Ce fichier définit la classe Octree */
 
-#include <include/Arbre.h>
+#include "Arbre.h"
 
 
 

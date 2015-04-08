@@ -1,6 +1,6 @@
 #ifndef POINT_H
 #define POINT_H
-
+#include <string>
 /* ©ENSG 2015
  * École nationale des sciences géographiques
  * 6-8 avenue Blaise Pascal
@@ -23,6 +23,11 @@ class Point
         void setX(double x);
         void setY(double y);
         void setZ(double z);
+        Point readPly(std::string Path,int line);
+        Point readPlyBinaire(std::string Path,int line);
+        Point readTxt(std::string Path,int line);
+
+
     protected:
     private:
 

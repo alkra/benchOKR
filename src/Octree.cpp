@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe Octree. */
 
-#include "include/Octree.h"
+#include "../include/Octree.h"
 
 Octree::Octree()
 {

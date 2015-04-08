@@ -20,10 +20,9 @@
  * nombre maximum d'enfants. Lorsqu'on tente une opération incorrecte, une des
  * quatre exceptions est levée : à récupérer ! */
 
-#include "include/Point.h"
-#include "include/Voxel.h"
-#include "include/Fichier.h"
-#include <array>
+#include "Point.h"
+#include "Voxel.h"
+#include "Fichier.h"
 
 class ErreurAffectationTerminal : public std::exception {
     const char* what() const throw() {

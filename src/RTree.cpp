@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe RTree. */
 
-#include "include/RTree.h"
+#include "../include/RTree.h"
 
 RTree::RTree()
 {

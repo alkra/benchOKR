@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe Voxel */
 
-#include "include/Voxel.h"
+#include "../include/Voxel.h"
 
 Voxel::Voxel() : m_debut(), m_fin() {} // constructeur par défaut
 Voxel::Voxel(const Point3D &min, const Point3D &max) :
