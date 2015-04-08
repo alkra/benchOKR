@@ -12,9 +12,9 @@
  * Cette classe sera héritée par nos trois méthodes de construction.
  * Elle représente l'arbre en train d'être construit. */
 
-#include "include/Noeud.h"
-#include "include/Point.h"
-#include "include/Voxel.h"
+#include "../include/Noeud.h"
+#include "../include/Point.h"
+#include "../include/Voxel.h"
 
 class Arbre  // déclaration de la classe Abstraite Arbre
 {

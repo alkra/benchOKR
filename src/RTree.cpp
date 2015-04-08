@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe RTree. */
 
-#include "include/RTree.h"
+#include "../include/RTree.h"
 
 RTree::RTree()
 {
@@ -24,7 +24,7 @@ void RTree::construire() {
 }
 
 Point* RTree::requete(const Point &centre, double distance) const {
-    // requête sur un voisinage
+    return racine->requete(centre, distance);
 }
 
 Point* RTree::requete(const Voxel &conteneur) const {

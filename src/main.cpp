@@ -5,7 +5,7 @@
  * 77455 MARNE-LA-VALLÉE CEDEX 2
  * FRANCE */
 
-#include "include/RTree.h"
+#include "../include/RTree.h"
 #include <iostream>
 
 int main(int argc, char** argv)

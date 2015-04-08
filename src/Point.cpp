@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe Point. */
 
-#include "include/Point.h"
+#include "../include/Point.h"
 
 /* Constructeurs */
 

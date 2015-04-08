@@ -10,7 +10,7 @@
 
 /* Ce fichier définit la classe NoeudR */
 
-#include <include/Noeud.h>
+#include <../include/Noeud.h>
 #include "Fichier.h"
 
 

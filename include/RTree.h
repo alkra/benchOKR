@@ -10,9 +10,9 @@
 
 /* Ce fichier définit la classe RTree. */
 
-#include "include/Arbre.h"
-#include "include/NoeudR.h"
-#include "include/Point.h"
+#include "../include/Arbre.h"
+#include "../include/NoeudR.h"
+#include "../include/Point.h"
 
 class RTree : public Arbre
 // Création d'une classe RTree qui hérite de la classe Arbre

@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe Point3D */
 
-#include "include/Point3D.h"
+#include "../include/Point3D.h"
 
 Point3D::Point3D()
 {

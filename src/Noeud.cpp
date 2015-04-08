@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe Noeud. */
 
-#include "include/Noeud.h"
+#include "../include/Noeud.h"
 
 /* Méthodes virtuelles */
 Noeud::Noeud() : m_terminal(false), m_boite() { // construit un noeud normal

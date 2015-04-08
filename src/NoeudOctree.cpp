@@ -8,7 +8,7 @@
 /* Ce fichier contient l'implémentation des méthodes de la classe NoeudOctree
  */
 
-#include "include/NoeudOctree.h"
+#include "../include/NoeudOctree.h"
 
 
 NoeudOctree::NoeudOctree() : Noeud() {/*
