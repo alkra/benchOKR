@@ -6,10 +6,9 @@
  * FRANCE */
 
 #include "include/RTree.h"
+#include <iostream>
 
 int main(int argc, char** argv)
 {
-    RTree monTest;
-    monTest.construire();
     return 0;
 }
