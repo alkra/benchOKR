@@ -32,3 +32,16 @@ Prévision du travail
 Maryame : lecture + kd
 David : QGL
 Alban : bulk-loading
+
+
+
+Travail réalisé :
+---------------
+
+
+David : installation de libQGLViewer (cf. Bilbiographie). Création
+d'un .pro
+Maryame : méthode de lecture d'un point du fichier ply : dans la
+classe Point, ou en-dehors ?
+Alban : rédaction de Voxel.intersecte, tests, et algorithmes de base
+du R-tree.
