@@ -1,9 +1,11 @@
 #ifndef TESTSVOXEL_H
 #define TESTSVOXEL_H
 
-#include <ostream>
+#include <QDebug>
 
-bool Voxel_test_creation(const std::ostream out = std::cout);
-bool Voxel_test_intersection(const std::ostream out = std::cout);
+#include "../include/Voxel.h"
+
+bool Voxel_test_creation();
+bool Voxel_test_intersection();
 
 #endif // TESTSVOXEL_H
