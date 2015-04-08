@@ -9,7 +9,6 @@
  * FRANCE */
 
 #include "../include/Point3D.h"
-#include "../include/Point.h"
 
 /* Définit la classe représentant un voxel parallèle aux axes du repère */
 class Voxel {
@@ -20,7 +19,9 @@ public:
     Voxel(const Voxel &modele); // constructeur de recopie
 
     /* Méthode */
-    bool intersecte(const Point &candidat, bool strict = false) const; // revoie true si le point est dans le voxel
+    Point3D *calcSommets() const;
+    bool intersecte(const Point3D &candidat, bool strict = false) const; // revoie true si le point est dans le voxel
+    static bool intersecte(const Voxel &un, const Voxel &deux, bool strict = false, bool testerAutreSens = true); // renvoie vrai si l'un des voxels intersecte l'autre.
 
     /* Accesseurs et mutateurs */
     Point3D getDebut() const;
@@ -31,6 +32,7 @@ public:
     void setFin(double x, double y, double z);
 
 private:
+
     Point3D m_debut;
     Point3D m_fin;
 };

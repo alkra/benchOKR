@@ -103,3 +103,52 @@ bool Voxel_test_intersection() {
 
     return result;
 }
+
+
+bool Voxel_test_double_intersection() {
+    bool res = true;
+    Voxel un(0, 0, 0, 10, 10, 10), deux(2, 2, 2, 20, 6, 6), trois(-1, -1, -1, -3, -3, -3);
+
+    qDebug() << "Test n° " << 3 << " Intersection de deux voxels." << endl;
+    qDebug() << "Test n° " << 3 << "." << 1 << endl;
+    qDebug() << "Voxel : (" << un.getDebut().getX() << ", "
+             << un.getDebut().getY() << ", "
+             << un.getDebut().getZ() << ")x("
+             << un.getFin().getX() << ", "
+             << un.getFin().getY() << ", "
+             << un.getFin().getZ() << ")" << endl;
+    qDebug() << "inter : (" << trois.getDebut().getX() << ", "
+             << trois.getDebut().getY() << ", "
+             << trois.getDebut().getZ() << ")x("
+             << trois.getFin().getX() << ", "
+             << trois.getFin().getY() << ", "
+             << trois.getFin().getZ() << ")" << endl;
+    if(Voxel::intersecte(un, trois)) {
+        qDebug() << "est non vide. C'est faux !" << endl;
+        res = false;
+    } else {
+        qDebug() << "est vide. C'est bon." << endl;
+    }
+
+    qDebug() << "Test n° " << 3 << "." << 2 << endl;
+    qDebug() << "Voxel : (" << un.getDebut().getX() << ", "
+             << un.getDebut().getY() << ", "
+             << un.getDebut().getZ() << ")x("
+             << un.getFin().getX() << ", "
+             << un.getFin().getY() << ", "
+             << un.getFin().getZ() << ")" << endl;
+    qDebug() << "inter : (" << deux.getDebut().getX() << ", "
+             << deux.getDebut().getY() << ", "
+             << deux.getDebut().getZ() << ")x("
+             << deux.getFin().getX() << ", "
+             << deux.getFin().getY() << ", "
+             << deux.getFin().getZ() << ")" << endl;
+    if(Voxel::intersecte(un, deux)) {
+        qDebug() << "est non vide. C'est bon." << endl;
+    } else {
+        qDebug() << "est vide. C'est faux !" << endl;
+        res = false;
+    }
+
+    return res;
+}

@@ -39,7 +39,7 @@ bool test_dimension(bool inferieur(double, double), double debut, double fin, do
 }
 
 /* Méthode */
-bool Voxel::intersecte(const Point &candidat, bool strict) const {
+bool Voxel::intersecte(const Point3D &candidat, bool strict) const {
     /* Choix de la méthode de comparaison, stricte ou large */
     bool (*inferieur)(double, double);
     if(strict) {
@@ -53,6 +53,35 @@ bool Voxel::intersecte(const Point &candidat, bool strict) const {
      && test_dimension(inferieur, m_debut.getY(), m_fin.getY(), candidat.getY())
      && test_dimension(inferieur, m_debut.getZ(), m_fin.getZ(), candidat.getZ())
     );
+}
+
+Point3D *Voxel::calcSommets() const {
+    Point3D *sommets = new Point3D[8];
+    sommets[0] = Point3D(m_debut);
+    sommets[1] = Point3D(m_debut.getX(), m_debut.getY(), m_fin.getZ());
+    sommets[2] = Point3D(m_debut.getX(), m_fin.getY(), m_debut.getZ());
+    sommets[3] = Point3D(m_debut.getX(), m_fin.getY(), m_fin.getZ());
+    sommets[4] = Point3D(m_fin.getX(), m_debut.getY(), m_debut.getZ());
+    sommets[5] = Point3D(m_fin.getX(), m_debut.getY(), m_fin.getZ());
+    sommets[6] = Point3D(m_fin.getX(), m_fin.getY(), m_debut.getZ());
+    sommets[7] = Point3D(m_fin);
+    return sommets;
+}
+
+bool Voxel::intersecte(const Voxel &un, const Voxel &deux, bool strict, bool testerAutreSens) {
+    bool res = false;
+
+    Point3D *sommets = deux.calcSommets();
+    for(short i = 0; i<8; i++) {
+        res = res || un.intersecte(sommets[i], strict);
+    }
+    delete[] sommets;
+
+    if(res && testerAutreSens) {
+        res = res || Voxel::intersecte(deux, un, strict, false);
+    }
+
+    return res;
 }
 
 /* Accesseurs et mutateurs */
