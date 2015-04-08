@@ -5,14 +5,15 @@
  * 77455 MARNE-LA-VALLÉE CEDEX 2
  * FRANCE */
 
-
-#include "../include/RTree.h"
-
-
-
+#include <iostream>
+#include<string>
+using namespace std;
+#include<../include/Point.h>
 
 
 int main(int argc, char** argv)
 {
-    return 0;
+    Point p;
+    string Path="E:/araignee.ply";
+    p=p.readPly(Path,13);
 }

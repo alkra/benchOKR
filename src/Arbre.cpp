@@ -7,7 +7,7 @@
 
 /* Ce fichier contient l'implémentation des méthodes de la classe Arbre. */
 
-#include "include/Arbre.h"
+#include "../include/Arbre.h"
 
 Arbre::Arbre() : racine(NULL) {
 }

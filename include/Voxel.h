@@ -8,8 +8,8 @@
  * 77455 MARNE-LA-VALLÉE CEDEX 2
  * FRANCE */
 
-#include "include/Point3D.h"
-#include "include/Point.h"
+#include "Point3D.h"
+#include "Point.h"
 
 /* Définit la classe représentant un voxel parallèle aux axes du repère */
 class Voxel {

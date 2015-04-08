@@ -10,7 +10,7 @@
 
 /* Ce fichier définit la classe NoeudKd. */
 
-#include <include/Noeud.h>
+#include "Noeud.h"
 #include "Fichier.h"
 
 
