@@ -25,7 +25,7 @@ class Point3D
         void setY(double y);
         void setZ(double z);
 
-    private:
+    protected:
 
     // attributs membres de point3D
     double m_x,m_y,m_z ;

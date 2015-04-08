@@ -11,35 +11,14 @@
 
 /* Constructeurs */
 
-Point::Point() : m_x(0), m_y(0), m_z(0)
+Point::Point() : Point3D()
 {
     //ctor
 }
 
-Point::Point(double x, double y, double z) : m_x(x), m_y(y), m_z(z) {}
+Point::Point(double x, double y, double z) : Point3D(x, y, z) {}
 
 Point::~Point()
 {
     //dtor
-}
-
-/* Accesseurs et mutateurs */
-
-double Point::getX() const {
-    return m_x;
-}
-double Point::getY() const {
-    return m_y;
-}
-double Point::getZ() const {
-    return m_z;
-}
-void Point::setX(double x) {
-    m_x = x;
-}
-void Point::setY(double y) {
-    m_y = y;
-}
-void Point::setZ(double z) {
-    m_z = z;
 }
