@@ -5,11 +5,14 @@
  * 77455 MARNE-LA-VALLÉE CEDEX 2
  * FRANCE */
 
+
 #include "../include/RTree.h"
+
+
+
+
 
 int main(int argc, char** argv)
 {
-    RTree monTest;
-    monTest.construire();
     return 0;
 }

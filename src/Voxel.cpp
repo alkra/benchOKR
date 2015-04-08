@@ -22,10 +22,37 @@ Voxel::Voxel(const Voxel &modele) { // constructeur de recopie
     m_fin = modele.getFin();
 }
 
+bool operateur_strict(double a, double b) {
+    return a < b;
+}
+bool operateur_large(double a, double b) {
+    return a <= b;
+}
+bool test_dimension(bool inferieur(double, double), double debut, double fin, double candidat) {
+    return (
+            inferieur(debut, candidat)
+         && inferieur(candidat, fin)
+            ) || (
+            inferieur(fin, candidat)
+         && inferieur(candidat, debut)
+            );
+}
+
 /* Méthode */
 bool Voxel::intersecte(const Point &candidat, bool strict) const {
-    /* revoie true si le point est dans le voxel */
-    // ...
+    /* Choix de la méthode de comparaison, stricte ou large */
+    bool (*inferieur)(double, double);
+    if(strict) {
+        inferieur = &operateur_strict;
+    } else {
+        inferieur = &operateur_large;
+    }
+
+    return (
+        test_dimension(inferieur, m_debut.getX(), m_fin.getX(), candidat.getX())
+     && test_dimension(inferieur, m_debut.getY(), m_fin.getY(), candidat.getY())
+     && test_dimension(inferieur, m_debut.getZ(), m_fin.getZ(), candidat.getZ())
+    );
 }
 
 /* Accesseurs et mutateurs */
