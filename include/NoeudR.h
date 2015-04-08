@@ -10,8 +10,8 @@
 
 /* Ce fichier définit la classe NoeudR */
 
-#include <../include/Noeud.h>
-#include "Fichier.h"
+#include "../include/Noeud.h"
+#include "../include/Fichier.h"
 
 
 class NoeudR : public Noeud

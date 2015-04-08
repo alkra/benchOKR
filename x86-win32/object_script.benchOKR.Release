@@ -1,0 +1,15 @@
+INPUT(
+./release/main.o
+./release/Arbre.o
+./release/Fichier.o
+./release/KdTree.o
+./release/Noeud.o
+./release/NoeudKd.o
+./release/NoeudOctree.o
+./release/NoeudR.o
+./release/Octree.o
+./release/Point.o
+./release/Point3D.o
+./release/RTree.o
+./release/Voxel.o
+);

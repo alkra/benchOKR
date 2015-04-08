@@ -10,8 +10,9 @@
 
 /* Ce fichier définit la classe NoeudKd. */
 
-#include <../include/Noeud.h>
-#include "Fichier.h"
+
+#include "../include/Noeud.h"
+#include "../include/Fichier.h"
 
 
 class NoeudKd : public Noeud
