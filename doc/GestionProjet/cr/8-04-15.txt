@@ -39,9 +39,27 @@ Travail réalisé :
 ---------------
 
 
-David : installation de libQGLViewer (cf. Bilbiographie). Création
-d'un .pro
+David : installation de libQGLViewer (cf. Bilbiographie). Une caméra,
+on ne l'écrit plus ! Création d'un .pro
 Maryame : méthode de lecture d'un point du fichier ply : dans la
-classe Point, ou en-dehors ?
+classe Point, ou en-dehors ? En-dehors : on n'exécute qu'une fois le
+constructeur.
+Test de non-régression : Maryame a repris du code : est-ce que ça
+marche toujours ? => Quand on intègre le code dans le projet, il
+fonctionne toujours. Générer des points (1000) aléatoirement. TDD : test
+driven development, expression du besoin du product owner.
 Alban : rédaction de Voxel.intersecte, tests, et algorithmes de base
 du R-tree.
+
+
+Réunion
+-------
+
+Fichier .pro est le fichier du projet.
+qmake génère un Makefile à partir du .pro.
+On lui indique la librairie.
+
+Compilation :
+Préprocesseur rassemble les .h et .cpp
+Editeur de liens rassemble les .o
+
