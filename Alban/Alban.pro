@@ -1,4 +1,5 @@
 QT  += core
+TARGET = benchOKR
 SOURCES += src/Arbre.cpp \
     src/main.cpp \
     src/Fichier.cpp \
