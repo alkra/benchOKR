@@ -1,0 +1,34 @@
+##########################
+# Compte-rendu de séance #
+##########################
+
+Date : 8 avril 2015
+Lieu : M209
+
+
+Avant la séance
+---------------
+
+Maryame a cherché à utiliser la librairie boost. Étant difficile à
+installer, il a été plus rentable de tout recoder. Tester les cas
+pathologiques.
+
+
+Questions à Emmanuel
+-------------------
+
+setEnfant : comment le spécialiser mieux qu'en le recopiant ? Explicit
+cast sur getEnfant ? -> On précise le type "unsigned short typ" TODO
+Union NoeudSelonProfondeur OK ? 4 exceptions ? -> OK
+Utiliser des std::array ? -> De toutes manières, utilise les tableaux []
+Pourquoi le =0 ? -> Pas obligé de surcharger : il y a une
+implémentation donnée.
+
+Il faut vérifier que les new se passent bien, pour nous !
+
+Prévision du travail
+--------------------
+
+Maryame : lecture + kd
+David : QGL
+Alban : bulk-loading

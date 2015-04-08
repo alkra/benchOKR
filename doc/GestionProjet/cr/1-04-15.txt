@@ -39,3 +39,17 @@ Travail réalisé
 
 Maryame : lecture d'un fichier .ply et création d'un répertoire adapté
 au kd-tree.
+Alban : Reprise et complétion des classes
+David : formation
+
+
+Questions et pistes d'évolution
+-------------------------------
+
+setEnfant : comment le spécialiser mieux qu'en le recopiant ? Explicit
+cast sur getEnfant ?
+Classe Fichier : doit-on tous les garder ouverts ? Sous quelle forme ?
+Union NoeudSelonProfondeur OK ? 4 exceptions ?
+Implémenter Voxel.intersecte(Point3D)
+Utiliser des std::array ?
+Pourquoi le =0 ?
