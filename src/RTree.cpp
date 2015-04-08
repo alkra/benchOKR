@@ -19,6 +19,8 @@ RTree::~RTree()
     //dtor
 }
 
+
+
 void RTree::construire() {
     // Code spécifique au kd-tree
 }
@@ -28,5 +30,5 @@ Point* RTree::requete(const Point &centre, double distance) const {
 }
 
 Point* RTree::requete(const Voxel &conteneur) const {
-    // requête dans un voxel
+    return racine->requete(conteneur);
 }

@@ -65,7 +65,7 @@ Point* NoeudOctree::requete(const Point &centre, double distance) const {
 }
 
 Point* NoeudOctree::requete(const Voxel &conteneur) const {
-    // renvoie tous les points de tous les enfants contenus dans le conteneur
+
 }
 
 /* Accesseur */

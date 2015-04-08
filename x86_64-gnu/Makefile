@@ -45,19 +45,19 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Alban/src/Arbre.cpp \
-		../Alban/src/main.cpp \
-		../Alban/src/Fichier.cpp \
-		../Alban/src/KdTree.cpp \
-		../Alban/src/Noeud.cpp \
-		../Alban/src/NoeudKd.cpp \
-		../Alban/src/NoeudOctree.cpp \
-		../Alban/src/NoeudR.cpp \
-		../Alban/src/Octree.cpp \
-		../Alban/src/Point.cpp \
-		../Alban/src/Point3D.cpp \
-		../Alban/src/RTree.cpp \
-		../Alban/src/Voxel.cpp 
+SOURCES       = ../src/Arbre.cpp \
+		../src/main.cpp \
+		../src/Fichier.cpp \
+		../src/KdTree.cpp \
+		../src/Noeud.cpp \
+		../src/NoeudKd.cpp \
+		../src/NoeudOctree.cpp \
+		../src/NoeudR.cpp \
+		../src/Octree.cpp \
+		../src/Point.cpp \
+		../src/Point3D.cpp \
+		../src/RTree.cpp \
+		../src/Voxel.cpp 
 OBJECTS       = Arbre.o \
 		main.o \
 		Fichier.o \
@@ -124,19 +124,19 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../Alban/Alban.pro ../Alban/src/Arbre.cpp \
-		../Alban/src/main.cpp \
-		../Alban/src/Fichier.cpp \
-		../Alban/src/KdTree.cpp \
-		../Alban/src/Noeud.cpp \
-		../Alban/src/NoeudKd.cpp \
-		../Alban/src/NoeudOctree.cpp \
-		../Alban/src/NoeudR.cpp \
-		../Alban/src/Octree.cpp \
-		../Alban/src/Point.cpp \
-		../Alban/src/Point3D.cpp \
-		../Alban/src/RTree.cpp \
-		../Alban/src/Voxel.cpp
+		../Alban/Alban.pro ../src/Arbre.cpp \
+		../src/main.cpp \
+		../src/Fichier.cpp \
+		../src/KdTree.cpp \
+		../src/Noeud.cpp \
+		../src/NoeudKd.cpp \
+		../src/NoeudOctree.cpp \
+		../src/NoeudR.cpp \
+		../src/Octree.cpp \
+		../src/Point.cpp \
+		../src/Point3D.cpp \
+		../src/RTree.cpp \
+		../src/Voxel.cpp
 QMAKE_TARGET  = benchOKR
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = benchOKR
@@ -289,7 +289,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/benchOKR1.0.0 || mkdir -p .tmp/benchOKR1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../Alban/include/Arbre.h ../Alban/include/Fichier.h ../Alban/include/KdTree.h ../Alban/include/Noeud.h ../Alban/include/NoeudKd.h ../Alban/include/NoeudOctree.h ../Alban/include/NoeudR.h ../Alban/include/Octree.h ../Alban/include/Point.h ../Alban/include/Point3D.h ../Alban/include/RTree.h ../Alban/include/Voxel.h .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../Alban/src/Arbre.cpp ../Alban/src/main.cpp ../Alban/src/Fichier.cpp ../Alban/src/KdTree.cpp ../Alban/src/Noeud.cpp ../Alban/src/NoeudKd.cpp ../Alban/src/NoeudOctree.cpp ../Alban/src/NoeudR.cpp ../Alban/src/Octree.cpp ../Alban/src/Point.cpp ../Alban/src/Point3D.cpp ../Alban/src/RTree.cpp ../Alban/src/Voxel.cpp .tmp/benchOKR1.0.0/ && (cd `dirname .tmp/benchOKR1.0.0` && $(TAR) benchOKR1.0.0.tar benchOKR1.0.0 && $(COMPRESS) benchOKR1.0.0.tar) && $(MOVE) `dirname .tmp/benchOKR1.0.0`/benchOKR1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/benchOKR1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../include/Arbre.h ../include/Fichier.h ../include/KdTree.h ../include/Noeud.h ../include/NoeudKd.h ../include/NoeudOctree.h ../include/NoeudR.h ../include/Octree.h ../include/Point.h ../include/Point3D.h ../include/RTree.h ../include/Voxel.h .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../src/Arbre.cpp ../src/main.cpp ../src/Fichier.cpp ../src/KdTree.cpp ../src/Noeud.cpp ../src/NoeudKd.cpp ../src/NoeudOctree.cpp ../src/NoeudR.cpp ../src/Octree.cpp ../src/Point.cpp ../src/Point3D.cpp ../src/RTree.cpp ../src/Voxel.cpp .tmp/benchOKR1.0.0/ && (cd `dirname .tmp/benchOKR1.0.0` && $(TAR) benchOKR1.0.0.tar benchOKR1.0.0 && $(COMPRESS) benchOKR1.0.0.tar) && $(MOVE) `dirname .tmp/benchOKR1.0.0`/benchOKR1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/benchOKR1.0.0
 
 
 clean:compiler_clean 
@@ -326,123 +326,99 @@ compiler_clean:
 
 ####### Compile
 
-Arbre.o: ../Alban/src/Arbre.cpp ../Alban/include/Arbre.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
-		../include/Point.h \
-		../include/Voxel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Arbre.o ../Alban/src/Arbre.cpp
-
-main.o: ../Alban/src/main.cpp ../Alban/include/RTree.h \
-		../Alban/include/Arbre.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
+Arbre.o: ../src/Arbre.cpp ../include/Arbre.h \
+		../include/Noeud.h \
 		../include/Point.h \
 		../include/Voxel.h \
-		../Alban/include/NoeudR.h \
+		../include/Point3D.h \
 		../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Alban/src/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Arbre.o ../src/Arbre.cpp
 
-Fichier.o: ../Alban/src/Fichier.cpp ../Alban/include/Fichier.h \
-		../include/Point.h \
-		../include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Point.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Fichier.o ../Alban/src/Fichier.cpp
-
-KdTree.o: ../Alban/src/KdTree.cpp ../Alban/include/KdTree.h \
+main.o: ../src/main.cpp ../include/RTree.h \
 		../include/Arbre.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
-		../include/Point.h \
-		../include/Voxel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KdTree.o ../Alban/src/KdTree.cpp
-
-Noeud.o: ../Alban/src/Noeud.cpp ../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
-		../include/Point.h \
-		../include/Voxel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Noeud.o ../Alban/src/Noeud.cpp
-
-NoeudKd.o: ../Alban/src/NoeudKd.cpp ../Alban/include/NoeudKd.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
+		../include/Noeud.h \
 		../include/Point.h \
 		../include/Voxel.h \
-		../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudKd.o ../Alban/src/NoeudKd.cpp
+		../include/Point3D.h \
+		../include/Fichier.h \
+		../include/NoeudR.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
-NoeudOctree.o: ../Alban/src/NoeudOctree.cpp ../Alban/include/NoeudOctree.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
+Fichier.o: ../src/Fichier.cpp ../include/Fichier.h \
 		../include/Point.h \
 		../include/Voxel.h \
-		../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudOctree.o ../Alban/src/NoeudOctree.cpp
+		../include/Point3D.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Fichier.o ../src/Fichier.cpp
 
-NoeudR.o: ../Alban/src/NoeudR.cpp ../Alban/include/NoeudR.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
+KdTree.o: ../src/KdTree.cpp ../include/KdTree.h \
+		../include/Arbre.h \
+		../include/Noeud.h \
 		../include/Point.h \
 		../include/Voxel.h \
+		../include/Point3D.h \
 		../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudR.o ../Alban/src/NoeudR.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KdTree.o ../src/KdTree.cpp
 
-Octree.o: ../Alban/src/Octree.cpp ../Alban/include/Octree.h \
-		../Alban/include/Arbre.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
-		../include/Point.h \
-		../include/Voxel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Octree.o ../Alban/src/Octree.cpp
-
-Point.o: ../Alban/src/Point.cpp ../Alban/include/Point.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Point.o ../Alban/src/Point.cpp
-
-Point3D.o: ../Alban/src/Point3D.cpp ../Alban/include/Point3D.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Point3D.o ../Alban/src/Point3D.cpp
-
-RTree.o: ../Alban/src/RTree.cpp ../Alban/include/RTree.h \
-		../Alban/include/Arbre.h \
-		../Alban/include/Noeud.h \
-		../Alban/include/Point.h \
-		../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Fichier.h \
+Noeud.o: ../src/Noeud.cpp ../include/Noeud.h \
 		../include/Point.h \
 		../include/Voxel.h \
-		../Alban/include/NoeudR.h \
+		../include/Point3D.h \
 		../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o RTree.o ../Alban/src/RTree.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Noeud.o ../src/Noeud.cpp
 
-Voxel.o: ../Alban/src/Voxel.cpp ../Alban/include/Voxel.h \
-		../Alban/include/Point3D.h \
-		../Alban/include/Point.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Voxel.o ../Alban/src/Voxel.cpp
+NoeudKd.o: ../src/NoeudKd.cpp ../include/NoeudKd.h \
+		../include/Noeud.h \
+		../include/Point.h \
+		../include/Voxel.h \
+		../include/Point3D.h \
+		../include/Fichier.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudKd.o ../src/NoeudKd.cpp
+
+NoeudOctree.o: ../src/NoeudOctree.cpp ../include/NoeudOctree.h \
+		../include/Noeud.h \
+		../include/Point.h \
+		../include/Voxel.h \
+		../include/Point3D.h \
+		../include/Fichier.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudOctree.o ../src/NoeudOctree.cpp
+
+NoeudR.o: ../src/NoeudR.cpp ../include/NoeudR.h \
+		../include/Noeud.h \
+		../include/Point.h \
+		../include/Voxel.h \
+		../include/Point3D.h \
+		../include/Fichier.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudR.o ../src/NoeudR.cpp
+
+Octree.o: ../src/Octree.cpp ../include/Octree.h \
+		../include/Arbre.h \
+		../include/Noeud.h \
+		../include/Point.h \
+		../include/Voxel.h \
+		../include/Point3D.h \
+		../include/Fichier.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Octree.o ../src/Octree.cpp
+
+Point.o: ../src/Point.cpp ../include/Point.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Point.o ../src/Point.cpp
+
+Point3D.o: ../src/Point3D.cpp ../include/Point3D.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Point3D.o ../src/Point3D.cpp
+
+RTree.o: ../src/RTree.cpp ../include/RTree.h \
+		../include/Arbre.h \
+		../include/Noeud.h \
+		../include/Point.h \
+		../include/Voxel.h \
+		../include/Point3D.h \
+		../include/Fichier.h \
+		../include/NoeudR.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o RTree.o ../src/RTree.cpp
+
+Voxel.o: ../src/Voxel.cpp ../include/Voxel.h \
+		../include/Point3D.h \
+		../include/Point.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Voxel.o ../src/Voxel.cpp
 
 ####### Install
 
