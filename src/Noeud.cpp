@@ -9,121 +9,87 @@
 
 #include "../include/Noeud.h"
 
-/* Méthodes virtuelles */
-Noeud::Noeud() : m_terminal(false), m_boite() { // construit un noeud normal
-    /* m_enfants.fils = new Noeud[1];
-    m_taille_enfants = 1; */
+/* Constructeurs */
+Noeud::Noeud() : m_boite(), m_enfants(NULL), m_nb_enfants(0), m_dossier(),
+    m_fichier(), m_terminal(false) { // construit un noeud par défaut
 }
 
-Noeud::Noeud(bool terminal) : m_terminal(terminal), m_boite() {/*
-    // construit un noeud terminal (ou non)
-    if(terminal) {
-        m_enfants.feuille = new Fichier[1];
-        m_taille_enfants = 1;
-    } else {
-        m_enfants.fils = new Noeud[1];
-        m_taille_enfants = 1;
-    }*/
+Noeud::Noeud(QString cheminRelatif): m_boite(), m_enfants(NULL),
+    m_nb_enfants(0), m_dossier(cheminRelatif), m_fichier(), m_terminal(false)
+{ // construit un nœud
 }
 
-Noeud::Noeud(Voxel &boite, bool terminal) :
-       m_terminal(terminal), m_boite(boite) {/*
-    if(terminal) {
-        m_enfants.feuille = new Fichier[1];
-        m_taille_enfants = 1;
-    } else {
-        m_enfants.fils = new Noeud[1];
-        m_taille_enfants = 1;
-    }*/
+Noeud::Noeud(Voxel &boite, QString cheminRelatif) : m_boite(boite),
+    m_enfants(NULL), m_nb_enfants(0), m_dossier(cheminRelatif),
+    m_fichier(), m_terminal(false) { // construit un noeud en lui associant un Voxel
 }
 
-Noeud::Noeud(const Noeud &modele) { /* // Constructeur de recopie
-    m_terminal = modele.est_terminal();
+Noeud::Noeud(const Noeud &modele) : m_fichier() { // constructeur de recopie
     m_boite = modele.getVoxel();
-    m_taille_enfants = modele.getTailleEnfants();
-    if(m_terminal) {
-        m_enfants.feuille = new Fichier[m_taille_enfants];
-    } else {
-        m_enfants.fils = new Noeud[m_taille_enfants]();
+    m_nb_enfants = modele.getNbEnfants();
+    m_enfants = new Noeud[m_nb_enfants];
+    for(long i = 0 ; i < m_nb_enfants ; i++) {
+        m_enfants[i] = modele.getEnfant(i);
     }
-    long i = 0;
-    union NoeudSelonProfondeur *enfantsModele = modele.getEnfants();
-
-    for(i=0 ; i<m_taille_enfants ; i++) { // recopie du tableau
-        if(terminal) {
-            m_enfants.feuille[i] = enfantsModele->feuille[i];
-        } else {
-            m_enfants.fils[i] = enfantsModele->fils[i];
-        }
-    }*/
-}
-
-Noeud::~Noeud() {
-}
-
-
-long Noeud::getTailleEnfants() const {
-    // renvoie la longueur du tableau d'enfants
-    return m_taille_enfants;
-}
-
-Noeud& Noeud::getFils(long pos) const throw(ErreurAccesIntermediaire) {
-    // retourne le pos-ième enfant si c'est un noeud
+    m_dossier = modele.getDossier();
+    m_terminal = modele.estTerminal();
     if(m_terminal) {
-        throw new ErreurAccesIntermediaire;
-    } else {
-        return m_enfants.fils[pos];
+        m_fichier = modele.getFichier();
     }
 }
 
-Fichier& Noeud::getFeuille(long pos) const throw(ErreurAccesTerminal) {
-    // retourne le pos-ième enfant si c'est une feuille
-    if(m_terminal) {
-        return m_enfants.feuille[pos];
-    } else {
-        throw new ErreurAccesTerminal;
-    }
+Noeud::~Noeud() { // destructeur
+    m_fichier.fermer();
+    delete[] m_enfants;
 }
 
-void Noeud::setEnfant(long pos, Noeud &noeud) throw(ErreurAffectationTerminal) {
-    // remplace le pos-ième enfant par "noeud"
-    if(m_terminal) {
-        throw new ErreurAffectationTerminal;
-    } else {
-        m_enfants.fils[pos] = noeud;
-    }
-}
-
-void Noeud::setEnfant(long pos, Fichier &feuille) throw(ErreurAffectationIntermediaire) {
-    // remplace le pos-ième enfant par "feuille"
-    if(m_terminal) {
-        m_enfants.feuille[pos] = feuille;
-    } else {
-        throw new ErreurAffectationIntermediaire;
-    }
-}
-
-const Noeud::NoeudSelonProfondeur Noeud::getEnfants() const {
-    // retourne le tableau d'enfants (pourquoi faire ?)
-    return m_enfants;
-}
-
-void Noeud::setEnfants(union NoeudSelonProfondeur enfants, long taille,
-                       bool terminal) {
-    // remplace le tableau d'enfants (DANGEREUX !)
-    m_enfants = enfants;
-    m_terminal = terminal;
-    m_taille_enfants = taille;
-}
 
 Voxel Noeud::getVoxel() const {
     return m_boite;
 }
 
-void Noeud::setVoxel(Voxel &v) {
-    m_boite = v;
+void Noeud::setVoxel(const Voxel &boite) {
+    m_boite = boite;
 }
 
-bool Noeud::est_terminal() const {
-    return m_terminal;
+Voxel Noeud::calculerVoxel() {
+    if(m_terminal) {
+        m_boite = m_fichier.calculerVoxel();
+    } else {
+        double xmin, xmax, ymin, ymax, zmin, zmax;
+        Point3D *un, *deux;
+        for(long i=0 ; i < m_nb_enfants ; i++) {
+            *un = m_enfants[i].getVoxel().getDebut();
+            *deux = m_enfants[i].getVoxel().getFin();
+            if(i == 0) {
+                xmin = un->getX();
+                ymin = un->getY();
+                zmin = un->getZ();
+                xmin = deux->getX();
+                ymin = deux->getY();
+                zmin = deux->getZ();
+            } else {
+                if(un->getX() < deux->getX()) {
+                    xmin = min<double>(xmin, un->getX());
+                    xmax = max<double>(xmax, deux->getX());
+                    arrêt
+            }
+        }
+    }
 }
+
+Noeud getEnfant(long pos) const;
+void setEnfant(Noeud &nouveau, long pos);
+bool ajoutEnfant(Noeud &nouveau, long pos = -1);
+Noeud supprimerEnfant(long pos = -1);
+
+long getNbEnfants() const;
+
+QDir getDossier() const;
+bool setDossier(const QString &nouveau);
+bool setDossier(QDir &nouveau);
+
+Fichier& getFichier() const throw(TerminalErreur);
+void setFichier(const Fichier &nouveau);
+
+bool estTerminal() const;

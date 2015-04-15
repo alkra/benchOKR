@@ -57,8 +57,7 @@ NoeudR::NoeudR(const NoeudR &modele) : Noeud(modele) { /* // Constructeur de rec
 }
 
 /* Les fonctions de requête */
-QVector<Point> NoeudR::requete(const Point &centre, double distance)
-    const {
+QVector<Point> NoeudR::requete(const Point &centre, double distance) const {
 
 }
 
@@ -86,6 +85,8 @@ QVector<Point> NoeudR::requete(const Voxel &conteneur) const {
             }
         }
     }
+
+    return resultat;
 }
 
 /* Accesseur */
