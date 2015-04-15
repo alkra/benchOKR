@@ -9,18 +9,37 @@
 
 #include "../include/Fichier.h"
 
-Fichier::Fichier() {
-    // euh
+Fichier::Fichier() : m_fichier(), m_voxel() {
+
 }
 
-Fichier::Fichier(const QString chemin)
-{
-    // ouvrir le fichier "chemin"
+Fichier::Fichier(const Fichier &modele) : m_fichier(),
+    m_voxel(modele.getVoxel()) {
+    m_fichier.setFileName(modele.getFichier().fileName());
+}
+
+
+Fichier& Fichier::operator=(Fichier modele) {
+    *this = modele;
+    return *this;
 }
 
 Fichier::~Fichier()
 {
-    // fermer le fichier
+}
+
+bool Fichier::ouvrir(const QString &chemin, QIODevice::OpenMode mode) {
+    m_fichier.setFileName(chemin);
+    return m_fichier.open(mode);
+}
+
+void Fichier::fermer() {
+    m_fichier.close();
+}
+
+
+bool Fichier::ajoutPoint(const Point &p, long pos) {
+    // à implémenter
 }
 
 Point Fichier::getPoint(long pos)
@@ -28,10 +47,33 @@ Point Fichier::getPoint(long pos)
     // renvoie le pos-ième point du fichier
 }
 
-Point* requete(const Point &centre, double distance) {
+Point* Fichier::requete(const Point &centre, double distance) const {
     // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
 }
 
-Point* requete(const Voxel &conteneur) {
+Point* Fichier::requete(const Voxel &conteneur) const {
     // renvoie tous les points du fichier contenus dans 'conteneur'
+}
+
+/* Accesseurs et mutateurs (1 par attribut) */
+const QFile &Fichier::getFichier() const {
+    return m_fichier;
+}
+
+void Fichier::setFichier(QFile &nouveau) {
+
+}
+
+Voxel Fichier::getVoxel() const {
+    return m_voxel;
+}
+
+void Fichier::calculerVoxel() {
+    // MARYAME
+}
+
+void Fichier::setVoxel(const Voxel &v) {
+    // Attention, ne garantit pas que la nouvelle boîte soit cohérente
+    // Appeler calculerVoxel plutôt
+    m_voxel = v;
 }

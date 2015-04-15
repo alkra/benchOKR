@@ -25,28 +25,52 @@
 
 #include "Point.h"
 #include "Voxel.h"
+
 #include <QString>
+#include <QFile>
 
 class Fichier
 {
     public:
-        Fichier();
-        Fichier(const QString chemin); // constructeur
+        Fichier(); // constructeur
+        Fichier(const Fichier &modele); // constructeur de recopie
+        /*friend void swap(Fichier &un, Fichier &deux) {
+            // enable ADL (not necessary in our case, but good practice)
+            using std::swap;
+
+            // by swapping the members of two classes,
+            // the two classes are effectively swapped
+            swap(un.m_fichier, deux.m_fichier);
+            swap(un.m_voxel, deux.m_voxel);
+
+            // http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
+        }*/
+        Fichier &operator=(Fichier);
         ~Fichier(); // destructeur
 
+        bool ouvrir(const QString &chemin,
+                    QIODevice::OpenMode mode = QIODevice::ReadWrite);
+        void fermer(); // appelée dans le destructeur
+
         Point getPoint(long pos); // renvoie le pos-ième point du fichier
+        bool ajoutPoint(const Point &p, long pos = -1); // insère un point dans le fichier (-1 à la fin).
 
         /* Les fonctions de requête */
         Point* requete(const Point &centre, double distance) const; // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
         Point* requete(const Voxel &conteneur) const; // // renvoie tous les points du fichier contenus dans 'conteneur'
 
         /* Accesseurs et mutateurs (1 par attribut) */
-        // iofstream getFichier() const;
-        // void setFichier(iofstream f);
+        const QFile &getFichier() const;
+        void setFichier(QFile &nouveau);
+
+        Voxel getVoxel() const;
+        void calculerVoxel(); // MARYAME
+        void setVoxel(const Voxel &v);
     protected:
     private:
         /* Une feuille est associée à un fichier : */
-        // iofstream *fichier;
+        QFile m_fichier;
+        Voxel m_voxel;
 };
 
 #endif // FICHIER_H
