@@ -47,11 +47,11 @@ Point Fichier::getPoint(long pos)
     // renvoie le pos-ième point du fichier
 }
 
-Point* Fichier::requete(const Point &centre, double distance) const {
+QVector<Point> Fichier::requete(const Point &centre, double distance) const {
     // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
 }
 
-Point* Fichier::requete(const Voxel &conteneur) const {
+QVector<Point> Fichier::requete(const Voxel &conteneur) const {
     // renvoie tous les points du fichier contenus dans 'conteneur'
 }
 

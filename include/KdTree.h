@@ -22,8 +22,8 @@ class KdTree : public Arbre  // Création d'une classe KdTree qui hérite de la cl
         ~KdTree();
 
         void construire();
-        Point* requete(const Point &centre, double distance) const; // voisinage
-        Point* requete(const Voxel &conteneur) const; // dans un voxel
+        QVector<Point> requete(const Point &centre, double distance) const; // voisinage
+        QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel
     protected:
     private:
 };

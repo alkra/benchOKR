@@ -57,33 +57,23 @@ NoeudR::NoeudR(const NoeudR &modele) : Noeud(modele) { /* // Constructeur de rec
 }
 
 /* Les fonctions de requête */
-Point* NoeudR::requete(const Point &centre, double distance) const {
-    // renvoie tous les points de tous les enfants se trouvant dans le voisinage
-}
-
-Point* NoeudR::requete(const Voxel &conteneur) const {
-    // renvoie tous les points de tous les enfants contenus dans le conteneur
-}
-
-std::vector<Point> NoeudR::requeteV(const Point &centre, double distance)
+QVector<Point> NoeudR::requete(const Point &centre, double distance)
     const {
 
 }
 
-std::vector<Point> NoeudR::requeteV(const Voxel &conteneur) const {
+QVector<Point> NoeudR::requete(const Voxel &conteneur) const {
     // renvoie tous les points de tous les enfants contenus dans le conteneur
     // Algorithme de Gutmann
 
-    std::vector<Point> resultat, res_requete;
+    QVector<Point> resultat, res_requete;
 
     if(m_terminal) { // Gut84 - S2
         Fichier *feuilles = m_enfants.feuille;
         for(long i = 0 ; i < m_taille_enfants ; i++) {
             if(Voxel::intersecte(feuilles[i].getVoxel(), conteneur)) {
-                res_requete.clear();
-                res_requete.assign(feuilles[i].requete(conteneur));
-                resultat.insert(resultat.end(),
-                                res_requete.begin(), res_requete.end());
+                res_requete = feuilles[i].requete(conteneur);
+                resultat += res_requete;
             }
         }
     }
@@ -91,9 +81,8 @@ std::vector<Point> NoeudR::requeteV(const Voxel &conteneur) const {
         Noeud *fils = m_enfants.fils;
         for(long i = 0 ; i < m_taille_enfants ; i++) {
             if(Voxel::intersecte(fils[i].getVoxel(), conteneur)) {
-                res_requete = fils[i].requeteV(conteneur);
-                resultat.insert(resultat.end(),
-                                res_requete.begin(), res_requete.end());
+                res_requete = fils[i].requete(conteneur);
+                resultat += res_requete;
             }
         }
     }

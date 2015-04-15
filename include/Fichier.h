@@ -28,6 +28,7 @@
 
 #include <QString>
 #include <QFile>
+#include <QVector>
 
 class Fichier
 {
@@ -56,8 +57,8 @@ class Fichier
         bool ajoutPoint(const Point &p, long pos = -1); // insère un point dans le fichier (-1 à la fin).
 
         /* Les fonctions de requête */
-        Point* requete(const Point &centre, double distance) const; // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
-        Point* requete(const Voxel &conteneur) const; // // renvoie tous les points du fichier contenus dans 'conteneur'
+        QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
+        QVector<Point> requete(const Voxel &conteneur) const; // // renvoie tous les points du fichier contenus dans 'conteneur'
 
         /* Accesseurs et mutateurs (1 par attribut) */
         const QFile &getFichier() const;

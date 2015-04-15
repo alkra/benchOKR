@@ -60,11 +60,11 @@ NoeudKd::~NoeudKd() {
 }
 
 /* Les fonctions de requête */
-Point* NoeudKd::requete(const Point &centre, double distance) const {
+QVector<Point> NoeudKd::requete(const Point &centre, double distance) const {
     // renvoie tous les points de tous les enfants se trouvant dans le voisinage
 }
 
-Point* NoeudKd::requete(const Voxel &conteneur) const {
+QVector<Point> NoeudKd::requete(const Voxel &conteneur) const {
     // renvoie tous les points de tous les enfants contenus dans le conteneur
 }
 

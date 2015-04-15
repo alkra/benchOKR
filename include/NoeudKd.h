@@ -25,8 +25,8 @@ class NoeudKd : public Noeud
         ~NoeudKd(); // destructeur
 
         /* Les fonctions de requête */
-        Point* requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
-        Point* requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
+        QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
+        QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
 
         union NoeudSelonProfondeur {
             NoeudKd *fils;

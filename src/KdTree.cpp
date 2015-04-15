@@ -23,10 +23,10 @@ void KdTree::construire() {
     // Code spécifique au kd-tree
 }
 
-Point* KdTree::requete(const Point &centre, double distance) const {
+QVector<Point> KdTree::requete(const Point &centre, double distance) const {
     // requête sur un voisinage
 }
 
-Point* KdTree::requete(const Voxel &conteneur) const {
+QVector<Point> KdTree::requete(const Voxel &conteneur) const {
     // requête dans un voxel
 }

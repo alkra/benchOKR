@@ -25,10 +25,10 @@ void RTree::construire() {
     // Code spécifique au kd-tree
 }
 
-Point* RTree::requete(const Point &centre, double distance) const {
+QVector<Point> RTree::requete(const Point &centre, double distance) const {
     return racine->requete(centre, distance);
 }
 
-Point* RTree::requete(const Voxel &conteneur) const {
+QVector<Point> RTree::requete(const Voxel &conteneur) const {
     return racine->requete(conteneur);
 }

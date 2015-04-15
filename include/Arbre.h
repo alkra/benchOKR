@@ -38,8 +38,8 @@ class Arbre  // déclaration de la classe Abstraite Arbre
         */ // (Alban) euh bon...
 
         virtual void construire() =0;
-        virtual Point* requete(const Point &centre, double distance) const =0; // voisinage
-        virtual Point* requete(const Voxel &conteneur) const =0; // dans un voxel
+        virtual QVector<Point> requete(const Point &centre, double distance) const =0; // voisinage
+        virtual QVector<Point> requete(const Voxel &conteneur) const =0; // dans un voxel
 
         /* Accesseurs et mutateurs */
         Noeud* getRacine() const; // renvoie un pointeur vers la racine

@@ -65,8 +65,8 @@ class Noeud
         ~Noeud(); // destructeur
 
         /* Les fonctions de requête */
-        virtual Point* requete(const Point &centre, double distance) const =0; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
-        virtual Point* requete(const Voxel &conteneur) const =0; // renvoie tous les points de tous les enfants contenus dans le conteneur
+        virtual QVector<Point> requete(const Point &centre, double distance) const =0; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
+        virtual QVector<Point> requete(const Voxel &conteneur) const =0; // renvoie tous les points de tous les enfants contenus dans le conteneur
 
         /* Accesseurs et mutateurs */
         Noeud& getFils(long pos) const throw(ErreurAccesIntermediaire); // retourne le pos-ième enfant si c'est un noeud

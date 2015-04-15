@@ -60,11 +60,11 @@ NoeudOctree::NoeudOctree(const NoeudOctree &modele) : Noeud(modele) { /*
 }
 
 /* Les fonctions de requête */
-Point* NoeudOctree::requete(const Point &centre, double distance) const {
+QVector<Point> NoeudOctree::requete(const Point &centre, double distance) const {
     // renvoie tous les points de tous les enfants se trouvant dans le voisinage
 }
 
-Point* NoeudOctree::requete(const Voxel &conteneur) const {
+QVector<Point> NoeudOctree::requete(const Voxel &conteneur) const {
 
 }
 
