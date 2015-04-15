@@ -16,4 +16,6 @@ int main(int argc, char *argv[])
         qDebug("****** Des tests ont échoué ******");
         return 1;
     }
+
+    qDebug() << sizeof(Point);
 }
