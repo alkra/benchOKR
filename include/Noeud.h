@@ -24,43 +24,22 @@
 #include "../include/Voxel.h"
 #include "../include/Fichier.h"
 
-class ErreurAffectationTerminal : public std::exception {
+#include <QDir>
+
+
+class TerminalErreur : public std::exception {
     const char* what() const throw() {
-        return "Vous avez essayé d'affecter un noeud comme enfant d'un noeud terminal.";
+        return "Ce nœud n'est pas terminal.";
     }
 };
-
-class ErreurAffectationIntermediaire : public std::exception {
-    const char* what() const throw() {
-        return "Vous avez essayé d'affecter une feuille comme enfant d'un noeud non terminal.";
-    }
-};
-
-class ErreurAccesTerminal : public std::exception {
-    const char* what() const throw() {
-        return "Vous avez essayé de récupérer une feuille alors que le noeud n'est pas terminal.";
-    }
-};
-
-class ErreurAccesIntermediaire : public std::exception {
-    const char* what() const throw() {
-        return "Vous avez essayé de récupérer un noeud intermédiaire alors que le noeud est terminal.";
-    }
-};
-
 
 
 class Noeud
 {
     public:
-        union NoeudSelonProfondeur {
-            Noeud *fils; // un tableau de noeuds
-            Fichier *feuille; // un tableau de feuilles
-        };
-
-        Noeud(); // construit un noeud normal
-        Noeud(bool terminal); // construit un noeud basique et éventuellement terminal (constitué de fichiers (feuilles))
-        Noeud(Voxel &boite, bool terminal = false); // construit un noeud terminal (ou non) en lui affectant une boîte englobante.
+        Noeud(); // construit un noeud par défaut
+        Noeud(QString cheminRelatif); // construit un nœud
+        Noeud(Voxel &boite, QString cheminRelatif); // construit un noeud en lui associant un Voxel
         Noeud(const Noeud &modele); // constructeur de recopie
         ~Noeud(); // destructeur
 
@@ -69,25 +48,33 @@ class Noeud
         virtual QVector<Point> requete(const Voxel &conteneur) const =0; // renvoie tous les points de tous les enfants contenus dans le conteneur
 
         /* Accesseurs et mutateurs */
-        Noeud& getFils(long pos) const throw(ErreurAccesIntermediaire); // retourne le pos-ième enfant si c'est un noeud
-        Fichier& getFeuille(long pos) const throw(ErreurAccesTerminal); // retourne le pos-ième enfant si c'est une feuille
-        long getTailleEnfants() const; // renvoie la longueur du tableau d'enfants
-        void setEnfant(long pos, Noeud &noeud)
-            throw(ErreurAffectationTerminal); // remplace le pos-ième enfant par "noeud"
-        void setEnfant(long pos, Fichier &feuille)
-            throw(ErreurAffectationIntermediaire); // remplace le pos-ième enfant par "feuille"
-        const NoeudSelonProfondeur getEnfants() const; // retourne le tableau d'enfants (pourquoi faire ?)
-        void setEnfants(NoeudSelonProfondeur enfants, long taille,
-                        bool terminal); // remplace le tableau d'enfants (DANGEREUX !)
-        Voxel getVoxel() const; // retourne la boîte englobante
-        void setVoxel(Voxel &v); // définit la boîte englobante
-        bool est_terminal() const; // (accesseur) renvoie vrai si le noeud est terminal (composé de feuilles = fichiers)
+        Voxel getVoxel() const;
+        void setVoxel(const Voxel &boite);
+        Voxel calculerVoxel();
+
+        Noeud getEnfant(long pos) const;
+        void setEnfant(Noeud &nouveau, long pos);
+        bool ajoutEnfant(Noeud &nouveau, long pos = -1);
+        Noeud supprimerEnfant(long pos = -1);
+
+        long getNbEnfants() const;
+
+        QDir getDossier() const;
+        bool setDossier(const QString &nouveau);
+        bool setDossier(QDir &nouveau);
+
+        Fichier& getFichier() const throw(TerminalErreur);
+        void setFichier(const Fichier &nouveau);
+
+        bool estTerminal() const;
 
     protected:
-        bool m_terminal;
-        NoeudSelonProfondeur m_enfants;
-        long m_taille_enfants; // on stocke un tableau => on garde sa taille
         Voxel m_boite;
+        Noeud *m_enfants; // le tableau des enfants
+        long m_nb_enfants; // sa taille
+        QDir m_dossier; // le dossier du nœud
+        Fichier m_fichier; // le fichier associé, si le noeud est terminal
+        bool m_terminal; // vrai si le noeud est terminal
     private:
 };
 

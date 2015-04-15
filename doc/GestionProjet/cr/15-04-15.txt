@@ -1,0 +1,19 @@
+Garder le fichier ouvert puis fseek().
+
+Indicateurs : après ou bien les coder en même temps ? libQGLViewer permet d'afficher le nombre de fps
+
+Montrer des algorithmes ce soir.
+
+On se place dans le cas où tout tient dans la mémoire.
+Bloc d'exécution : 640 ko
+Espace global via des pointeurs.
+
+David : calcul de volumétrie à mettre dans le rapport. Il s'agit de calculer : pour stocker tant de points, il me faut tant de mémoire.
+3 doubles sur x bits (IEEE 554). Ma mémoire fait 4 Go -1 Go pour le système d'exploitation, combien de points puis-je stocker ?
+
+
+À faire :
+--------
+
+Maryame : calculer le voxel englobant d'un fichier
+Alban : implémenter Fichier (lecture et écriture) et Noeud

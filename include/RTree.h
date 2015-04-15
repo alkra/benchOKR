@@ -19,6 +19,7 @@ class RTree : public Arbre
 {
     public:
         RTree();
+        RTree(char *racine);
         ~RTree();
 
         void construire();
@@ -26,6 +27,11 @@ class RTree : public Arbre
         QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel
     protected:
     private:
+        bool inserer(const Point &p);
+        long choisirFeuille(const Point &point, NoeudR *courant, NoeudR *parent);
+
+        char *m_cheminRacine;
+        const int MAX_FICHIER = 10;
 };
 
 #endif // RTREE_H
