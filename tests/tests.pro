@@ -17,6 +17,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     testsVoxel.cpp \
+    testsFichier.cpp \
     ../src/Arbre.cpp \
     ../src/Fichier.cpp \
     ../src/KdTree.cpp \
@@ -29,6 +30,6 @@ SOURCES += main.cpp \
     ../src/Point3D.cpp \
     ../src/RTree.cpp \
     ../src/Voxel.cpp
-
 HEADERS += \
-    testsVoxel.h
+    testsVoxel.h \
+    testsFichier.h

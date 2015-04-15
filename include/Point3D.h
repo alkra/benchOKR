@@ -11,6 +11,8 @@
 /* Ce fichier définit la classe Point3D, qui représente le deux coins d'un
  * Voxel. */
 
+#include <QString>
+
 class Point3D
 {
     public:
@@ -25,6 +27,7 @@ class Point3D
         void setY(double y);
         void setZ(double z);
 
+        QString toQString() const;
     protected:
 
     // attributs membres de point3D

@@ -41,3 +41,9 @@ void Point3D::setY(double y) {
 void Point3D::setZ(double z) {
     m_z = z;
 }
+
+QString Point3D::toQString() const {
+    QString res;
+    res.append(QString("%1   %2    %3").arg(m_x).arg(m_y).arg(m_z));
+    return res;
+}

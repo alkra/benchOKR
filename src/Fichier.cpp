@@ -9,6 +9,8 @@
 
 #include "../include/Fichier.h"
 
+#include <QTextStream>
+
 Fichier::Fichier() : m_fichier(), m_voxel() {
 
 }
@@ -39,7 +41,14 @@ void Fichier::fermer() {
 
 
 bool Fichier::ajoutPoint(const Point &p, long pos) {
-    // à implémenter
+    if(m_fichier.isOpen()) {
+        // position n'est pas implémenté, insère en fin de fichier
+        QTextStream out(&m_fichier);
+        out << p.toQString() << endl;
+        return true;
+    }
+
+    return false;
 }
 
 Point Fichier::getPoint(long pos)

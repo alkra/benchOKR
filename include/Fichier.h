@@ -50,7 +50,8 @@ class Fichier
         ~Fichier(); // destructeur
 
         bool ouvrir(const QString &chemin,
-                    QIODevice::OpenMode mode = QIODevice::ReadWrite);
+                    QIODevice::OpenMode mode
+                        = QIODevice::Append | QIODevice::Text);
         void fermer(); // appelée dans le destructeur
 
         Point getPoint(long pos); // renvoie le pos-ième point du fichier
