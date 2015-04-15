@@ -13,6 +13,8 @@
 #include "../include/Noeud.h"
 #include "../include/Fichier.h"
 
+#include <vector>
+
 
 class NoeudR : public Noeud
 {
@@ -29,9 +31,16 @@ class NoeudR : public Noeud
         void setEnfant(long pos, NoeudR &noeud)
             throw(ErreurAffectationTerminal); // remplace le pos-ième enfant par "noeud"
 
+        union NoeudSelonProfondeur {
+            NoeudR *fils;
+            Fichier *feuille;
+        };
+
         const int MAX_FILS = 5;
         const int MAX_PAGES = 5;
     protected:
+        std::vector<Point> requeteV(const Point &centre, double distance) const;
+        std::vector<Point> requeteV(const Voxel &conteneur) const;
     private:
 };
 #endif // NOEUDR_H

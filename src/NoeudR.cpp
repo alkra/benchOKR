@@ -65,6 +65,40 @@ Point* NoeudR::requete(const Voxel &conteneur) const {
     // renvoie tous les points de tous les enfants contenus dans le conteneur
 }
 
+std::vector<Point> NoeudR::requeteV(const Point &centre, double distance)
+    const {
+
+}
+
+std::vector<Point> NoeudR::requeteV(const Voxel &conteneur) const {
+    // renvoie tous les points de tous les enfants contenus dans le conteneur
+    // Algorithme de Gutmann
+
+    std::vector<Point> resultat, res_requete;
+
+    if(m_terminal) { // Gut84 - S2
+        Fichier *feuilles = m_enfants.feuille;
+        for(long i = 0 ; i < m_taille_enfants ; i++) {
+            if(Voxel::intersecte(feuilles[i].getVoxel(), conteneur)) {
+                res_requete.clear();
+                res_requete.assign(feuilles[i].requete(conteneur));
+                resultat.insert(resultat.end(),
+                                res_requete.begin(), res_requete.end());
+            }
+        }
+    }
+    else { // Gut84 - S1
+        Noeud *fils = m_enfants.fils;
+        for(long i = 0 ; i < m_taille_enfants ; i++) {
+            if(Voxel::intersecte(fils[i].getVoxel(), conteneur)) {
+                res_requete = fils[i].requeteV(conteneur);
+                resultat.insert(resultat.end(),
+                                res_requete.begin(), res_requete.end());
+            }
+        }
+    }
+}
+
 /* Accesseur */
 void NoeudR::setEnfant(long pos, NoeudR &noeud) throw(ErreurAffectationTerminal) {
     // remplace le pos-ième enfant par "noeud"
