@@ -9,8 +9,6 @@
 
 #include "../include/RTree.h"
 
-#include <iostream>
-
 RTree::RTree() : m_cheminRacine("") {
 }
 
@@ -39,45 +37,69 @@ QVector<Point> RTree::requete(const Voxel &conteneur) const {
     return racine->requete(conteneur);
 }
 
-bool RTree::inserer(const Point &p) { // Gut84 : algorithm Insert
-    NoeudR *parent = NULL;
-    long lieu = choisirFeuille(p, racine, parent); // Gut84 : I1
-    Fichier& feuille = parent->getFeuille(lieu);
+RTree::FichierFermeErreur::FichierFermeErreur() : m_fichier(NULL) {}
+RTree::FichierFermeErreur::FichierFermeErreur(Fichier *fichier) : m_fichier(fichier) {}
+Fichier* RTree::FichierFermeErreur::getFichier() const {
+    return m_fichier;
+}
+const char * RTree::FichierFermeErreur::what() const throw() {
+    QString message(
+                QString("Le fichier%1 est fermé.").arg(
+                    m_fichier == NULL ?
+                        QString() :
+                        QString(" %1").arg(
+                            m_fichier->getFichier().fileName()
+                            )
+                        )
+                );
+    QByteArray m = message.toLocal8Bit();
+    return m.data();
+}
 
-    if(!feuille.ouvrir()) {
-        std::cerr << "Insertion du point " << p.toQString() << " a échoué." << endl;
-        std::cerr << "Impossible d'ouvrir le fichier de destionation :" << endl;
-        std::cerr << feuille.getFichier().fileName() << endl;
-        return false;
+bool RTree::inserer(const Point &p) { // Gut84 : algorithm Insert
+    NoeudR *parent = choisirFeuille(p, racine); // Gut84 : I1
+    Fichier& f = *(parent->getFichier());
+
+    if(!f.estOuvert()) {
+        throw new FichierFermeErreur;
     }
 
     /* Gut84 : I2 */
-    if(libre(feuille)) {
-        feuille.ajoutPoint(p);
+    if(libre(parent)) {
+        f.ajoutPoint(p);
     } else {
-        Fichier *nouveau = diviserNoeud(p, parent, lieu);
+        NoeudR *nouveau = diviserNoeud(p, parent);
 
         /* Gut84 : I3 */
         NoeudR *deuxiemeRacine = ajusterArbre(parent, nouveau);
 
         /* Gut84 : I4 */
         if(deuxiemeRacine) {
-            NoeudR nouvelleRacine;
-            nouvelleRacine.setEnfant(0, racine);
-            nouvelleRacine.setEnfant(1, *deuxiemeRacine);
+            NoeudR *nouvelleRacine = new NoeudR();
+            nouvelleRacine->ajoutEnfant(*racine);
+            nouvelleRacine->ajoutEnfant(*deuxiemeRacine);
+            racine = nouvelleRacine;
         }
     }
 }
 
 /* Gut84 : ChooseLeaf */
-long RTree::choisirFeuille(const Point &point, NoeudR* courant, NoeudR *parent) {
-    if(courant->est_terminal()) { // Gut84 : CL2
-        parent = courant;
-        return choisirSousArbre;
-    }
-    else { // Gut84 : CL3
-        Voxel *courant = NULL, *nouveau = NULL;
-        long arret =
-        for(long i = 0 ; i < NoeudR::MAX_FILS)
-    }
+NoeudR *RTree::choisirFeuille(const Point &point, const NoeudR *courant) const {
+    // non implémenté
+    return NULL;
+}
+
+bool RTree::libre(const NoeudR *feuille) const {
+    // non implémenté
+    return true;
+}
+
+NoeudR *RTree::diviserNoeud(const Point &p, NoeudR *parent) {
+    // non implémenté
+    return NULL;
+}
+
+NoeudR* RTree::ajusterArbre(NoeudR *feuille, NoeudR *nouveau) {
+    // non implémenté
+    return NULL;
 }

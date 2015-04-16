@@ -13,9 +13,10 @@
  * Kd-tree. */
 
 #include "Arbre.h"
+#include "NoeudKd.h"
 
 
-class KdTree : public Arbre  // Création d'une classe KdTree qui hérite de la classe Arbre
+class KdTree : public Arbre<NoeudKd>  // Création d'une classe KdTree qui hérite de la classe Arbre
 {
     public:
         KdTree();

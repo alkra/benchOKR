@@ -14,24 +14,15 @@
 #include "../include/Fichier.h"
 
 
-class NoeudOctree : public Noeud
+class NoeudOctree : public Noeud<NoeudOctree, 8>
 {
     public:
         NoeudOctree(); // construit un noeud normal
-        NoeudOctree(bool terminal); // construit un noeud terminal
-        NoeudOctree(Voxel &boite, bool terminal = false);
         NoeudOctree(const NoeudOctree &modele); // constructeur de recopie
 
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
-
-        union NoeudSelonProfondeur {
-            NoeudOctree *fils;
-            Fichier *feuille;
-        };
-
-        void setEnfant(long pos, NoeudOctree &noeud) throw(ErreurAffectationTerminal); // remplace le pos-ième enfant par "noeud"
     protected:
     private:
 };

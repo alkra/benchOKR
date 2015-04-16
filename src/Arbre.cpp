@@ -5,18 +5,23 @@
  * 77455 MARNE-LA-VALLÉE CEDEX 2
  * FRANCE */
 
+#ifndef ARBRE_CPP
+#define ARBRE_CPP
+
 /* Ce fichier contient l'implémentation des méthodes de la classe Arbre. */
 
 #include "../include/Arbre.h"
 
-Arbre::Arbre() : racine(NULL) {
+template <class Nd> Arbre<Nd>::Arbre() : racine(NULL) {
 }
 
-Noeud* Arbre::getRacine() const {
+template <class Nd> Nd* Arbre<Nd>::getRacine() const {
     return racine;
 }
 
-void Arbre::setRacine(Noeud* nouvelle) {
+template <class Nd> void Arbre<Nd>::setRacine(Nd* nouvelle) {
     racine = nouvelle;
 }
+
+#endif // ARBRE_CPP
 

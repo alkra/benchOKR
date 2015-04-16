@@ -13,30 +13,17 @@
 #include "../include/Noeud.h"
 #include "../include/Fichier.h"
 
+#define RTREE_MAX_ENFANTS 5
 
-
-class NoeudR : public Noeud
+class NoeudR : public Noeud<NoeudR, RTREE_MAX_ENFANTS>
 {
     public:
         NoeudR(); // construit un noeud normal
-        NoeudR(bool terminal); // construit un noeud terminal
-        NoeudR(Voxel &boite, bool terminal = false);
-        NoeudR(const NoeudR &modele); // constructeur de recopie
+        NoeudR(const NoeudR & modele);
 
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
-
-        void setEnfant(long pos, NoeudR &noeud)
-            throw(ErreurAffectationTerminal); // remplace le pos-ième enfant par "noeud"
-
-        union NoeudSelonProfondeur {
-            NoeudR *fils;
-            Fichier *feuille;
-        };
-
-        const int MAX_FILS = 5;
-        const int MAX_PAGES = 5;
     protected:
     private:
 };

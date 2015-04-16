@@ -10,11 +10,10 @@
 using namespace std;
 
 #include "../include/Point.h"
+#include "../include/KdTree.h"
 
 
 int main(int argc, char** argv)
 {
-    Point p;
-    string Path="E:/araignee.ply";
-    p=p.readPly(Path,13);
+    KdTree monKd;
 }

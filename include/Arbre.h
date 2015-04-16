@@ -16,6 +16,7 @@
 #include "../include/Point.h"
 #include "../include/Voxel.h"
 
+template <class Nd>
 class Arbre  // déclaration de la classe Abstraite Arbre
 {
 
@@ -42,15 +43,17 @@ class Arbre  // déclaration de la classe Abstraite Arbre
         virtual QVector<Point> requete(const Voxel &conteneur) const =0; // dans un voxel
 
         /* Accesseurs et mutateurs */
-        Noeud* getRacine() const; // renvoie un pointeur vers la racine
-        void setRacine(Noeud* nouvelle); // dangereux, on n'a pas à l'utiliser
+        Nd* getRacine() const; // renvoie un pointeur vers la racine
+        void setRacine(Nd *nouvelle); // dangereux, on n'a pas à l'utiliser
 
     // attributs de la classe arbre
     protected:
-        Noeud* racine; // Pointe vers le début de l'arbre
+        Nd* racine; // Pointe vers le début de l'arbre
 
     private:
 
 };
+
+#include "../src/Arbre.cpp" // Pour pouvoir accéder aux fonctions templatées
 
 #endif // ARBRE_H

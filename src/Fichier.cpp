@@ -35,6 +35,10 @@ bool Fichier::ouvrir(const QString &chemin, QIODevice::OpenMode mode) {
     return m_fichier.open(mode);
 }
 
+bool Fichier::estOuvert() {
+    return m_fichier.isOpen();
+}
+
 void Fichier::fermer() {
     m_fichier.close();
 }

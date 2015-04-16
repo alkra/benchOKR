@@ -11,10 +11,10 @@
 /* Ce fichier définit la classe Octree */
 
 #include "../include/Arbre.h"
+#include "NoeudOctree.h"
 
 
-
-class Octree : public Arbre  // Création d'une classe Octree qui hérite de la classe Arbre
+class Octree : public Arbre<NoeudOctree>  // Création d'une classe Octree qui hérite de la classe Arbre
 {
     public:
         Octree();
