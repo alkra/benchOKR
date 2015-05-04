@@ -16,75 +16,73 @@
 using namespace std;
 
 /* Constructeurs */
-
-Point::Point() : Point3D()
+Point::Point() : m_x(0), m_y(0), m_z(0),m_code(0)
 {
     //ctor
 }
 
-Point::Point(double x, double y, double z) : Point3D(x, y, z) {}
+Point::Point(double x, double y, double z) :Point3D(x,y,z) {}
+
 
 Point::~Point()
 {
     //dtor
 }
 
-Point Point::readPly(string Path,int line)
+
+
+
+// les opérateurs de surcharge
+// pour effectuer les opérations aritmétiques sur les objets
+
+Point operator+(Point const &a, Point const &b)
 {
-    Point result;
-    ifstream fichier (Path.c_str(),ios::in);
-
-    double** v1;
-    string str;
-    int i=0;
-    char* pEnd;
-    char* pEnd1;
-    double d1, d2, d3;
-
-    if(fichier)  // si l'ouverture a réussi
-    {
-        string info;
-        getline(fichier, info);
-        if (info=="ply")
-            cout << "le fichier ouvert est un fichier .ply" << endl;
-
-
-        while (std::getline(fichier, info))
-        {
-            //GotoLine(file, 8);
-            if(i==line)
-            {
-                if ( atoi(info.c_str()))  //check that the input is number
-                    // if (i>8 && i<963)
-                {
-                    result.m_x = strtod (info.c_str(), &pEnd);
-                    result.m_y = strtod (pEnd, &pEnd1);
-                    result.m_z = strtod (pEnd1, NULL);
-
-                    cout <<result.m_x<<" "<<result.m_y<<" "<<result.m_z<< endl;
-
-
-                }
-
-
-                break;
-            }
-            i++;
-        }
-       /* if( result==NULL){
-            cout<<"la ligne %d n'existe pas dans le fichier"<<line<<endl;
-        }*/
-
-        fichier.close();  // on ferme le fichier
-    }
-    else  // sinon
-        cerr << "Impossible d'ouvrir le fichier !" << endl;
-    return result;
-
+    Point copie(a);
+    copie+=b;
+    return copie;
 }
+Point& Point::operator+=(const Point &val)
+{
+    m_x = m_x+ val.getX();
+    m_y = m_y + val.getY();
+    m_z = m_z + val.getZ();
+
+    return *this;
+}
+Point operator-(Point const &a, Point const &b)
+{
+    Point copie(a);
+    copie-=b;
+    return copie;
+}
+Point& Point::operator-=(const Point &val)
+{
+    m_x = m_x- val.getX();
+    m_y = m_y - val.getY();
+    m_z = m_z - val.getZ();
+
+
+    return *this;
+}
+
+Point operator*(Point const &a, double const &b)
+{
+    Point copie(a);
+    copie*=b;
+    return copie;
+}
+Point& Point::operator*=(const double &val)
+{
+    m_x = m_x* val;
+    m_y = m_y * val;
+    m_z = m_z * val;
+
+
+    return *this;
+}
+
 
 Point readPlyBinaire(std::string Path,int line)
 {}
 Point readTxt(std::string Path,int line)
 {}
-
