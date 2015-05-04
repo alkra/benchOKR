@@ -30,6 +30,8 @@
 #include <QFile>
 #include <QVector>
 
+#include <iostream>
+
 class Fichier
 {
     public:
@@ -59,14 +61,15 @@ class Fichier
         bool ajoutPoint(const Point &p, long pos = -1); // insère un point dans le fichier (-1 à la fin).
 
         long getNbPoints(); // compte le nombre de points dans le fichier
-        Point** getPoints(std::ostream out = cout); // récupère tous les points du fichier
+        Point** getPoints(); // récupère tous les points du fichier
 
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
         QVector<Point> requete(const Voxel &conteneur) const; // // renvoie tous les points du fichier contenus dans 'conteneur'
 
         /* Accesseurs et mutateurs (1 par attribut) */
-        const QFile &getFichier() const;
+        const QFile &cgetFichier() const;
+        QFile &getFichier();
         void setFichier(QFile &nouveau);
 
         Voxel getVoxel() const;
@@ -76,8 +79,8 @@ class Fichier
     private:
         /* Une feuille est associée à un fichier : */
         QFile m_fichier;
-        long m_nb_points;
         Voxel m_voxel;
+        long m_nb_points;
 };
 
 #endif // FICHIER_H
