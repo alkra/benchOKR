@@ -67,13 +67,13 @@ NOEUD(void)::setVoxel(const Voxel &boite) {
 
 NOEUD(void)::calculerVoxel() {
     if(m_terminal) {
-        m_boite = m_fichier->calculerVoxel();
+        m_boite = m_fichier->getVoxel();
     } else {
         /* On calcule le : */
         double xmin, xmax, ymin, ymax, zmin, zmax;
         /* de l'ensemble des voxels de tous les enfants. */
 
-        Point3D *un, *deux;
+        Point3D *un = NULL, *deux = NULL;
         for(long i=0 ; i < m_nb_enfants ; i++) {
             *un = m_enfants[i].getVoxel().getDebut();
             *deux = m_enfants[i].getVoxel().getFin();
@@ -132,7 +132,7 @@ NOEUD(void)::setEnfant(Nd &nouveau, long pos) throw(TerminalErreur, IndiceHorsDo
     } // else
 
     if(nouveau.estDefaut()) { // cela revient à une suppression
-        supprimerEnfant(pos);
+        supprimerEnfant<Nd>(pos);
         return;
     }
 
@@ -258,7 +258,7 @@ NOEUD(void)::setFichier(const Fichier &nouveau) throw(TerminalErreur) {
     }
 
     m_fichier->fermer();
-    m_fichier = nouveau;
+    m_fichier = new Fichier(nouveau);
 }
 
 NOEUD(bool)::estTerminal() const {

@@ -17,7 +17,7 @@ Fichier::Fichier() : m_fichier(), m_voxel(), m_nb_points(-1) {
 
 Fichier::Fichier(const Fichier &modele) : m_fichier(),
     m_voxel(modele.getVoxel()), m_nb_points(-1) {
-    m_fichier.setFileName(modele.getFichier().fileName());
+    m_fichier.setFileName(modele.cgetFichier().fileName());
 }
 
 
@@ -65,7 +65,7 @@ long Fichier::getNbPoints() { // compte le nombre de points dans le fichier
         //comptage du nombre de lignes
         m_fichier.readLine();
         long pointCount=0;
-        while (m_fichier.readLine())
+        while (m_fichier.readLine().length() > 0)
         {
             pointCount++;
         }
@@ -76,7 +76,7 @@ long Fichier::getNbPoints() { // compte le nombre de points dans le fichier
     return m_nb_points; // si le fichier n'a pas été ouvert, renvoie -1
 }
 
-Point** Fichier::getPoints(std::ostream out){ // récupère tous les points du fichier
+Point** Fichier::getPoints(){ // récupère tous les points du fichier
     long nbPoints = getNbPoints();
     if(nbPoints < 0) {
         return NULL;
@@ -89,7 +89,7 @@ Point** Fichier::getPoints(std::ostream out){ // récupère tous les points du f
         // lecture de la première ligne pour savoir quoi faire
         QByteArray info = m_fichier.readLine();
         if(info=="ply")
-            out<< "le fichier ouvert est un fichier .ply"<< endl;
+            std::cout<< "le fichier ouvert est un fichier .ply"<< std::endl;
 
         // lecture des points
         for(long i = 0 ; i < nbPoints ; i++) {
@@ -104,7 +104,10 @@ Point** Fichier::getPoints(std::ostream out){ // récupère tous les points du f
                 }
             }
 
-            liste[i] = new Point(propre[0], propre[1], propre[2]);
+            liste[i] = new Point(
+                        propre[0].toDouble(),
+                    propre[1].toDouble(),
+                    propre[2].toDouble());
         }
 
         return liste;
@@ -125,7 +128,11 @@ QVector<Point> Fichier::requete(const Voxel &conteneur) const {
 }
 
 /* Accesseurs et mutateurs (1 par attribut) */
-const QFile &Fichier::getFichier() const {
+const QFile &Fichier::cgetFichier() const {
+    return m_fichier;
+}
+
+QFile &Fichier::getFichier() {
     return m_fichier;
 }
 
