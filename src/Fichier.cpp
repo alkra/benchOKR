@@ -11,12 +11,12 @@
 
 #include <QTextStream>
 
-Fichier::Fichier() : m_fichier(), m_voxel() {
+Fichier::Fichier() : m_fichier(), m_voxel(), m_nb_points(-1) {
 
 }
 
 Fichier::Fichier(const Fichier &modele) : m_fichier(),
-    m_voxel(modele.getVoxel()) {
+    m_voxel(modele.getVoxel()), m_nb_points(-1) {
     m_fichier.setFileName(modele.getFichier().fileName());
 }
 
@@ -58,6 +58,62 @@ bool Fichier::ajoutPoint(const Point &p, long pos) {
 Point Fichier::getPoint(long pos)
 {
     // renvoie le pos-ième point du fichier
+}
+
+long Fichier::getNbPoints() { // compte le nombre de points dans le fichier
+    if(m_nb_points < 0 && estOuvert()) {
+        //comptage du nombre de lignes
+        m_fichier.readLine();
+        long pointCount=0;
+        while (m_fichier.readLine())
+        {
+            pointCount++;
+        }
+
+        m_nb_points = pointCount;
+    }
+
+    return m_nb_points; // si le fichier n'a pas été ouvert, renvoie -1
+}
+
+Point** Fichier::getPoints(std::ostream out){ // récupère tous les points du fichier
+    long nbPoints = getNbPoints();
+    if(nbPoints < 0) {
+        return NULL;
+    }
+
+    Point   **liste = new Point *[nbPoints];
+
+    if (estOuvert()) // si le fichier est ouvert
+    {
+        // lecture de la première ligne pour savoir quoi faire
+        QByteArray info = m_fichier.readLine();
+        if(info=="ply")
+            out<< "le fichier ouvert est un fichier .ply"<< endl;
+
+        // lecture des points
+        for(long i = 0 ; i < nbPoints ; i++) {
+            info = m_fichier.readLine(); // lecture de la ligne
+
+            // extraction des chaînes de caractère correspondant aux coordonnées
+            QList<QByteArray> coordonnees = info.split(' '), propre;
+            for(int j = 0 ; j < coordonnees.length(); j++) {
+                // élimination d'éventuelles chaînes vides
+                if(coordonnees[j].count() != 0) {
+                   propre.push_back(coordonnees[j]);
+                }
+            }
+
+            liste[i] = new Point(propre[0], propre[1], propre[2]);
+        }
+
+        return liste;
+    }
+    else {
+        // cerr<< "Impossible d'ouvrir le fichier ! "<< endl;
+        delete[] liste;
+        return NULL;
+    }
 }
 
 QVector<Point> Fichier::requete(const Point &centre, double distance) const {
