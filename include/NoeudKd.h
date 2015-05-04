@@ -21,6 +21,9 @@ class NoeudKd : public Noeud<NoeudKd, 2>
         NoeudKd(); // construit un noeud normal
         ~NoeudKd(); // destructeur
 
+#define getEnfant(pos) getEnfant<NoeudKd>(pos)
+#define supprimerEnfant(pos) supprimerEnfant<NoeudKd>(pos)
+
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur

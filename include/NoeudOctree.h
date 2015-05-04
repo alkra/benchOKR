@@ -13,6 +13,8 @@
 #include "../include/Noeud.h"
 #include "../include/Fichier.h"
 
+#define getEnfant(pos) getEnfant<NoeudOctree>(pos)
+#define supprimerEnfant(pos) supprimerEnfant<NoeudOctree>(pos)
 
 class NoeudOctree : public Noeud<NoeudOctree, 8>
 {
