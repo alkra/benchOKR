@@ -34,6 +34,8 @@ public:
         m_texte = "L'indice demandé est incorrect.";
     }
 
+    ~IndiceHorsDomaine() throw() {}
+
     IndiceHorsDomaine(int demande, int min = -1, int max = -1) :
         m_demande(demande), m_min(min), m_max(max) {
         m_texte += QString("L'indice %1 est incorrect.").arg(m_demande);
@@ -82,17 +84,17 @@ public:
     public:
 #define TERMINAL "Ce nœud est terminal et n'a pas d'enfants.\n"
 #define PAS_TERMINAL "Ce nœud n'est pas terminal et n'est pas associé à un fichier.\n"
-        TerminalErreur(char *message) : m_message(message) {}
+        TerminalErreur(QString message) : m_message(message) {}
         const char* what() const throw() {
-            return m_message;
+            return m_message.toLocal8Bit().data();
         }
     protected:
-        char *m_message;
+        QString m_message;
     };
 
-    Noeud(); // construit un noeud par défaut
-    Noeud(QString cheminRelatif); // construit un nœud
-    Noeud(Voxel &boite, QString cheminRelatif); // construit un noeud en lui associant un Voxel
+    Noeud(bool terminal = false); // construit un noeud par défaut
+    Noeud(QString cheminRelatif, bool terminal = false); // construit un nœud
+    Noeud(Voxel &boite, QString cheminRelatif, bool terminal = false); // construit un noeud en lui associant un Voxel
     Noeud(const Noeud &modele); // constructeur de recopie
     //Noeud& operator= (const Noeud modele);
     ~Noeud(); // destructeur
@@ -120,10 +122,10 @@ public:
     long getNbMaxEnfants() const; // le nombre maximal d'enfants possible
 
     QDir getDossier() const;
-    template <class T> bool setDossier(const T &nouveau);
+    template <class T> void setDossier(const T &nouveau);
 
     Fichier* getFichier() const throw(TerminalErreur);
-    void setFichier(const Fichier &nouveau) throw(TerminalErreur);
+    void setFichier(Fichier *nouveau) throw(TerminalErreur);
 
     bool estTerminal() const;
 };

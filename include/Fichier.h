@@ -57,6 +57,8 @@ class Fichier
         bool estOuvert();
         void fermer(); // appelée dans le destructeur
 
+        QString getChemin() const;
+
         Point getPoint(long pos); // renvoie le pos-ième point du fichier
         bool ajoutPoint(const Point &p, long pos = -1); // insère un point dans le fichier (-1 à la fin).
 
@@ -80,7 +82,7 @@ class Fichier
         /* Une feuille est associée à un fichier : */
         QFile m_fichier;
         Voxel m_voxel;
-        long m_nb_points;
+        QString m_chemin;
 };
 
 #endif // FICHIER_H

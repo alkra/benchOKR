@@ -9,5 +9,6 @@
 bool Voxel_test_creation();
 bool Voxel_test_intersection();
 bool Voxel_test_double_intersection();
+bool Voxel_test_volume();
 
 #endif // TESTSVOXEL_H

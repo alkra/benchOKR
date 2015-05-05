@@ -152,3 +152,60 @@ bool Voxel_test_double_intersection() {
 
     return res;
 }
+
+bool Voxel_test_volume() {
+    bool res = true;
+    Voxel un(0, 0, 0, 1, 1, 1), deux(-1, -1, -1, 1, 1, 1),
+            trois(1, 1, 1, -1, -1, -1), quatre(-4, -3, -2, 1, 5, 6);
+    qDebug() << "Test n° " << 4 << " : Volume de voxels." << endl;
+
+    qDebug() << "Voxel : (" << un.getDebut().getX() << ", "
+             << un.getDebut().getY() << ", "
+             << un.getDebut().getZ() << ")x("
+             << un.getFin().getX() << ", "
+             << un.getFin().getY() << ", "
+             << un.getFin().getZ() << ")" << endl;
+    qDebug() << "Volume : " << un.volume() << endl;
+    if(un.volume() == 1) { qDebug() << "OK" << endl; } else {
+        qDebug() << "KO" << endl << endl;
+        res = false;
+    }
+
+    qDebug() << "Voxel : (" << deux.getDebut().getX() << ", "
+             << deux.getDebut().getY() << ", "
+             << deux.getDebut().getZ() << ")x("
+             << deux.getFin().getX() << ", "
+             << deux.getFin().getY() << ", "
+             << deux.getFin().getZ() << ")" << endl;
+    qDebug() << "Volume : " << deux.volume() << endl << endl;
+    if(deux.volume() == 8) { qDebug() << "OK" << endl; } else {
+        qDebug() << "KO" << endl << endl;
+        res = false;
+    }
+
+    qDebug() << "Voxel : (" << trois.getDebut().getX() << ", "
+             << trois.getDebut().getY() << ", "
+             << trois.getDebut().getZ() << ")x("
+             << trois.getFin().getX() << ", "
+             << trois.getFin().getY() << ", "
+             << trois.getFin().getZ() << ")" << endl;
+    qDebug() << "Volume : " << trois.volume() << endl << endl;
+    if(trois.volume() == 8) { qDebug() << "OK" << endl; } else {
+        qDebug() << "KO" << endl << endl;
+        res = false;
+    }
+
+    qDebug() << "Voxel : (" << quatre.getDebut().getX() << ", "
+             << quatre.getDebut().getY() << ", "
+             << quatre.getDebut().getZ() << ")x("
+             << quatre.getFin().getX() << ", "
+             << quatre.getFin().getY() << ", "
+             << quatre.getFin().getZ() << ")" << endl;
+    qDebug() << "Volume : " << quatre.volume() << endl << endl;
+    if(quatre.volume() == 320) { qDebug() << "OK" << endl; } else {
+        qDebug() << "KO" << endl << endl;
+        res = false;
+    }
+
+    return res;
+}

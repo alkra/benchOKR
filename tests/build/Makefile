@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-CXXFLAGS      = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
+CXXFLAGS      = -m64 -pipe -std=c++11 -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../../tests -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -m64
@@ -48,10 +48,8 @@ OBJECTS_DIR   = ./
 SOURCES       = ../main.cpp \
 		../testsVoxel.cpp \
 		../testsFichier.cpp \
-		../../src/Arbre.cpp \
 		../../src/Fichier.cpp \
 		../../src/KdTree.cpp \
-		../../src/Noeud.cpp \
 		../../src/NoeudKd.cpp \
 		../../src/NoeudOctree.cpp \
 		../../src/NoeudR.cpp \
@@ -63,10 +61,8 @@ SOURCES       = ../main.cpp \
 OBJECTS       = main.o \
 		testsVoxel.o \
 		testsFichier.o \
-		Arbre.o \
 		Fichier.o \
 		KdTree.o \
-		Noeud.o \
 		NoeudKd.o \
 		NoeudOctree.o \
 		NoeudR.o \
@@ -130,10 +126,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../../tests.pro ../main.cpp \
 		../testsVoxel.cpp \
 		../testsFichier.cpp \
-		../../src/Arbre.cpp \
 		../../src/Fichier.cpp \
 		../../src/KdTree.cpp \
-		../../src/Noeud.cpp \
 		../../src/NoeudKd.cpp \
 		../../src/NoeudOctree.cpp \
 		../../src/NoeudR.cpp \
@@ -290,7 +284,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/tests1.0.0 || mkdir -p .tmp/tests1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/tests1.0.0/ && $(COPY_FILE) --parents ../testsVoxel.h ../testsFichier.h .tmp/tests1.0.0/ && $(COPY_FILE) --parents ../main.cpp ../testsVoxel.cpp ../testsFichier.cpp ../../src/Arbre.cpp ../../src/Fichier.cpp ../../src/KdTree.cpp ../../src/Noeud.cpp ../../src/NoeudKd.cpp ../../src/NoeudOctree.cpp ../../src/NoeudR.cpp ../../src/Octree.cpp ../../src/Point.cpp ../../src/Point3D.cpp ../../src/RTree.cpp ../../src/Voxel.cpp .tmp/tests1.0.0/ && (cd `dirname .tmp/tests1.0.0` && $(TAR) tests1.0.0.tar tests1.0.0 && $(COMPRESS) tests1.0.0.tar) && $(MOVE) `dirname .tmp/tests1.0.0`/tests1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/tests1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/tests1.0.0/ && $(COPY_FILE) --parents ../testsVoxel.h ../testsFichier.h .tmp/tests1.0.0/ && $(COPY_FILE) --parents ../main.cpp ../testsVoxel.cpp ../testsFichier.cpp ../../src/Fichier.cpp ../../src/KdTree.cpp ../../src/NoeudKd.cpp ../../src/NoeudOctree.cpp ../../src/NoeudR.cpp ../../src/Octree.cpp ../../src/Point.cpp ../../src/Point3D.cpp ../../src/RTree.cpp ../../src/Voxel.cpp .tmp/tests1.0.0/ && (cd `dirname .tmp/tests1.0.0` && $(TAR) tests1.0.0.tar tests1.0.0 && $(COMPRESS) tests1.0.0.tar) && $(MOVE) `dirname .tmp/tests1.0.0`/tests1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/tests1.0.0
 
 
 clean:compiler_clean 
@@ -346,14 +340,6 @@ testsFichier.o: ../testsFichier.cpp ../../include/Fichier.h \
 		../../include/Voxel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testsFichier.o ../testsFichier.cpp
 
-Arbre.o: ../../src/Arbre.cpp ../../include/Arbre.h \
-		../../include/Noeud.h \
-		../../include/Point.h \
-		../../include/Point3D.h \
-		../../include/Voxel.h \
-		../../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Arbre.o ../../src/Arbre.cpp
-
 Fichier.o: ../../src/Fichier.cpp ../../include/Fichier.h \
 		../../include/Point.h \
 		../../include/Point3D.h \
@@ -366,22 +352,19 @@ KdTree.o: ../../src/KdTree.cpp ../../include/KdTree.h \
 		../../include/Point.h \
 		../../include/Point3D.h \
 		../../include/Voxel.h \
-		../../include/Fichier.h
+		../../include/Fichier.h \
+		../../src/Noeud.cpp \
+		../../src/Arbre.cpp \
+		../../include/NoeudKd.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KdTree.o ../../src/KdTree.cpp
-
-Noeud.o: ../../src/Noeud.cpp ../../include/Noeud.h \
-		../../include/Point.h \
-		../../include/Point3D.h \
-		../../include/Voxel.h \
-		../../include/Fichier.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Noeud.o ../../src/Noeud.cpp
 
 NoeudKd.o: ../../src/NoeudKd.cpp ../../include/NoeudKd.h \
 		../../include/Noeud.h \
 		../../include/Point.h \
 		../../include/Point3D.h \
 		../../include/Voxel.h \
-		../../include/Fichier.h
+		../../include/Fichier.h \
+		../../src/Noeud.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudKd.o ../../src/NoeudKd.cpp
 
 NoeudOctree.o: ../../src/NoeudOctree.cpp ../../include/NoeudOctree.h \
@@ -389,7 +372,8 @@ NoeudOctree.o: ../../src/NoeudOctree.cpp ../../include/NoeudOctree.h \
 		../../include/Point.h \
 		../../include/Point3D.h \
 		../../include/Voxel.h \
-		../../include/Fichier.h
+		../../include/Fichier.h \
+		../../src/Noeud.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudOctree.o ../../src/NoeudOctree.cpp
 
 NoeudR.o: ../../src/NoeudR.cpp ../../include/NoeudR.h \
@@ -397,7 +381,8 @@ NoeudR.o: ../../src/NoeudR.cpp ../../include/NoeudR.h \
 		../../include/Point.h \
 		../../include/Point3D.h \
 		../../include/Voxel.h \
-		../../include/Fichier.h
+		../../include/Fichier.h \
+		../../src/Noeud.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NoeudR.o ../../src/NoeudR.cpp
 
 Octree.o: ../../src/Octree.cpp ../../include/Octree.h \
@@ -406,7 +391,10 @@ Octree.o: ../../src/Octree.cpp ../../include/Octree.h \
 		../../include/Point.h \
 		../../include/Point3D.h \
 		../../include/Voxel.h \
-		../../include/Fichier.h
+		../../include/Fichier.h \
+		../../src/Noeud.cpp \
+		../../src/Arbre.cpp \
+		../../include/NoeudOctree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Octree.o ../../src/Octree.cpp
 
 Point.o: ../../src/Point.cpp ../../include/Point.h \
@@ -423,6 +411,8 @@ RTree.o: ../../src/RTree.cpp ../../include/RTree.h \
 		../../include/Point3D.h \
 		../../include/Voxel.h \
 		../../include/Fichier.h \
+		../../src/Noeud.cpp \
+		../../src/Arbre.cpp \
 		../../include/NoeudR.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o RTree.o ../../src/RTree.cpp
 

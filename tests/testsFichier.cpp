@@ -31,3 +31,23 @@ bool Fichier_test_ajout_point(char *wd) {
     }
     return res;
 }
+
+bool Fichier_test_nombre_points() {
+    bool res = true;
+    QString fichier("../../donneeTestDIAS/SalamandreCloud.txt");
+    qDebug() << "Test n° " << 2 << " : lecture du nombre de points.";
+    qDebug() << "Fichier : " << fichier;
+
+    // ouverture du fichier
+    Fichier f;
+    if(!f.ouvrir(fichier, QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "ÉCHEC DE L'OUVERTURE DU FICHIER "<< fichier;
+        return false;
+    }
+
+    // lecture du nombre de lignes
+    long nbLignes = f.getNbPoints();
+    qDebug() << "Nb lignes : " << nbLignes;
+
+    return res;
+}

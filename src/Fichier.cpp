@@ -10,14 +10,14 @@
 #include "../include/Fichier.h"
 
 #include <QTextStream>
+#include <QDebug>
 
-Fichier::Fichier() : m_fichier(), m_voxel(), m_nb_points(-1) {
-
+Fichier::Fichier() : m_fichier(), m_voxel(), m_chemin() {
 }
 
 Fichier::Fichier(const Fichier &modele) : m_fichier(),
-    m_voxel(modele.getVoxel()), m_nb_points(-1) {
-    m_fichier.setFileName(modele.cgetFichier().fileName());
+    m_voxel(modele.getVoxel()), m_chemin(modele.getChemin()) {
+    m_fichier.setFileName(m_chemin);
 }
 
 
@@ -31,6 +31,7 @@ Fichier::~Fichier()
 }
 
 bool Fichier::ouvrir(const QString &chemin, QIODevice::OpenMode mode) {
+    m_chemin = chemin;
     m_fichier.setFileName(chemin);
     return m_fichier.open(mode);
 }
@@ -40,9 +41,12 @@ bool Fichier::estOuvert() {
 }
 
 void Fichier::fermer() {
-    m_fichier.close();
+    //m_fichier.close();
 }
 
+QString Fichier::getChemin() const {
+    return m_chemin;
+}
 
 bool Fichier::ajoutPoint(const Point &p, long pos) {
     if(m_fichier.isOpen()) {
@@ -61,19 +65,23 @@ Point Fichier::getPoint(long pos)
 }
 
 long Fichier::getNbPoints() { // compte le nombre de points dans le fichier
-    if(m_nb_points < 0 && estOuvert()) {
-        //comptage du nombre de lignes
-        m_fichier.readLine();
-        long pointCount=0;
+    long nbPoints = -1;
+    if(estOuvert()) {
+        // Lecture de l'en-tête
+        QByteArray entete = m_fichier.readLine();
+        /*while(entete.length() > 0 && entete != QString("end header")) {
+            entete = m_fichier.readLine();
+        }*/
+
+        // Comptage
+        nbPoints = 0;
         while (m_fichier.readLine().length() > 0)
         {
-            pointCount++;
+            nbPoints++;
         }
-
-        m_nb_points = pointCount;
     }
 
-    return m_nb_points; // si le fichier n'a pas été ouvert, renvoie -1
+    return nbPoints; // si le fichier n'a pas été ouvert, renvoie -1
 }
 
 Point** Fichier::getPoints(){ // récupère tous les points du fichier
