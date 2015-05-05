@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     res = res && Voxel_test_double_intersection();
     res = res && Fichier_test_ajout_point(argv[0]);
     res = res && Voxel_test_volume();
+    res = res && Fichier_test_nombre_points();
 
     if(res) {
         qDebug("=== Tous les tests sont passés ===");

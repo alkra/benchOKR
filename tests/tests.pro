@@ -33,3 +33,5 @@ SOURCES += main.cpp \
 HEADERS += \
     testsVoxel.h \
     testsFichier.h
+
+QMAKE_CXXFLAGS += -std=c++11

@@ -13,18 +13,21 @@
 #include "../include/Noeud.h"
 
 /* Constructeurs */
-NOEUD()::Noeud() : m_defaut(true), m_boite(), m_enfants(NULL), m_nb_enfants(0),
-    m_dossier(), m_fichier(NULL), m_terminal(false) { // construit un noeud par défaut
+NOEUD()::Noeud(bool terminal) : m_defaut(true), m_boite(), m_enfants(NULL), m_nb_enfants(0),
+    m_dossier(), m_fichier(NULL), m_terminal(terminal) { // construit un noeud par défaut
 }
 
-NOEUD()::Noeud(QString cheminRelatif): m_defaut(false), m_boite(),
+NOEUD()::Noeud(QString cheminRelatif, bool terminal): m_defaut(false), m_boite(),
     m_enfants(NULL), m_nb_enfants(0), m_dossier(cheminRelatif), m_fichier(NULL),
-    m_terminal(false) { // construit un nœud
+    m_terminal(terminal) { // construit un nœud
+    if(!m_dossier.exists()) {
+        m_dossier.mkpath(cheminRelatif);
+    }
 }
 
-NOEUD()::Noeud(Voxel &boite, QString cheminRelatif) : m_defaut(false),
+NOEUD()::Noeud(Voxel &boite, QString cheminRelatif, bool terminal) : m_defaut(false),
     m_boite(boite), m_enfants(NULL), m_nb_enfants(0),m_dossier(cheminRelatif),
-    m_fichier(NULL), m_terminal(false) { // construit un noeud en lui associant un Voxel
+    m_fichier(NULL), m_terminal(terminal) { // construit un noeud en lui associant un Voxel
 }
 
 NOEUD()::Noeud(const Noeud<Nd, MAX_ENFANTS> &modele) : m_fichier(NULL) { // constructeur de recopie
@@ -171,16 +174,21 @@ NOEUD(bool)::ajoutEnfant(Nd &nouveau, long pos) throw(TerminalErreur, IndiceHors
 
     if(pos == -1) { // ajout à la fin
         m_enfants[m_nb_enfants] = nouveau;
+        m_enfants[m_nb_enfants].getDossier().rename(
+                    nouveau.getDossier().path(),
+                    m_dossier.path() + "/" + m_nb_enfants);
     } else {
         // on décale
-        Nd tmp;
-        for(long i=pos ; i < m_nb_enfants ; i++) {
-            tmp = m_enfants[i+1];
+        for(long i=m_nb_enfants-1 ; i >= pos ; i--) {
             m_enfants[i+1] = m_enfants[i];
+            m_dossier.rename(QString("%d").arg(i), QString("%d").arg(i+1));
         }
 
         // on ajoute
         m_enfants[pos] = nouveau;
+        m_enfants[pos].getDossier().rename(
+                    nouveau.getDossier().path(),
+                    m_dossier.path() + "/" + pos);
     }
 
     // ajout effectué
@@ -232,8 +240,8 @@ NOEUD(QDir)::getDossier() const {
     return m_dossier;
 }
 
-NOEUD(template <class T> bool)::setDossier(const T &nouveau){
-    return m_dossier = QDir(nouveau);
+NOEUD(template <class T> void)::setDossier(const T &nouveau){
+    m_dossier = QDir(nouveau);
 }
 
 NOEUD(Fichier*)::getFichier() const
@@ -245,7 +253,7 @@ throw(TerminalErreur) {
     return m_fichier;
 }
 
-NOEUD(void)::setFichier(const Fichier &nouveau) throw(TerminalErreur) {
+NOEUD(void)::setFichier(Fichier *nouveau) throw(TerminalErreur) {
     if(m_nb_enfants > 0) { // on n'écrase pas le contenu
         throw TerminalErreur(PAS_TERMINAL);
     } // else
@@ -258,7 +266,7 @@ NOEUD(void)::setFichier(const Fichier &nouveau) throw(TerminalErreur) {
     }
 
     m_fichier->fermer();
-    m_fichier = new Fichier(nouveau);
+    m_fichier = nouveau;
 }
 
 NOEUD(bool)::estTerminal() const {
