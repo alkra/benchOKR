@@ -24,13 +24,13 @@ public:
     Point(double x, double y, double z,int code);
 
     ~Point();
-    double getX() const;
-    double getY() const;
-    double getZ() const;
+//    double getX() const;
+//    double getY() const;
+//    double getZ() const;
 
-    void setX(double x);
-    void setY(double y);
-    void setZ(double z);
+//    void setX(double x);
+//    void setY(double y);
+//    void setZ(double z);
 
     unsigned int m_code;  // utilisé au cours de la génération de l'octree
 

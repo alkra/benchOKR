@@ -23,6 +23,8 @@ Point::Point() : m_x(0), m_y(0), m_z(0),m_code(0)
 
 Point::Point(double x, double y, double z) :Point3D(x,y,z) {}
 
+Point::Point(double x, double y, double z, int code) : Point3D(x,y,z), m_code(code) {}
+
 
 Point::~Point()
 {
