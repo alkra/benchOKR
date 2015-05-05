@@ -34,6 +34,8 @@ public:
         m_texte = "L'indice demandé est incorrect.";
     }
 
+    ~IndiceHorsDomaine() throw() {}
+
     IndiceHorsDomaine(int demande, int min = -1, int max = -1) :
         m_demande(demande), m_min(min), m_max(max) {
         m_texte += QString("L'indice %1 est incorrect.").arg(m_demande);
