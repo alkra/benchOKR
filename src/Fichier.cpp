@@ -73,14 +73,12 @@ bool Fichier::ajoutPoint(const Point &p, long pos) {
 }
 
 void Fichier::passerEntete(const QString &fin) {
-    /*if(m_nb_points) {
-        //std::cerr << "On doit recalculer le nb de points." << std::endl;
-        if(!rouvrir(m_mode | QIODevice::ReadOnly)) {
-            throw(1);
-        }
+    //std::cerr << "On doit recalculer le nb de points." << std::endl;
+    if(!rouvrir((m_mode & (~QIODevice::Append)) | QIODevice::ReadOnly)) {
+        throw(1);
     }
 
-    QByteArray ligne = m_fichier.readLine();
+    /*QByteArray ligne = m_fichier.readLine();
     int compteur = 0;
     while(!m_fichier.atEnd()
           && ligne.length() > 0

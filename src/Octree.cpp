@@ -12,6 +12,9 @@
 
 Octree::Octree(): m_centre(0,0,0,0), m_rayon(0.0)
 {
+racine=new NoeudOctree();
+QDir dossierRacine("E:/Git/ProjetDeveloppement/Octree"); // racine de mon arbre
+dossierRacine.mkpath("E:/Git/ProjetDeveloppement/Octree");
 
 }
 
@@ -20,7 +23,9 @@ Octree::~Octree()
 {
 }
 
+void Octree::construire(){
 
+}
 
 // construction de l'Octree
 
@@ -28,7 +33,6 @@ const   bool    Octree::construire(QString adresse,
 
                               const unsigned int threshold,
                               const unsigned int maximumDepth,
-                              const Bounds &bounds,
                               const unsigned int currentDepth)
 {
     Fichier plyInitial;
@@ -39,6 +43,8 @@ const   bool    Octree::construire(QString adresse,
 
     Point ** points = plyInitial.getPoints();
     const unsigned int count = plyInitial.getNbPoints();
+
+    Bounds bounds = calcCubicBounds(points, count);
 
     return racine->construire(points, count, threshold, maximumDepth, bounds, currentDepth);
 }
@@ -89,30 +95,7 @@ const Bounds Octree::calcCubicBounds(const Point * const * points,
     return b;
 }
 
-//const bool Octree::traverse(callback proc, void *data) const
-//{
-//    // Call the callback for this node (if the callback returns false, then
-//    // stop traversing.
 
-//    if (!proc(*this, data)) return false;
-
-//    // If I'm a node, recursively traverse my children
-
-//    if (!_pointCount)
-//    {
-//        for (unsigned int i = 0; i < 8; i++)
-//        {
-//            // We store incomplete trees (i.e. we're not guaranteed
-//            // that a node has all 8 children)
-
-//            if (!_child[i]) continue;
-
-//            if (!_child[i]->traverse(proc, data)) return false;
-//        }
-//    }
-
-//    return true;
-//}
 
 
 

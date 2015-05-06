@@ -10,6 +10,7 @@
 
 #include "../include/NoeudOctree.h"
 #include "../include/Point.h"
+#include <QDebug>
 
 
 
@@ -84,7 +85,7 @@ const   bool    NoeudOctree::construire(Point** points,
 
         m_enfant[i] = new NoeudOctree;
 
-
+qDebug() << childPointCounts[i];
         Point   **newList = new Point *[childPointCounts[i]];
 
         // Go through the input list of points and copy over the points
