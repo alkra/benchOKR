@@ -36,7 +36,7 @@ class Fichier
 {
     public:
         Fichier(); // constructeur
-        Fichier(const Fichier &modele); // constructeur de recopie
+        Fichier(Fichier &modele); // constructeur de recopie
         /*friend void swap(Fichier &un, Fichier &deux) {
             // enable ADL (not necessary in our case, but good practice)
             using std::swap;
@@ -54,12 +54,17 @@ class Fichier
         bool ouvrir(const QString &chemin,
                     QIODevice::OpenMode mode
                         = QIODevice::Append | QIODevice::Text);
+        bool rouvrir(QIODevice::OpenMode mode);
         bool estOuvert();
         void fermer(); // appelée dans le destructeur
 
         QString getChemin() const;
+        void setChemin(const QString &nom);
+        QIODevice::OpenMode getMode() const;
 
-        Point getPoint(long pos); // renvoie le pos-ième point du fichier
+        void passerEntete(const QString &fin);
+
+        Point getPoint(long pos = -1); // renvoie le pos-ième point du fichier
         bool ajoutPoint(const Point &p, long pos = -1); // insère un point dans le fichier (-1 à la fin).
 
         long getNbPoints(); // compte le nombre de points dans le fichier
@@ -67,7 +72,7 @@ class Fichier
 
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
-        QVector<Point> requete(const Voxel &conteneur) const; // // renvoie tous les points du fichier contenus dans 'conteneur'
+        QVector<Point> requete(const Voxel &conteneur); // // renvoie tous les points du fichier contenus dans 'conteneur'
 
         /* Accesseurs et mutateurs (1 par attribut) */
         const QFile &cgetFichier() const;
@@ -83,6 +88,8 @@ class Fichier
         QFile m_fichier;
         Voxel m_voxel;
         QString m_chemin;
+        QIODevice::OpenMode m_mode;
+        long m_nb_points;
 };
 
 #endif // FICHIER_H
