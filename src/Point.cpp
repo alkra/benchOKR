@@ -16,16 +16,16 @@
 using namespace std;
 
 /* Constructeurs */
-Point::Point() : m_code(0), m_x(0), m_y(0), m_z(0)
+Point::Point() : Point3D(), m_code(0)
 {
     //ctor
 }
 
-Point::Point(const Point3D &autre) : m_code(0), Point3D(autre)
+Point::Point(const Point3D &autre) : Point3D(autre), m_code(0)
 {
 }
 
-Point::Point(double x, double y, double z) :Point3D(x,y,z) {}
+Point::Point(double x, double y, double z) : Point3D(x,y,z), m_code(0) {}
 
 Point::Point(double x, double y, double z, int code) : Point3D(x,y,z), m_code(code) {}
 

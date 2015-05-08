@@ -20,6 +20,7 @@ using namespace std;
 #include<QString>
 
 #define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
+#define SALAMANDRE_TXT "../donneeTestDIAS/SalamandreCloud.txt"
 
 int main()
 {
@@ -49,7 +50,7 @@ int main()
 
 
     Octree monArbre;
-    QString chemin=ARAIGNEE_PLY;
+    QString chemin=SALAMANDRE_TXT;
 
      monArbre.construire(chemin,500,4,0);
 

@@ -30,7 +30,7 @@ const   bool    NoeudOctree::construire(Point** points,
                                         const Bounds &bounds,
                                         const unsigned int currentDepth)
 {
-    if (count <= threshold || currentDepth >= maximumDepth)
+    if (count <= threshold)// || currentDepth >= maximumDepth)
     {
         // pour le stockage des points dans les noeuds si les conditions sont remplies, ce qui fait de ce noeud une feuille.
 
@@ -40,7 +40,7 @@ const   bool    NoeudOctree::construire(Point** points,
         return true;
     }
 
-    unsigned int    childPointCounts[8];
+    unsigned int    childPointCounts[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
     // Pendant cette étape, on va affecter chaque point à un noeud (octant)
     for (unsigned int i = 0; i < count; i++)
@@ -60,9 +60,15 @@ const   bool    NoeudOctree::construire(Point** points,
         // du point au centre du noeud courant
 
         p.m_code=0;
-        if (p.getX() > c.getX()) p.m_code |= 1;
-        if (p.getY() > c.getY()) p.m_code |= 2;
-        if (p.getZ() > c.getZ()) p.m_code |= 4;
+        if (p.getX() > c.getX()) {
+            p.m_code |= 1;
+        }
+        if (p.getY() > c.getY()) {
+            p.m_code |= 2;
+        }
+        if (p.getZ() > c.getZ()) {
+            p.m_code |= 4;
+        }
 
         // On allons garder les informations concernant le nombre de points dans chaque octant
 
@@ -85,8 +91,9 @@ const   bool    NoeudOctree::construire(Point** points,
 
         m_enfant[i] = new NoeudOctree;
 
-qDebug() << childPointCounts[i];
-        Point   **newList = new Point *[childPointCounts[i]];
+        qDebug() << childPointCounts[i];
+        Point   **newList = NULL;
+        newList = new Point *[childPointCounts[i]];
 
         // Go through the input list of points and copy over the points
         // that were coded for this child
@@ -106,11 +113,11 @@ qDebug() << childPointCounts[i];
         // A ce niveau, nous avons une liste de points qui appartiennent à ce noeud enfant
 
 
-        int     newCount = 0;
-        for (unsigned int j = 0; j < childPointCounts[i]; j++)
-        {
+//        int     newCount = 0;
+//        for (unsigned int j = 0; j < childPointCounts[i]; j++)
+//        {
 
-        }
+//        }
 
         //Générer un volume englobant
         // Nous utilisons une table de décallage.
@@ -144,7 +151,7 @@ qDebug() << childPointCounts[i];
 
         // Recurse
 
-        m_enfant[i]->construire(newList, newCount, threshold, maximumDepth,
+        m_enfant[i]->construire(newList, childPointCounts[i], threshold, maximumDepth,
                                 newBounds, currentDepth+1);
 
         // Tout nettoyer

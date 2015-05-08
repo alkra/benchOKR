@@ -145,7 +145,6 @@ long Fichier::getNbPoints() { // compte le nombre de points dans le fichier
 
 Point** Fichier::getPoints(){ // récupère tous les points du fichier
     long nbPoints = getNbPoints();
-    std::cerr << "getPoints() : nbPoints vaut " << nbPoints << std::endl;
     if(nbPoints < 0) {
         throw nbPoints;
     }

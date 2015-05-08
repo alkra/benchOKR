@@ -25,23 +25,10 @@ public:
     Point(const Point3D &autre);
 
     ~Point();
-//    double getX() const;
-//    double getY() const;
-//    double getZ() const;
-
-//    void setX(double x);
-//    void setY(double y);
-//    void setZ(double z);
 
     unsigned int m_code;  // utilisé au cours de la génération de l'octree
 
 private:
-
-
-    // attribut de classe point3D
-    double m_x;
-    double m_y;
-    double m_z;
 
 
 
