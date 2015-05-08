@@ -12,6 +12,8 @@
 
 #include "../include/Noeud.h"
 
+#include <QDebug>
+
 /* Constructeurs */
 NOEUD()::Noeud(bool terminal) : m_defaut(true), m_boite(), m_enfants(NULL), m_nb_enfants(0),
     m_dossier(), m_fichier(NULL), m_terminal(terminal) { // construit un noeud par défaut
@@ -173,12 +175,12 @@ NOEUD(bool)::ajoutEnfant(Nd &nouveau, long pos) throw(TerminalErreur, IndiceHors
     }
 
     if(pos == -1) { // ajout à la fin
-        m_enfants[m_nb_enfants] = nouveau;
-        QDir dossierEnfant = m_enfants[m_nb_enfants].getDossier();
+        QDir dossierEnfant(nouveau.getDossier());
         dossierEnfant.rename(dossierEnfant.absolutePath(),
                              m_dossier.absoluteFilePath(
-                                 QString("%d").arg(m_nb_enfants)));
-        m_enfants[m_nb_enfants].setDossier(dossierEnfant);
+                                 QString::number(m_nb_enfants)));
+        nouveau.setDossier(dossierEnfant);
+        m_enfants[m_nb_enfants] = nouveau;
 
     } else {
         // on décale

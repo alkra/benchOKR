@@ -9,11 +9,26 @@
 #include<string>
 using namespace std;
 
-#include "../include/Point.h"
-#include "../include/KdTree.h"
+#include "../include/RTree.h"
 
 
-int main(int argc, char** argv)
+int main()
 {
-    KdTree monKd;
+    QDir racine("../rtree");
+    racine.removeRecursively();
+
+    RTree *r = NULL;
+    try {
+        ALLOCATION(r, RTree(racine.absoluteFilePath("0")))
+    } catch(PlusDeMemoire m) {
+        qFatal("Plus de mémoire disponible.");
+    } catch(int e) {
+        if(e == 2) {
+            qFatal("Impossible d'ouvrir le fichier de données à la racine.");
+        } else {
+            qFatal(QString("Erreur %1").arg(e).toLocal8Bit().data());
+        }
+    }
+
+    r->construire();
 }
