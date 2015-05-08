@@ -1,30 +1,32 @@
 #ifndef OCTREE_H
 #define OCTREE_H
 
-/* ©ENSG 2015
- * École nationale des sciences géographiques
+/* Â©ENSG 2015
+ * Ã‰cole nationale des sciences gÃ©ographiques
  * 6-8 avenue Blaise Pascal
- * Cité Descartes - Champs-sur-Marne
- * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * CitÃ© Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÃ‰E CEDEX 2
  * FRANCE */
 
-/* Ce Point définit la classe Octree */
+/* Ce Point dÃ©finit la classe Octree */
 
 #include "../include/Arbre.h"
 #include "../include/NoeudOctree.h"
 #include "Point.h"
+
+#define OCTREE_DOSSIER_RACINE "E:/Git/ProjetDeveloppement/Octree"
 
 using namespace std;
 
 
 
 
-class Octree : public Arbre<NoeudOctree>  // Création d'une classe Octree qui hérite de la classe Arbre
+class Octree : public Arbre<NoeudOctree>  // CrÃ©ation d'une classe Octree qui hÃ©rite de la classe Arbre
 {
 
 public:
 
-    // fonction de rappel pour la création des Points
+    // fonction de rappel pour la crÃ©ation des Points
 
    // typedef bool            (*callback)(const Octree &o, void *data);
 
@@ -34,26 +36,26 @@ public:
 
     // destructeur
      ~Octree();
-    // méthode permettant de construire l'octree
+    // mÃ©thode permettant de construire l'octree
     void construire();
 
      const   bool            construire(QString adresse,   // nombre total de points
-                                               const unsigned int threshold, // seuil d'arrêt
+                                               const unsigned int threshold, // seuil d'arrÃªt
                                                const unsigned int maximumDepth, // profondeur de l'arbre           // volume englobant
                                                const unsigned int currentDepth = 0); // profondeur courante
 
-    // méthode permettant de construire le volume englobant
+    // mÃ©thode permettant de construire le volume englobant
 
     static  const   Bounds          calcCubicBounds(const Point * const * points,
                                                     const unsigned int count);
 
 
 
-    // définition de la fonction qui sera rappelée pour la création des Points
+    // dÃ©finition de la fonction qui sera rappelÃ©e pour la crÃ©ation des Points
 
     //  virtual const   bool            traverse(callback proc, void *data) const;
 
-    // fonction de requête
+    // fonction de requÃªte
 
     QVector<Point> requete(const Point &centre, double distance) const; // voisinage
     QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel

@@ -19,6 +19,8 @@ using namespace std;
 #include <QDebug>
 #include<QString>
 
+#define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
+
 int main()
 {
     //Fichier util;
@@ -47,7 +49,7 @@ int main()
 
 
     Octree monArbre;
-    QString chemin="C:/code04Mai2015/constructionOctree4Mai/araignee.ply";
+    QString chemin=ARAIGNEE_PLY;
 
      monArbre.construire(chemin,500,4,0);
 

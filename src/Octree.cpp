@@ -13,8 +13,8 @@
 Octree::Octree(): m_centre(0,0,0,0), m_rayon(0.0)
 {
 racine=new NoeudOctree();
-QDir dossierRacine("E:/Git/ProjetDeveloppement/Octree"); // racine de mon arbre
-dossierRacine.mkpath("E:/Git/ProjetDeveloppement/Octree");
+QDir dossierRacine(OCTREE_DOSSIER_RACINE); // racine de mon arbre
+dossierRacine.mkpath(OCTREE_DOSSIER_RACINE);
 
 }
 
