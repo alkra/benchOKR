@@ -22,6 +22,7 @@ public:
     Point();
     Point(double x, double y, double z);
     Point(double x, double y, double z,int code);
+    Point(const Point3D &autre);
 
     ~Point();
 //    double getX() const;

@@ -14,7 +14,7 @@
 #include "../include/NoeudOctree.h"
 #include "Point.h"
 
-#define OCTREE_DOSSIER_RACINE "E:/Git/ProjetDeveloppement/Octree"
+#define OCTREE_DOSSIER_RACINE "../Octree"
 
 using namespace std;
 
@@ -46,8 +46,7 @@ public:
 
     // méthode permettant de construire le volume englobant
 
-    static  const   Bounds          calcCubicBounds(const Point * const * points,
-                                                    const unsigned int count);
+    static  const   Bounds          calcCubicBounds(const Voxel &englobant);
 
 
 

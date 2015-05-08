@@ -44,15 +44,15 @@ const   bool    Octree::construire(QString adresse,
     Point ** points = plyInitial.getPoints();
     const unsigned int count = plyInitial.getNbPoints();
 
-    Bounds bounds = calcCubicBounds(points, count);
+    plyInitial.calculerVoxel();
+    Bounds bounds = calcCubicBounds(plyInitial.getVoxel());
 
     return racine->construire(points, count, threshold, maximumDepth, bounds, currentDepth);
 }
 
 // calcul du voulume englobant
 
-const Bounds Octree::calcCubicBounds(const Point * const * points,
-                                     const unsigned int count)
+const Bounds Octree::calcCubicBounds(const Voxel &englobant)
 {
 
 
@@ -61,19 +61,19 @@ const Bounds Octree::calcCubicBounds(const Point * const * points,
     // Détermination du minimum et du maximum de notre jeu de données
 
 
-    Point   min = *points[0];
-    Point   max = *points[0];
+    Point   min = englobant.getDebut();
+    Point   max = englobant.getFin();
 
-    for (unsigned int i = 1; i < count; i++)
-    {
-        const Point &p = *points[i];
-        if (p.getX() < min.getX()) min.setX(p.getX());
-        if (p.getY() < min.getY()) min.setY(p.getY());
-        if (p.getZ() < min.getZ()) min.setZ(p.getZ());
-        if (p.getX() > max.getX()) max.setX(p.getX());
-        if (p.getY() > max.getY()) max.setY(p.getY());
-        if (p.getZ() > max.getZ()) max.setZ(p.getZ());
-    }
+    //for (unsigned int i = 1; i < count; i++)
+    //{
+    //    const Point &p = *points[i];
+    //    if (p.getX() < min.getX()) min.setX(p.getX());
+    //    if (p.getY() < min.getY()) min.setY(p.getY());
+    //    if (p.getZ() < min.getZ()) min.setZ(p.getZ());
+    //    if (p.getX() > max.getX()) max.setX(p.getX());
+    //    if (p.getY() > max.getY()) max.setY(p.getY());
+    //    if (p.getZ() > max.getZ()) max.setZ(p.getZ());
+    //}
 
 
     Point   rayon = max - min;
