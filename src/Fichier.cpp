@@ -144,18 +144,10 @@ long Fichier::getNbPoints() { // compte le nombre de points dans le fichier
 }
 
 Point** Fichier::getPoints(){ // récupère tous les points du fichier
-    if(!rouvrir(m_mode | QIODevice::ReadOnly)) {
-        return NULL;
-    }
-
     long nbPoints = getNbPoints();
     std::cerr << "getPoints() : nbPoints vaut " << nbPoints << std::endl;
     if(nbPoints < 0) {
         throw nbPoints;
-    }
-
-    if(!rouvrir(m_mode | QIODevice::ReadOnly)) {
-        return NULL;
     }
 
     try {
@@ -163,6 +155,8 @@ Point** Fichier::getPoints(){ // récupère tous les points du fichier
     } catch(...) {
     }
 
+
+    m_nb_points = nbPoints;
     Point **liste = new Point*[nbPoints];
 
     // lecture de la première ligne pour savoir quoi faire
@@ -233,7 +227,52 @@ Voxel Fichier::getVoxel() const {
 }
 
 void Fichier::calculerVoxel() {
-    // MARYAME
+    Point **points = getPoints();
+    Voxel provisoire;
+    Point3D debut, fin;
+    if(m_nb_points > 0) {
+        provisoire.setDebut(*(points[0]));
+        provisoire.setFin(*(points[0]));
+    }
+
+    for(int i=1 ; i  < m_nb_points ; i++) {
+        try {
+            if(!provisoire.intersecte(*(points[i]))) {
+                debut = provisoire.getDebut();
+                fin = provisoire.getFin();
+                debut.setX(std::min<double>(
+                                std::min<double>(debut.getX(), fin.getX()),
+                                points[i]->getX()
+                                ));
+                debut.setY(std::min<double>(
+                                std::min<double>(debut.getY(), fin.getY()),
+                                points[i]->getY()
+                                ));
+                debut.setZ(std::min<double>(
+                                std::min<double>(debut.getZ(), fin.getZ()),
+                                points[i]->getZ()
+                                ));
+                fin.setX(std::max<double>(
+                                std::max<double>(debut.getX(), fin.getX()),
+                                points[i]->getX()
+                                ));
+                fin.setY(std::max<double>(
+                                std::max<double>(debut.getY(), fin.getY()),
+                                points[i]->getY()
+                                ));
+                fin.setZ(std::max<double>(
+                                std::max<double>(debut.getZ(), fin.getZ()),
+                                points[i]->getZ()
+                                ));
+                provisoire.setDebut(debut);
+                provisoire.setFin(fin);
+            }
+        } catch(...) {
+            break;
+        }
+    }
+
+    m_voxel = provisoire;
 }
 
 void Fichier::setVoxel(const Voxel &v) {

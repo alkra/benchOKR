@@ -174,9 +174,12 @@ NOEUD(bool)::ajoutEnfant(Nd &nouveau, long pos) throw(TerminalErreur, IndiceHors
 
     if(pos == -1) { // ajout à la fin
         m_enfants[m_nb_enfants] = nouveau;
-        m_enfants[m_nb_enfants].getDossier().rename(
-                    nouveau.getDossier().path(),
-                    m_dossier.path() + "/" + m_nb_enfants);
+        QDir dossierEnfant = m_enfants[m_nb_enfants].getDossier();
+        dossierEnfant.rename(dossierEnfant.absolutePath(),
+                             m_dossier.absoluteFilePath(
+                                 QString("%d").arg(m_nb_enfants)));
+        m_enfants[m_nb_enfants].setDossier(dossierEnfant);
+
     } else {
         // on décale
         for(long i=m_nb_enfants-1 ; i >= pos ; i--) {
@@ -265,7 +268,7 @@ NOEUD(void)::setFichier(Fichier *nouveau) throw(TerminalErreur) {
         m_terminal = true;
     }
 
-    m_fichier->fermer();
+    delete m_fichier;
     m_fichier = nouveau;
 }
 

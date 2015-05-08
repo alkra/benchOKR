@@ -28,6 +28,13 @@
 
 #define NOEUD(type) template <class Nd, int MAX_ENFANTS> type Noeud<Nd, MAX_ENFANTS>
 
+class PlusDeMemoire : public std::exception {
+public:
+    const char* what() const throw() {
+        return "Plus de mémoire.";
+    }
+};
+
 class IndiceHorsDomaine : public std::exception {
 public:
     IndiceHorsDomaine() : m_demande(0), m_min(-1), m_max(-1) {
