@@ -10,20 +10,17 @@ using namespace std;
 
 #include "../include/KdTree.h"
 #include "../include/NoeudKd.h"
+#include "../include/RTree.h"
+#include "../include/Octree.h"
+#include "../include/NoeudOctree.h"
+
+#define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
+#define SALAMANDRE_TXT "../donneeTestDIAS/SalamandreCloud.txt"
 
 
 int main(int argc, char *argv[])
 {
-    /*Point3D d;
-  d.setX(3);
-  d.setY(6);
-  d.setZ(66);
-  Point3D* T=new Point3D[10];
-  T[0]=d;
-  cout<<"ce resultat ::::"<<T[0].getZ()<<endl;*/
-
-   // p.lirefichierply()
-    NoeudKd* p11;
+    /*NoeudKd* p11;
     KdTree p;
     p11=p.construire1();
 
@@ -83,7 +80,58 @@ int main(int argc, char *argv[])
     //lire les point du path[j] telque les point
     //sont compris entre les points en entré
     //else lire les point
+*/
 
+    /*QDir racine("../rtree");
+    racine.removeRecursively();
+
+    RTree *r = NULL;
+    try {
+        ALLOCATION(r, RTree(racine.absoluteFilePath("0")))
+    } catch(PlusDeMemoire m) {
+        qFatal("Plus de mémoire disponible.");
+    } catch(int e) {
+        if(e == 2) {
+            qFatal("Impossible d'ouvrir le fichier de données à la racine.");
+        } else {
+            qFatal(QString("Erreur %1").arg(e).toLocal8Bit().data());
+        }
+    }
+
+    r->construire();*/
+
+    //Fichier util;
+    // Ouverture du fichier
+
+    //util.ouvrir("C:/code04Mai2015/constructionOctree4Mai/araignee.ply", QIODevice::ReadOnly | QIODevice::Text);
+    //util.ouvrir("E:/Git/ProjetDeveloppement/jeuTest/Salamandre.ply", QIODevice::ReadOnly | QIODevice::Text);
+
+
+
+
+
+    // renvoyer la liste des points
+    //Point **points = util.getPoints();
+    // compter le nombre de points
+
+    //int nbrePts = util.getNbPoints();
+
+    //qDebug()<<nbrePts;
+
+//    QString ligneLue;
+
+//    ligneLue=points.at(10)->toQString();
+
+//    qDebug()<< ligneLue;
+
+
+    Octree monArbre;
+    QString chemin=SALAMANDRE_TXT;
+
+     monArbre.construire(chemin,500,4,0);
+
+
+    //test.construire(points,nbrePts,500,4,b,0);
     return 0;
 
 }
