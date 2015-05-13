@@ -12,19 +12,30 @@
 
 #include "Point3D.h"
 
-class Point : public Point3D
+
+class Point: public Point3D
 {
-    public:
-        Point();
-        Point(double x, double y, double z);
-        ~Point();
+public:
+    Point& operator+=(const Point &valeur);
+    Point& operator-=(const Point &valeur);
+    Point& operator*=(const double &valeur);
+    Point();
+    Point(double x, double y, double z);
+    Point(double x, double y, double z,int code);
+    Point(const Point3D &autre);
 
-        Point readPly(std::string Path,int line);
-        Point readPlyBinaire(std::string Path,int line);
-        Point readTxt(std::string Path,int line);
+    ~Point();
 
-    protected:
-    private:
+    unsigned int m_code;  // utilisé au cours de la génération de l'octree
+
+private:
+
+
+
 };
+Point operator+(Point const &a, Point const &b);
+Point operator-(Point const &a, Point const &b);
+Point operator*(Point const &a, double const &b);
+
 
 #endif // POINT_H

@@ -25,8 +25,6 @@ public:
     bool intersecte(const Point3D &candidat, bool strict = false) const; // revoie true si le point est dans le voxel
     static bool intersecte(const Voxel &un, const Voxel &deux, bool strict = false, bool testerAutreSens = true); // renvoie vrai si l'un des voxels intersecte l'autre.
 
-    double volume() const;
-
     /* Accesseurs et mutateurs */
     Point3D getDebut() const;
     Point3D getFin() const;

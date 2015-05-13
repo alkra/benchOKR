@@ -13,19 +13,46 @@
  * Kd-tree. */
 
 #include "Arbre.h"
-#include "NoeudKd.h"
+#include "Point3D.h"
+#include "Voxel.h"
+#include"KdTree.h"
+#include"NoeudKd.h"
 
+#include <string>
 
-class KdTree : public Arbre<NoeudKd>  // Création d'une classe KdTree qui hérite de la classe Arbre
+using namespace std;
+
+class KdTree : public Arbre  // Création d'une classe KdTree qui hérite de la classe Arbre
 {
     public:
         KdTree();
         ~KdTree();
 
+        //void construire1(string path,int niveau,string Path);
+
         void construire();
-        QVector<Point> requete(const Point &centre, double distance) const; // voisinage
-        QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel
+        NoeudKd* construire1();
+        Point* requete(const Point &centre, double distance) const; // voisinage
+        Point* requete(const Voxel &conteneur) const; // dans un voxel
+        double** lirefichiertxt(std::string Path,int lignes);//mettre les majusculle entre deux mots
+        double** lirefichierply(std::string Path,int lignes);//implèmenter la lecture du fichier binaire
+        double** triePoint(int n,int d,int j,double** v1);
+        int* CalculIndiceMedian(string Path,int depth);
+        int* CalculIndicePlanMedian(string Path,int depth);
+        //void construire1(double** v1,int median,int ligne);
+        Voxel calculvoxel(double** v1,int debut,int fin);
+        string* CreerNoeud(string P);
+        int calculPoints(string Path);
+
+
     protected:
+
+        Point3D point;
+        Point3D* tabpointmedian;
+        Voxel* tabvoxel;
+        NoeudKd* P;
+
+
     private:
 };
 

@@ -13,13 +13,27 @@
 #include "../include/Noeud.h"
 #include "../include/Fichier.h"
 
+
+typedef struct  // on déclare ici une structure pour stocker le volume englobant
+{
+    Point           centre;         // Centre du volume englobant
+    double          rayon;         // Rayon du volume eglobant
+} Bounds;
+
+
 #define getEnfant(pos) getEnfant<NoeudOctree>(pos)
 #define supprimerEnfant(pos) supprimerEnfant<NoeudOctree>(pos)
 
 class NoeudOctree : public Noeud<NoeudOctree, 8>
 {
     public:
+    const   bool            construire(Point **points, unsigned int count,   // nombre total de points
+                                              const unsigned int threshold, // seuil d'arrêt
+                                              const unsigned int maximumDepth, // profondeur de l'arbre
+                                              const Bounds &bounds,            // volume englobant
+                                              const unsigned int currentDepth = 0); // profondeur courante
         NoeudOctree(); // construit un noeud normal
+        ~NoeudOctree();
         NoeudOctree(const NoeudOctree &modele); // constructeur de recopie
 
         /* Les fonctions de requête */
@@ -27,6 +41,9 @@ class NoeudOctree : public Noeud<NoeudOctree, 8>
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
     protected:
     private:
+        NoeudOctree                  *m_enfant[8]; // tableau du nombre d'octant
+        unsigned int            m_pointCount; // nombre de points
+        Point                   **m_points;
 };
 
 #endif // NOEUDOCTREE_H

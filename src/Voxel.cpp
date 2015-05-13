@@ -11,7 +11,9 @@
 
 Voxel::Voxel() : m_debut(), m_fin() {} // constructeur par défaut
 Voxel::Voxel(const Point3D &min, const Point3D &max) :
-    m_debut(min), m_fin(max) {}
+    m_debut(min), m_fin(max) {
+
+}
 Voxel::Voxel(double xdeb, double ydeb, double zdeb,
              double xfin, double yfin, double zfin): m_debut(xdeb, ydeb,zdeb),
                                                      m_fin(xfin, yfin, zfin) {
@@ -84,13 +86,6 @@ bool Voxel::intersecte(const Voxel &un, const Voxel &deux, bool strict, bool tes
     return res;
 }
 
-double Voxel::volume() const {
-    double ex = m_fin.getX() - m_debut.getX(),
-            ey = m_fin.getY() - m_debut.getY(),
-            ez = m_fin.getZ() - m_debut.getZ();
-    return (ex >= 0 ? ex : -ex)*(ey >= 0 ? ey : -ey)*(ez >= 0 ? ez : -ez);
-}
-
 /* Accesseurs et mutateurs */
 Point3D Voxel::getDebut() const {
     return m_debut;
@@ -117,3 +112,4 @@ void Voxel::setFin(double x, double y, double z) {
     m_fin.setY(y);
     m_fin.setZ(z);
 }
+
