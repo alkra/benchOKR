@@ -16,80 +16,198 @@
  * Lors de la construction de l'arbre, on devra écrire dans ce fichier ;
  * et le lire lors des requêtes. */
 
-/* À faire :
- *  -- Doit-on garder le fichier ouvert (i.e. l'ouvrir dans le constructeur
- *     et le fermer dans le destructeur), permettre de l'ouvrir et de le
- *     fermer manuellement, ou bien l'ouvrir et le fermer à chaque accès ?
- *  -- Si on le garde ouvert, sous quelle forme le stocke-t-on (i/ostream) ?
- *  -- Implémenter les méthodes */
-
-#include "Point.h"
+#include "Point.h" // Un fichier contient des Point et non des Point3D
 #include "Voxel.h"
 
 #include <QString>
 #include <QFile>
 #include <QVector>
 
-#include <iostream>
+#include <iostream> // Bon, il faudrait savoir
+
+
+
+/* La classe Fichier représentant un fichier.
+ * Les constantes suivantes décrivent la structure par défaut de l'entête. */
+#ifndef FICHIER_ENTETE_FIN
+#define FICHIER_ENTETE_FIN "end_header\n"
+#endif
+#ifndef FICHIER_ENTETE_LONGUEUR
+#define FICHIER_ENTETE_LONGUEUR 100
+#endif
+
+
+
 
 class Fichier
 {
+public:
+    /* EXCEPTIONS */
+    /* Exception de base sur un Fichier */
+    class FichierErreur : public std::exception {
     public:
-        Fichier(); // constructeur
-        Fichier(Fichier &modele); // constructeur de recopie
-        /*friend void swap(Fichier &un, Fichier &deux) {
-            // enable ADL (not necessary in our case, but good practice)
-            using std::swap;
+        /* Constructeurs */
+        FichierErreur() throw();
+        FichierErreur(const QString mess) throw();
+        FichierErreur(const QString fich, const QString mess) throw();
+        FichierErreur(FichierErreur &modele) throw();
 
-            // by swapping the members of two classes,
-            // the two classes are effectively swapped
-            swap(un.m_fichier, deux.m_fichier);
-            swap(un.m_voxel, deux.m_voxel);
+        const char* what() const throw();
 
-            // http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
-        }*/
-        Fichier &operator=(Fichier);
-        ~Fichier(); // destructeur
+        /* Attributs */
+        QString message;
+        QString fichier;
+    };
 
-        bool ouvrir(const QString &chemin,
-                    QIODevice::OpenMode mode
-                        = QIODevice::Append | QIODevice::Text);
-        bool rouvrir(QIODevice::OpenMode mode);
-        bool estOuvert();
-        void fermer(); // appelée dans le destructeur
+    /* L'exception levée lorsque le fichier est fermé et ne devrait pas l'être,
+     * ou lorsque le fichier n'a pas pu être ouvert.
+     * Dans les méthodes de Fichier, toutes les méthodes essaient d'ouvrir le
+     * fichier, donc cette exception ne sera levée qu'en cas d'échec. */
 
-        QString getChemin() const;
-        void setChemin(const QString &nom);
-        QIODevice::OpenMode getMode() const;
+    class FichierFermeErreur : public FichierErreur {
+    public:
+        FichierFermeErreur() throw();
+        FichierFermeErreur(const QString mess) throw();
+        FichierFermeErreur(const QString &fich, const QString mess) throw();
+        FichierFermeErreur(const QString &fich,
+                           const QString md,
+                           const QString mess = QString()) throw();
+        FichierFermeErreur(const FichierFermeErreur &e) throw();
 
-        void passerEntete(const QString &fin);
+        const char * what() const throw ();
 
-        Point getPoint(long pos = -1); // renvoie le pos-ième point du fichier
-        bool ajoutPoint(const Point &p, long pos = -1); // insère un point dans le fichier (-1 à la fin).
+        QString mode;
+    };
 
-        long getNbPoints(); // compte le nombre de points dans le fichier
-        Point** getPoints(); // récupère tous les points du fichier
 
-        /* Les fonctions de requête */
-        QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
-        QVector<Point> requete(const Voxel &conteneur); // // renvoie tous les points du fichier contenus dans 'conteneur'
+    /* Exception levée lors de la lecture de l'en-tête du fichier, lorsque la
+     * fin du header n'a pas été trouvée. */
+    class FichierEnteteErreur : public FichierErreur {
+    public:
+        FichierEnteteErreur() throw();
+        FichierEnteteErreur(const QString mess) throw();
+        FichierEnteteErreur(const QString fich, const QString mess) throw();
+        FichierEnteteErreur(const FichierEnteteErreur &e) throw();
+        const char* what() const throw();
+    };
 
-        /* Accesseurs et mutateurs (1 par attribut) */
-        const QFile &cgetFichier() const;
-        QFile &getFichier();
-        void setFichier(QFile &nouveau);
+    /* Exception levée lorsque le fichier n'est pas valide. */
+    class FichierInvalideErreur : public FichierErreur {
+    public:
+        FichierInvalideErreur() throw();
+        FichierInvalideErreur(const QString mess) throw();
+        FichierInvalideErreur(const QString fich, const QString mess) throw();
+        FichierInvalideErreur(const FichierInvalideErreur &e) throw();
+        const char* what() const throw();
+    };
 
-        Voxel getVoxel() const;
-        void calculerVoxel(); // MARYAME
-        void setVoxel(const Voxel &v);
-    protected:
-    private:
-        /* Une feuille est associée à un fichier : */
-        QFile m_fichier;
-        Voxel m_voxel;
-        QString m_chemin;
-        QIODevice::OpenMode m_mode;
-        long m_nb_points;
+    /* Exception levée lorsque la fin du fichier a été atteinte inopinément */
+    class FichierFinErreur : public FichierErreur {
+    public:
+        FichierFinErreur() throw();
+        FichierFinErreur(const QString mess) throw();
+        FichierFinErreur(const QString fich, const QString mess) throw();
+        FichierFinErreur(const FichierFinErreur &e) throw();
+        const char* what() const throw();
+    };
+
+
+
+
+
+    /* EN-TETE */
+    struct EnTete {
+        QString terminaison;
+        long longueur;
+    };
+    struct MetaDonnees {
+        QIODevice::OpenMode format; // texte ou binaire ?
+        QString nomFormat; // intitulé exact du format
+        long nbColonnes; // nombre de colonnes
+        QVector<QString> colonnes; // intitulé des colonnes
+        QString autre; // reste de l'entête
+    };
+
+
+
+    /* ATTRIBUTS */
+protected:
+    QFile m_fichier;
+    QString m_chemin;
+    QIODevice::OpenMode m_mode;
+    EnTete m_entete;
+    /* Attributs calculés */
+    MetaDonnees m_meta;
+    Voxel m_voxel;
+    long m_nb_points;
+
+
+
+public:
+    /* MÉTHODES */
+    Fichier() throw(); // constructeur par défaut
+    Fichier(const QString &chemin,QIODevice::OpenMode mode = QIODevice::Text)
+        throw(); // constructeur spécialisé
+    Fichier(Fichier &modele) throw(); // constructeur de recopie
+    ~Fichier() throw(); // destructeur
+
+
+
+    /* Fonctions d'ouverture et fermeture */
+    bool ouvrir(const QString &chemin = QString(),
+                QIODevice::OpenMode mode
+                = QIODevice::Append | QIODevice::Text) throw();
+    bool rouvrir(QIODevice::OpenMode mode) throw();
+    bool estOuvert() throw();
+    void fermer() throw(); // appelée dans le destructeur
+
+
+
+    /* Fonctions de déplacement, lecture, et écriture */
+    void passerEntete(); // rouvre le fichier et positionne le curseur à la fin de l'en-tête. L'en-tête doit avoir été définie préalablement.
+    MetaDonnees lireEntete(const QString& fin = QString(),
+                           long longueur = FICHIER_ENTETE_LONGUEUR)
+        throw(FichierFermeErreur, FichierEnteteErreur); // tente de lire l'entête du fichier, le rouvrant au besoin. Si FICHIER_ENTETE_LONGUEUR est atteint et que fin n'a pas été précisé, annule tout et lève FichierEnteteErreur.
+    MetaDonnees lireEntete(long longueur, const QString &fin = QString())
+        throw(FichierFermeErreur, FichierEnteteErreur);
+    MetaDonnees lireEntete(const EnTete& entete) throw(FichierFermeErreur);
+
+    void calculerVoxel()
+        throw(FichierFermeErreur, FichierEnteteErreur, FichierInvalideErreur); // calcule le voxel englobant tous les points du fichier.
+
+    long getNbPoints()
+        throw(FichierFermeErreur, FichierEnteteErreur, FichierInvalideErreur);// compte le nombre de points dans le fichier
+
+    Point getPoint(long pos = -1)
+        throw(FichierFermeErreur, FichierFinErreur, FichierInvalideErreur); // renvoie le pos-ième point du fichier
+    bool ajoutPoint(const Point &p, long pos = -1) throw(FichierFermeErreur); // insère un point dans le fichier (-1 à la fin).
+
+    Point** getPoints() throw(); // récupère tous les points du fichier
+    QVector<Point> getVPoints() throw(FichierFermeErreur);
+
+    QVector<Point> requete(const Point &centre, double distance)
+        throw(FichierFermeErreur, FichierEnteteErreur, FichierInvalideErreur); // renvoie tous les points du fichier se trouvant à une distance 'distance' de 'centre'
+    QVector<Point> requete(const Voxel &conteneur)
+        throw(FichierFermeErreur, FichierEnteteErreur, FichierInvalideErreur); // renvoie tous les points du fichier contenus dans 'conteneur'
+
+    /* Accesseurs et mutateurs (1 par attribut) */
+    const QFile &cgetFichier() const throw();
+    QFile &getFichier() throw();
+    void setFichier(QFile &nouveau) throw();
+
+    QString getChemin() const throw();
+    void setChemin(const QString &nom) throw();
+
+    QIODevice::OpenMode getMode() const throw();
+
+    EnTete getEntete() const throw();
+    void setEntete(EnTete entete) throw();
+    void setEntete(const QString& fin = QString(FICHIER_ENTETE_FIN),
+                   long longueur = FICHIER_ENTETE_LONGUEUR) throw();
+
+    MetaDonnees getMeta() const throw();
+
+    Voxel getVoxel() const throw();
 };
 
 #endif // FICHIER_H

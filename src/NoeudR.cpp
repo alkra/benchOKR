@@ -10,16 +10,54 @@
 #include "../include/NoeudR.h"
 
 
-NoeudR::NoeudR() : Noeud() {
+NoeudR::NoeudR(bool terminal) : Noeud(terminal), m_parent(NULL) {
+}
+
+NoeudR::NoeudR(NoeudR *parent, bool terminal) :
+    Noeud(terminal), m_parent(parent) {
 }
 
 NoeudR::NoeudR(const NoeudR & modele) : Noeud(modele) {
 }
 
+NoeudR::~NoeudR() {
+    if(m_fichier != NULL) {
+        m_fichier->fermer();
+        delete m_fichier;
+    }
+    delete[] m_enfants;
+}
+
+
+NoeudR* NoeudR::getParent() const {
+    return m_parent;
+}
+void NoeudR::setParent(NoeudR *parent) {
+    m_parent = parent;
+}
+
+void NoeudR::setEnfant(NoeudR &nouveau, long pos)
+    throw(TerminalErreur, IndiceHorsDomaine) {
+    Noeud::setEnfant(nouveau, pos);
+    nouveau.setParent(this);
+}
+
+void NoeudR::ajoutEnfant(NoeudR &nouveau, long pos)
+    throw(TerminalErreur, IndiceHorsDomaine) {
+    Noeud::ajoutEnfant(nouveau, pos);
+    nouveau.setParent(this);
+}
+
 
 /* Les fonctions de requête */
 QVector<Point> NoeudR::requete(const Point &centre, double distance) const {
-
+    Voxel v(centre.getX() - distance,
+            centre.getY() - distance,
+            centre.getZ() - distance,
+            centre.getX() + distance,
+            centre.getY() + distance,
+            centre.getZ() + distance);
+    return NoeudR::requete(v);
 }
 
 QVector<Point> NoeudR::requete(const Voxel &conteneur) const {
