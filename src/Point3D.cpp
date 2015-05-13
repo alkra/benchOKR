@@ -16,6 +16,10 @@ Point3D::Point3D()
 
 Point3D::Point3D(double x, double y, double z) : m_x(x), m_y(y), m_z(z) {}
 
+Point3D::Point3D(const Point3D &autre) : m_x(autre.getX()), m_y(autre.getY()),
+m_z(autre.getZ()) {
+}
+
 Point3D::~Point3D()
 {
     //dtor
