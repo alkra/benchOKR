@@ -23,13 +23,13 @@ Octree::~Octree()
 {
 }
 
-void Octree::construire(){
-
+void Octree::construire(const QString &adresse, const QString &cheminDonnees){
+    construire(adresse, 500, 4, 0);
 }
 
 // construction de l'Octree
 
-const   bool    Octree::construire(QString adresse,
+bool    Octree::construire(QString adresse,
 
                               const unsigned int threshold,
                               const unsigned int maximumDepth,

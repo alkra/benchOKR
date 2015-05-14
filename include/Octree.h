@@ -37,9 +37,9 @@ public:
     // destructeur
      ~Octree();
     // méthode permettant de construire l'octree
-    void construire();
+    void construire(const QString &adresse, const QString &cheminDonnees);
 
-     const   bool            construire(QString adresse,   // nombre total de points
+       bool            construire(QString adresse,   // nombre total de points
                                                const unsigned int threshold, // seuil d'arrêt
                                                const unsigned int maximumDepth, // profondeur de l'arbre           // volume englobant
                                                const unsigned int currentDepth = 0); // profondeur courante

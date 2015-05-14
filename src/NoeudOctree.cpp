@@ -12,9 +12,10 @@
 #include "../include/Point.h"
 #include <QDebug>
 
+#define getEnfant(pos) getEnfant<NoeudOctree>(pos)
+#define supprimerEnfant(pos) supprimerEnfant<NoeudOctree>(pos)
 
-
-NoeudOctree::NoeudOctree() :  m_pointCount(0), m_points(NULL), Noeud() {
+NoeudOctree::NoeudOctree() :  Noeud(), m_pointCount(0), m_points(NULL) {
     memset(m_enfant, 0, sizeof(m_enfant));
 }
 
@@ -23,12 +24,12 @@ NoeudOctree::~NoeudOctree()
     delete[] m_points;
 }
 
-const   bool    NoeudOctree::construire(Point** points,
-                                        unsigned int count,
-                                        const unsigned int threshold,
-                                        const unsigned int maximumDepth,
-                                        const Bounds &bounds,
-                                        const unsigned int currentDepth)
+bool NoeudOctree::construire(Point** points,
+                             unsigned int count,
+                             const unsigned int threshold,
+                             const unsigned int maximumDepth,
+                             const Bounds &bounds,
+                             const unsigned int currentDepth)
 {
     if (count <= threshold)// || currentDepth >= maximumDepth)
     {
@@ -113,11 +114,11 @@ const   bool    NoeudOctree::construire(Point** points,
         // A ce niveau, nous avons une liste de points qui appartiennent à ce noeud enfant
 
 
-//        int     newCount = 0;
-//        for (unsigned int j = 0; j < childPointCounts[i]; j++)
-//        {
+        //        int     newCount = 0;
+        //        for (unsigned int j = 0; j < childPointCounts[i]; j++)
+        //        {
 
-//        }
+        //        }
 
         //Générer un volume englobant
         // Nous utilisons une table de décallage.
@@ -137,7 +138,7 @@ const   bool    NoeudOctree::construire(Point** points,
         };
 
 
-         // Calcul de notre décallage issu du centre du noeud parent au centre du noeud enfant
+        // Calcul de notre décallage issu du centre du noeud parent au centre du noeud enfant
 
 
         Point   offset = boundsOffsetTable[i] * bounds.rayon;

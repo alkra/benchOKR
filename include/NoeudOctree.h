@@ -21,13 +21,11 @@ typedef struct  // on déclare ici une structure pour stocker le volume engloban
 } Bounds;
 
 
-#define getEnfant(pos) getEnfant<NoeudOctree>(pos)
-#define supprimerEnfant(pos) supprimerEnfant<NoeudOctree>(pos)
 
 class NoeudOctree : public Noeud<NoeudOctree, 8>
 {
     public:
-    const   bool            construire(Point **points, unsigned int count,   // nombre total de points
+        bool            construire(Point **points, unsigned int count,   // nombre total de points
                                               const unsigned int threshold, // seuil d'arrêt
                                               const unsigned int maximumDepth, // profondeur de l'arbre
                                               const Bounds &bounds,            // volume englobant

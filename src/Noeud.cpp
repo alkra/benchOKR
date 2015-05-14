@@ -49,8 +49,10 @@ NOEUD()::Noeud(const Noeud<Nd, MAX_ENFANTS> &modele) : m_fichier(NULL) { // cons
 }
 
 NOEUD()::~Noeud() { // destructeur
-    m_fichier->fermer();
-    delete m_fichier;
+    if(m_fichier != NULL) {
+        m_fichier->fermer();
+        delete m_fichier;
+    }
     delete[] m_enfants;
 }
 

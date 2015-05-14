@@ -48,7 +48,7 @@ class RTree : public Arbre<NoeudR>
         RTree(const QString &rac);
         ~RTree();
 
-        void construire();
+        void construire(const QString &rac, const QString &cheminDonnees);
         QVector<Point> requete(const Point &centre, double distance) const; // voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel
 

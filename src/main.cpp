@@ -14,24 +14,27 @@ using namespace std;
 #include "../include/Octree.h"
 #include "../include/NoeudOctree.h"
 
+/* Chemin vers les données */
 #define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
 #define SALAMANDRE_TXT "../donneeTestDIAS/SalamandreCloud.txt"
+
+/* Type de construction attendue */
+#define CONSTRUIRE_KD
+#define CONSTRUIRE_OCTREE
+//#define CONSTRUIRE_RTREE
 
 
 int main(int argc, char *argv[])
 {
-    /*NoeudKd* p11;
+#ifdef CONSTRUIRE_KD
+    /*NoeudKd* p11;*/
     KdTree p;
-    p11=p.construire1();
+    p.construire("kd/", SALAMANDRE_TXT);
 
-    string* path1;
+    /*string* path1;
     path1=new string[14];
     Voxel* voxel;
     voxel=new Voxel[14];
-
-
-    //p.construire1();
-
 
     Point3D point1(1.63704,2.8783,1.74817);
     Point3D point2(12,2,5);
@@ -51,87 +54,25 @@ int main(int argc, char *argv[])
         {
             j++;
         }
-    }
+    }*/
+#endif
 
-    cout<<"j:"<<j<<endl;
-    if (j==0){
-        // déclencher une exception par pointeur
-        cout<<"entrer une autre valeur"<<endl;
-    }
-    else{
 
-        if(j>6)
-        {
-            cout<<path1[j-1]<<endl;
-            //lire les points du path j
-        }
-        else{
-            for(int k=6;k<14;k++)
-            {
-                if(path1[k].compare(0,path1[j-1].length(), path1[j-1]) == 0)//path[i] est le plus long .
-                {
-                    // lire lies fichier du path k path[k];
-                }
-            }
-
-        }
-
-}
-    //lire les point du path[j] telque les point
-    //sont compris entre les points en entré
-    //else lire les point
-*/
-
-    /*QDir racine("../rtree");
+#ifdef CONSTRUIRE_RTREE
+    QDir racine("../rtree");
     racine.removeRecursively();
-
-    RTree *r = NULL;
-    try {
-        ALLOCATION(r, RTree(racine.absoluteFilePath("0")))
-    } catch(PlusDeMemoire m) {
-        qFatal("Plus de mémoire disponible.");
-    } catch(int e) {
-        if(e == 2) {
-            qFatal("Impossible d'ouvrir le fichier de données à la racine.");
-        } else {
-            qFatal(QString("Erreur %1").arg(e).toLocal8Bit().data());
-        }
-    }
-
-    r->construire();*/
-
-    //Fichier util;
-    // Ouverture du fichier
-
-    //util.ouvrir("C:/code04Mai2015/constructionOctree4Mai/araignee.ply", QIODevice::ReadOnly | QIODevice::Text);
-    //util.ouvrir("E:/Git/ProjetDeveloppement/jeuTest/Salamandre.ply", QIODevice::ReadOnly | QIODevice::Text);
+    RTree r;
+    r.construire(racine.absoluteFilePath("0"), SALAMANDRE_TXT);
+#endif
 
 
-
-
-
-    // renvoyer la liste des points
-    //Point **points = util.getPoints();
-    // compter le nombre de points
-
-    //int nbrePts = util.getNbPoints();
-
-    //qDebug()<<nbrePts;
-
-//    QString ligneLue;
-
-//    ligneLue=points.at(10)->toQString();
-
-//    qDebug()<< ligneLue;
-
-
+#ifdef CONSTRUIRE_OCTREE
     Octree monArbre;
     QString chemin=SALAMANDRE_TXT;
 
-     monArbre.construire(chemin,500,4,0);
+    monArbre.construire(chemin,500,4,0);
+#endif
 
 
-    //test.construire(points,nbrePts,500,4,b,0);
     return 0;
-
 }

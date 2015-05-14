@@ -13,8 +13,17 @@
 RTree::RTree() : m_cheminRacine() {
 }
 
-RTree::RTree(const QString &rac) : m_cheminRacine(rac)
+RTree::RTree(const QString &rac) : Arbre(), m_cheminRacine(rac)
 {
+}
+
+RTree::~RTree()
+{
+}
+
+#define FIN_ENTETE "end_header"
+
+void RTree::construire(const QString &rac, const QString &cheminDonnees) {
     // Allocation de la racine
     ALLOCATION(racine, NoeudR(NULL, true))
 
@@ -25,7 +34,7 @@ RTree::RTree(const QString &rac) : m_cheminRacine(rac)
     QFile fichier(rac + "/" + FICHIER);
     if(!fichier.exists()) {
         if(!fichier.open(QIODevice::WriteOnly)) {
-            throw(2);
+            throw(Fichier::FichierFermeErreur(rac + "/" + FICHIER, "w", "(construire) : impossible de créer la racine."));
         }
         fichier.close();
     }
@@ -34,67 +43,32 @@ RTree::RTree(const QString &rac) : m_cheminRacine(rac)
     ALLOCATION(rf, Fichier())
     rf->setChemin(rac + "/" + FICHIER);
     racine->setFichier(rf);
-}
 
-RTree::~RTree()
-{
-}
 
-#define DONNEES "../donneeTestDIAS/SalamandreCloud.txt"
-#define FIN_ENTETE "end_header"
 
-void RTree::construire() {
     // ouverture du fichier racine en écriture
     try {
-        if(!racine->getFichier()->rouvrir(QIODevice::ReadWrite | QIODevice::Text)) {
+        if(!rf->rouvrir(QIODevice::ReadWrite | QIODevice::Text)) {
             qFatal("Impossible d'avoir l'accès en écriture.");
         }
-    } catch(NoeudR::TerminalErreur t) {
+    } catch(NoeudR::TerminalErreur) {
         qFatal("Le fichier racine n'est pas initialisé.");
     }
 
+
+
     // ouverture du fichier initial
     Fichier donnees;
-    if(!donnees.ouvrir(DONNEES, QIODevice::ReadOnly | QIODevice::Text)) {
+    if(!donnees.ouvrir(cheminDonnees, QIODevice::ReadOnly | QIODevice::Text)) {
         qFatal("Impossible d'ouvrir les données.");
     }
 
     // lecture de l'en-tête.
-    try {
-        donnees.passerEntete();
-    } catch(int e) {
-        switch(e) {
-        case 1:
-            qFatal("Le fichier de données n'est pas ouvert.");
-            return;
-        case 100:
-            qCritical("Entête plus longue que 100 lignes");
-            break;
-        default:
-            qCritical("Erreur inconnue venant de passerEntete.");
-            break;
-        }
-    }
+    donnees.passerEntete();
 
     Point p;
     for(int compteur = 0 ; compteur < 11 ; compteur++) {
-        try {
-            p = donnees.getPoint();
-        } catch(int e) {
-            qCritical("constuire() -> boucle -> impossible de récupérer le point.");
-            switch(e) {
-            case 1:
-                qDebug() << "    Le fichier n'a pas pu être ouvert. i vaut " << compteur;
-                break;
-                continue;
-            case 0:
-                qDebug() << "    Fin du fichier atteinte. i vaut " << compteur;
-                throw 0;
-            default:
-                qDebug() << "    Erreur inconnue. i vaut " << compteur;
-                throw e;
-            }
-        }
+        p = donnees.getPoint();
 
         try {
             inserer(p);
@@ -287,6 +261,7 @@ bool RTree::libre(const NoeudR *feuille) const {
         throw e;
     } catch(Fichier::FichierInvalideErreur &e) {
         qDebug() << "(libre) Le fichier " << e.fichier << " est invalde : " << e.message;
+        throw e;
     } catch(Fichier::FichierFinErreur) {
         qDebug("2");
         return true;

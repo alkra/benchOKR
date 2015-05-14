@@ -13,100 +13,36 @@
 using namespace std;
 
 
-NoeudKd::NoeudKd(string x, Voxel y):path(x), voxel(y){}
 
-string NoeudKd::getpath()const
-{
-    return path;
+NoeudKd::NoeudKd(bool terminal) : Noeud(terminal) {
 }
-Voxel NoeudKd::getvoxel()const
-{
-    return voxel;
+NoeudKd::NoeudKd(QString cheminRelatif, bool terminal)
+    : Noeud(cheminRelatif, terminal) { // construit un nœud
 }
-void NoeudKd::setpath(std::string p)
-{
-    path=p;
+NoeudKd::NoeudKd(Voxel &boite, QString cheminRelatif, bool terminal)
+    : Noeud(boite, cheminRelatif, terminal) {
 }
-void NoeudKd::setvoxel(Voxel v)
-{
-    voxel=v;
+NoeudKd::NoeudKd(const NoeudKd &modele) : Noeud(modele) {
 }
-
-
-
-NoeudKd::NoeudKd() : Noeud() { /* // construit un noeud normal
-    m_enfants.fils = new NoeudKd[];
-    m_taille_enfants = ;*/
-}
-NoeudKd::NoeudKd(bool terminal) : Noeud(terminal) { /* // construit un noeud terminal (ou non)
-    if(terminal) {
-        m_enfants.feuille = new Fichier[];
-        m_taille_enfants = ;
-    } else {
-        m_enfants.fils = new NoeudKd[];
-        m_taille_enfants = ;
-    }*/
-}
-
-NoeudKd::NoeudKd(Voxel &boite, bool terminal) : Noeud(boite, terminal) {/*
-    if(terminal) {
-        m_enfants.feuille = new Fichier[];
-        m_taille_enfants = ;
-    } else {
-        m_enfants.fils = new NoeudKd[];
-        m_taille_enfants = ;
-    }*/
-}
-
-
-NoeudKd::NoeudKd(const NoeudKd &modele) : Noeud(modele) { // Constructeur de recopie
-    m_terminal = modele.est_terminal();
-    m_boite = modele.getVoxel();
-    m_taille_enfants = modele.getTailleEnfants();
-    if(m_terminal) {
-        m_enfants.feuille = new Fichier[m_taille_enfants]();
-    } else {
-        m_enfants.fils = new NoeudKd[m_taille_enfants]();
-    }
-    long i = 0;
-    const union Noeud::NoeudSelonProfondeur enfantsModele = modele.getEnfants();
-
-    for(i=0 ; i<m_taille_enfants ; i++) { // recopie du tableau
-        if(m_terminal) {
-            m_enfants.feuille[i] = enfantsModele.feuille[i];
-        } else {
-            m_enfants.fils[i] = enfantsModele.fils[i];
-        }
-    }
-}
-
 NoeudKd::~NoeudKd() {
 }
 
 /* Les fonctions de requête */
-Point* NoeudKd::requete(const Point &centre, double distance) const {
+QVector<Point> NoeudKd::requete(const Point &centre, double distance) const {
     // renvoie tous les points de tous les enfants se trouvant dans le voisinage
 }
 
-Point* NoeudKd::requete(const Voxel &conteneur) const {
+QVector<Point> NoeudKd::requete(const Voxel &conteneur) const {
     QVector<Point> resultat;
     if(m_terminal) {
-        return m_fichier.getPoints(); // les points contenus dans ce noeud
+        return m_fichier->getVPoints(); // les points contenus dans ce noeud
     }
-    for (int i = 0; i < m_nb_enfant ; i++) {
-        if(m_enfants[i].getVoxel().intersecte(conteneur)) {
+
+    for (int i = 0; i < m_nb_enfants ; i++) {
+        if(Voxel::intersecte(m_enfants[i].getVoxel(), conteneur)) {
             resultat += m_enfants[i].requete(conteneur);
         }
     }
 
     return resultat;
-}
-
-/* Accesseur */
-void NoeudKd::setEnfant(long pos, NoeudKd &noeud) throw(ErreurAffectationTerminal) {  // remplace le pos-ième enfant par "noeud"
-    if(m_terminal) {
-        throw new ErreurAffectationTerminal;
-    } else {
-        m_enfants.fils[pos] = noeud;
-    }
 }

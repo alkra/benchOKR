@@ -1,59 +1,60 @@
 #ifndef ARBRE_H
 #define ARBRE_H
 
-/* ©ENSG 2015
- * École nationale des sciences géographiques
+/* Â©ENSG 2015
+ * Ã‰cole nationale des sciences gÃ©ographiques
  * 6-8 avenue Blaise Pascal
- * Cité Descartes - Champs-sur-Marne
- * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * CitÃ© Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÃ‰E CEDEX 2
  * FRANCE */
 
-/* Ce fichier déclare la classe abstraite Arbre.
- * Cette classe sera héritée par nos trois méthodes de construction.
- * Elle représente l'arbre en train d'être construit. */
+/* Ce fichier dÃ©clare la classe abstraite Arbre.
+ * Cette classe sera hÃ©ritÃ©e par nos trois mÃ©thodes de construction.
+ * Elle reprÃ©sente l'arbre en train d'Ãªtre construit. */
 
 #include "../include/Noeud.h"
 #include "../include/Point.h"
 #include "../include/Voxel.h"
+#include <QString>
 
 template <class Nd>
-class Arbre  // déclaration de la classe Abstraite Arbre
+class Arbre  // dÃ©claration de la classe Abstraite Arbre
 {
 
-    // méthodes de la classe Arbre
+    // mÃ©thodes de la classe Arbre
     public:
-        /* Une méthode virtuelle est une méthode dont on ne donne pas le code. (cf. Arbre.cpp)
-         * On s'en sert pour définir une simple interface.
-         * Conséquence : on ne peut pas les appeler depuis un objet instancié.
-         * Pour être utilisables, on doit hériter la classe et les redéfinir.
+        /* Une mÃ©thode virtuelle est une mÃ©thode dont on ne donne pas le code. (cf. Arbre.cpp)
+         * On s'en sert pour dÃ©finir une simple interface.
+         * ConsÃ©quence : on ne peut pas les appeler depuis un objet instanciÃ©.
+         * Pour Ãªtre utilisables, on doit hÃ©riter la classe et les redÃ©finir.
          *
-         * Ici, le constructeur est virtuel, donc on ne pourra même pas instancier un objet de type Arbre.
+         * Ici, le constructeur est virtuel, donc on ne pourra mÃªme pas instancier un objet de type Arbre.
          */
 
         Arbre(); // constructeur d'Arbre
 
-        /*création de fonction virtuelle pour rendre la classe abstraite pour la résolution dynamique des liens:
-        2 possibilités s'offrents à nous
-        -utilisation de pointeur ou référence
+        /*crÃ©ation de fonction virtuelle pour rendre la classe abstraite pour la rÃ©solution dynamique des liens:
+        2 possibilitÃ©s s'offrents Ã  nous
+        -utilisation de pointeur ou rÃ©fÃ©rence
         - utilisation de fonction virtuelle comme c'est le cas ici
         */ // (Alban) euh bon...
 
-        virtual void construire() =0;
+        virtual void construire(const QString& racine, const QString& cheminDonnes) =0;
         virtual QVector<Point> requete(const Point &centre, double distance) const =0; // voisinage
         virtual QVector<Point> requete(const Voxel &conteneur) const =0; // dans un voxel
 
         /* Accesseurs et mutateurs */
         Nd* getRacine() const; // renvoie un pointeur vers la racine
-        void setRacine(Nd *nouvelle); // dangereux, on n'a pas à l'utiliser
+        void setRacine(Nd *nouvelle); // dangereux, on n'a pas Ã  l'utiliser
 
     // attributs de la classe arbre
     protected:
-        Nd* racine; // Pointe vers le début de l'arbre
+        Nd* racine; // Pointe vers le dÃ©but de l'arbre
 
     private:
 
 };
 
-#include "../src/Arbre.cpp" // Pour pouvoir accéder aux fonctions templatées
+#include "../src/Arbre.cpp" // Pour pouvoir accÃ©der aux fonctions templatÃ©es
 
 #endif // ARBRE_H

@@ -1,28 +1,28 @@
 #ifndef KDTREE_H
 #define KDTREE_H
 
-/* ©ENSG 2015
- * École nationale des sciences géographiques
+/* Â©ENSG 2015
+ * Ã‰cole nationale des sciences gÃ©ographiques
  * 6-8 avenue Blaise Pascal
- * Cité Descartes - Champs-sur-Marne
- * 77455 MARNE-LA-VALLÉE CEDEX 2
+ * CitÃ© Descartes - Champs-sur-Marne
+ * 77455 MARNE-LA-VALLÃ‰E CEDEX 2
  * FRANCE */
 
-/* Ce fichier définit la classe KdTree.
- * Cette classe hérite de Arbre et représente le stockage par la méthode du
+/* Ce fichier dÃ©finit la classe KdTree.
+ * Cette classe hÃ©rite de Arbre et reprÃ©sente le stockage par la mÃ©thode du
  * Kd-tree. */
 
 #include "Arbre.h"
 #include "Point3D.h"
 #include "Voxel.h"
-#include"KdTree.h"
-#include"NoeudKd.h"
+#include "KdTree.h"
+#include "NoeudKd.h"
 
 #include <string>
 
 using namespace std;
 
-class KdTree : public Arbre  // Création d'une classe KdTree qui hérite de la classe Arbre
+class KdTree : public Arbre<NoeudKd>  // CrÃ©ation d'une classe KdTree qui hÃ©rite de la classe Arbre
 {
     public:
         KdTree();
@@ -30,18 +30,18 @@ class KdTree : public Arbre  // Création d'une classe KdTree qui hérite de la cl
 
         //void construire1(string path,int niveau,string Path);
 
-        void construire();
+        void construire(const QString& rootPath, const QString &cheminDonnees);
         NoeudKd* construire1();
-        Point* requete(const Point &centre, double distance) const; // voisinage
-        Point* requete(const Voxel &conteneur) const; // dans un voxel
+        QVector<Point> requete(const Point &centre, double distance) const; // voisinage
+        QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel
         double** lirefichiertxt(std::string Path,int lignes);//mettre les majusculle entre deux mots
-        double** lirefichierply(std::string Path,int lignes);//implèmenter la lecture du fichier binaire
+        double** lirefichierply(std::string Path,int lignes);//implÃ¨menter la lecture du fichier binaire
         double** triePoint(int n,int d,int j,double** v1);
         int* CalculIndiceMedian(string Path,int depth);
         int* CalculIndicePlanMedian(string Path,int depth);
         //void construire1(double** v1,int median,int ligne);
         Voxel calculvoxel(double** v1,int debut,int fin);
-        string* CreerNoeud(string P);
+        string* CreerNoeud(const string &path);
         int calculPoints(string Path);
 
 
@@ -50,7 +50,9 @@ class KdTree : public Arbre  // Création d'une classe KdTree qui hérite de la cl
         Point3D point;
         Point3D* tabpointmedian;
         Voxel* tabvoxel;
-        NoeudKd* P;
+
+public:
+        NoeudKd* root;
 
 
     private:

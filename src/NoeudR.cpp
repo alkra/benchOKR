@@ -21,11 +21,6 @@ NoeudR::NoeudR(const NoeudR & modele) : Noeud(modele) {
 }
 
 NoeudR::~NoeudR() {
-    if(m_fichier != NULL) {
-        m_fichier->fermer();
-        delete m_fichier;
-    }
-    delete[] m_enfants;
 }
 
 
