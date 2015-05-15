@@ -31,7 +31,9 @@ class NoeudOctree : public Noeud<NoeudOctree, 8>
                                               const unsigned int threshold, // seuil d'arrêt
                                               const unsigned int maximumDepth, // profondeur de l'arbre
                                               const Bounds &bounds,            // volume englobant
-                                              const unsigned int currentDepth = 0); // profondeur courante
+                                              std::string relation,
+                                               const unsigned int currentDepth = 0 // profondeur courante
+                                              );
         NoeudOctree(); // construit un noeud normal
         ~NoeudOctree();
         NoeudOctree(const NoeudOctree &modele); // constructeur de recopie
@@ -41,7 +43,7 @@ class NoeudOctree : public Noeud<NoeudOctree, 8>
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
     protected:
     private:
-        NoeudOctree                  *m_enfant[8]; // tableau du nombre d'octant
+        //NoeudOctree                  *m_enfant[8]; // tableau du nombre d'octant
         unsigned int            m_pointCount; // nombre de points
         Point                   **m_points;
 };
