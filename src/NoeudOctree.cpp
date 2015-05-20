@@ -109,8 +109,6 @@ const   bool    NoeudOctree::construire(Point** points,
         Point   **newList = NULL;
         newList = new Point *[childPointCounts[i]];
 
-        // Go through the input list of points and copy over the points
-        // that were coded for this child
 
         // On parcourt la liste des points d'entrée et la liste des points et et le stocke dans l'octant
         Point   **ptr = newList;
@@ -184,7 +182,11 @@ const   bool    NoeudOctree::construire(Point** points,
 
         delete[] newList;
     }
+
+
     return true;
+
+
 }
 
 

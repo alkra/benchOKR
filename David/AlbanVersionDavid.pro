@@ -13,7 +13,7 @@ TEMPLATE = app
 
 
 
-HEADERS+=../lib/libQGLViewer-2.6.1/libQGLViewer-2.6.1/QGLViewer/qglviewer.h
+HEADERS+
 
 INCLUDEPATH *=../lib/libQGLViewer-2.6.1/libQGLViewer-2.6.1
 LIBS *= -L../lib/libQGLViewer-2.6.1/libQGLViewer-2.6.1 -lQGLViewer2
@@ -32,7 +32,8 @@ SOURCES += ../src/Arbre.cpp \
     ../src/Point.cpp \
     ../src/Point3D.cpp \
     ../src/RTree.cpp \
-    ../src/Voxel.cpp
+    ../src/Voxel.cpp \
+    ../src/simpleViewer.cpp
 HEADERS += ../include/Arbre.h \
     ../include/Fichier.h \
     ../include/KdTree.h \
@@ -44,6 +45,7 @@ HEADERS += ../include/Arbre.h \
     ../include/Point.h \
     ../include/Point3D.h \
     ../include/RTree.h \
-    ../include/Voxel.h
+    ../include/Voxel.h \
+    ../include/simpleViewer.h
 
 QMAKE_CXXFLAGS += -std=c++11
