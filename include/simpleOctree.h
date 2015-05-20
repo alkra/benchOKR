@@ -1,0 +1,4 @@
+#ifndef SIMPLEOCTREE_H
+#define SIMPLEOCTREE_H
+
+#endif // SIMPLEOCTREE_H
