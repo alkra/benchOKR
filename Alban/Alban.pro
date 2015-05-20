@@ -24,6 +24,10 @@ HEADERS += ../include/Arbre.h \
     ../include/Point.h \
     ../include/Point3D.h \
     ../include/RTree.h \
-    ../include/Voxel.h
+    ../include/Voxel.h \
+    ../SimpleOctree/Stopwatch.h \
+    ../SimpleOctree/Vec3.h \
+    ../SimpleOctree/OctreePoint.h \
+    ../SimpleOctree/Octree.h
 
 QMAKE_CXXFLAGS += -std=c++11

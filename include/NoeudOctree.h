@@ -28,7 +28,8 @@ class NoeudOctree : public Noeud<NoeudOctree, 8>
         bool            construire(Point **points, unsigned int count,   // nombre total de points
                                               const unsigned int threshold, // seuil d'arrêt
                                               const unsigned int maximumDepth, // profondeur de l'arbre
-                                              const Bounds &bounds,            // volume englobant
+                                              const Bounds &bounds,           // volume englobant
+                                              std::string relation,
                                               const unsigned int currentDepth = 0); // profondeur courante
         NoeudOctree(); // construit un noeud normal
         ~NoeudOctree();

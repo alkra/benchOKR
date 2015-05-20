@@ -47,7 +47,7 @@ bool    Octree::construire(QString adresse,
     plyInitial.calculerVoxel();
     Bounds bounds = calcCubicBounds(plyInitial.getVoxel());
 
-    return racine->construire(points, count, threshold, maximumDepth, bounds, currentDepth);
+    return racine->construire(points, count, threshold, maximumDepth, bounds, "", currentDepth);
 }
 
 // calcul du voulume englobant

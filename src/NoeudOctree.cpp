@@ -12,6 +12,8 @@
 #include "../include/Point.h"
 #include <QDebug>
 
+using namespace std;
+
 #define getEnfant(pos) getEnfant<NoeudOctree>(pos)
 #define supprimerEnfant(pos) supprimerEnfant<NoeudOctree>(pos)
 
@@ -29,15 +31,26 @@ bool NoeudOctree::construire(Point** points,
                              const unsigned int threshold,
                              const unsigned int maximumDepth,
                              const Bounds &bounds,
+                             std::string relation,
                              const unsigned int currentDepth)
 {
-    if (count <= threshold)// || currentDepth >= maximumDepth)
-    {
-        // pour le stockage des points dans les noeuds si les conditions sont remplies, ce qui fait de ce noeud une feuille.
+    Point   &pt0 = *points[0]; // recuperation du premier point de la liste
 
-        m_pointCount = count;
-        m_points = new Point *[count];
-        memcpy(m_points, points, sizeof(Point *) * count);
+    //if (count <= threshold)// || (currentDepth >= maximumDepth))
+    if (currentDepth >= maximumDepth)
+    {
+
+
+        // pour le stockage des points dans les noeuds si les conditions sont remplies, ce qui fait de ce noeud une feuille.
+     cout << "Fin --> relation " << relation << " grille numero " <<pt0.m_code << " profondeur " << currentDepth << " nombre de points " <<  count << endl;
+       //qDebug() << "relation" << relation << "grille n°" <std::toString(pt0.m_code) << "profondeur " << currentDepth << "nombre de points " <<  count;
+     relation="";
+
+
+
+        //m_pointCount = count;
+        //m_points = new Point *[count];
+        //memcpy(m_points, points, sizeof(Point *) * count);
         return true;
     }
 
@@ -78,7 +91,7 @@ bool NoeudOctree::construire(Point** points,
     }
 
     // On appelle de recursivement la méthode construire pour chacun des 8 octants
-
+    NoeudOctree                  *m_enfant[8];
 
     for (unsigned int i = 0; i < 8; i++)
     {
@@ -90,14 +103,12 @@ bool NoeudOctree::construire(Point** points,
         // On affecte maintenant les octants et alloue une liste de points pour l'octant concerné seulement
 
 
-        m_enfant[i] = new NoeudOctree;
+        m_enfant[i] = new NoeudOctree();
 
-        qDebug() << childPointCounts[i];
+       // qDebug() << childPointCounts[i];
         Point   **newList = NULL;
         newList = new Point *[childPointCounts[i]];
 
-        // Go through the input list of points and copy over the points
-        // that were coded for this child
 
         // On parcourt la liste des points d'entrée et la liste des points et et le stocke dans l'octant
         Point   **ptr = newList;
@@ -151,15 +162,31 @@ bool NoeudOctree::construire(Point** points,
         newBounds.centre = bounds.centre + offset;
 
         // Recurse
+        // pour le stockage des points dans les noeuds si les conditions sont remplies, ce qui fait de ce noeud une feuille.
+        //qDebug() << "grille n°" << p.m_code
 
+        std::string temp = relation +  "." + std::to_string(pt0.m_code);
+        //relation += "." + std::to_string(pt0.m_code);
+        cout << "Debut --> relation " << temp << " grille numero " << pt0.m_code << " profondeur " << currentDepth << " nombre de points " <<  count << endl;
+
+         // test de recherche de source de plantage code
+        if ((count ==44525) && (currentDepth==2)){
+
+
+            cout << "Stop";
+        }
         m_enfant[i]->construire(newList, childPointCounts[i], threshold, maximumDepth,
-                                newBounds, currentDepth+1);
+                                newBounds,temp, currentDepth+1 );
 
         // Tout nettoyer
 
         delete[] newList;
     }
+
+
     return true;
+
+
 }
 
 
