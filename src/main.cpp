@@ -32,9 +32,9 @@ using namespace std;
 #include <QDebug>
 #include<QString>
 
-//#define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
-#define SALAMANDRE_TXT "C:/code04Mai2015/constructionOctree4Mai/Point3D_v3.txt"
-//#define SALAMANDRE_TXT "C:/code04Mai2015/constructionOctree4Mai/SalamandreCloud.txt"
+#define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
+#define POINT3D "C:/code04Mai2015/constructionOctree4Mai/Point3D_v3.txt"
+#define SALAMANDRE_TXT "C:/code04Mai2015/constructionOctree4Mai/SalamandreCloud.txt"
 
 
 /* Type de construction attendue */
@@ -62,15 +62,29 @@ int main(int argc, char** argv)
 //      point.load(nuage, cheminNuagePoint.c_str());
       
 
+
     // Instantiate the viewer.
     Viewer viewer;
 
-    viewer.m_afficher = new Point*[4];
-    viewer.m_tailleAfficher = 4;
-    viewer.m_afficher[0] = new Point(0.5f, 0.5f, 0.5f);
-    viewer.m_afficher[1] = new Point(-0.5f, 0.5f, 0.5f);
-    viewer.m_afficher[2] = new Point(-0.5f, -0.5f, 0.5f);
-    viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
+    //viewer.m_afficher = new Point*[4];
+    //viewer.m_tailleAfficher = 4;
+    //viewer.m_afficher[0] = new Point(0.5f, 0.5f, 0.5f);
+    //viewer.m_afficher[1] = new Point(-0.5f, 0.5f, 0.5f);
+    //viewer.m_afficher[2] = new Point(-0.5f, -0.5f, 0.5f);
+    //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
+
+    Fichier donnees(ARAIGNEE_PLY);
+
+    Point ** points = donnees.getPoints();
+    viewer.m_tailleAfficher = donnees.getNbPoints();
+
+    for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+        points[i]->setX(points[i]->getX() /10);
+        points[i]->setY(points[i]->getY() /10);
+        points[i]->setZ(points[i]->getZ() /10);
+    }
+
+    viewer.m_afficher = points;
 
     viewer.setWindowTitle("simpleViewer");
 

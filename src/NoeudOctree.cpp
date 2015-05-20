@@ -16,8 +16,8 @@
 
 using namespace std;
 
-NoeudOctree::NoeudOctree() :  m_pointCount(0), m_points(NULL), Noeud() {
-   // memset(m_enfant, 0, sizeof(m_enfant));
+NoeudOctree::NoeudOctree() :  Noeud(), m_pointCount(0), m_points(NULL) {
+   //memset(m_enfant, 0, sizeof(m_enfant));
 
 }
 
@@ -26,7 +26,7 @@ NoeudOctree::~NoeudOctree()
     delete[] m_points;
 }
 
-const   bool    NoeudOctree::construire(Point** points,
+bool    NoeudOctree::construire(Point** points,
                                         unsigned int count,
                                         const unsigned int threshold,
                                         const unsigned int maximumDepth,
