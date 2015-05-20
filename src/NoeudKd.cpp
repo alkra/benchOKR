@@ -8,11 +8,22 @@
 /* Ce fichier contient l'implémentation des méthodes de la classe NoeudKd. */
 
 #include "../include/NoeudKd.h"
+#include"string"
+
+using namespace std;
 
 
-NoeudKd::NoeudKd() : Noeud() { // construit un noeud normal
+
+NoeudKd::NoeudKd(bool terminal) : Noeud(terminal) {
 }
-
+NoeudKd::NoeudKd(QString cheminRelatif, bool terminal)
+    : Noeud(cheminRelatif, terminal) { // construit un nœud
+}
+NoeudKd::NoeudKd(Voxel &boite, QString cheminRelatif, bool terminal)
+    : Noeud(boite, cheminRelatif, terminal) {
+}
+NoeudKd::NoeudKd(const NoeudKd &modele) : Noeud(modele) {
+}
 NoeudKd::~NoeudKd() {
 }
 
@@ -22,5 +33,16 @@ QVector<Point> NoeudKd::requete(const Point &centre, double distance) const {
 }
 
 QVector<Point> NoeudKd::requete(const Voxel &conteneur) const {
-    // renvoie tous les points de tous les enfants contenus dans le conteneur
+    QVector<Point> resultat;
+    if(m_terminal) {
+        return m_fichier->getVPoints(); // les points contenus dans ce noeud
+    }
+
+    for (int i = 0; i < m_nb_enfants ; i++) {
+        if(Voxel::intersecte(m_enfants[i].getVoxel(), conteneur)) {
+            resultat += m_enfants[i].requete(conteneur);
+        }
+    }
+
+    return resultat;
 }

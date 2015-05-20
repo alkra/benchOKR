@@ -13,6 +13,7 @@
 #include <QDebug>
 #include<string>
 
+
 using namespace std;
 
 NoeudOctree::NoeudOctree() :  m_pointCount(0), m_points(NULL), Noeud() {

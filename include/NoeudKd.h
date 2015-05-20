@@ -18,15 +18,26 @@
 class NoeudKd : public Noeud<NoeudKd, 2>
 {
     public:
-        NoeudKd(); // construit un noeud normal
-        ~NoeudKd(); // destructeur
+        NoeudKd(bool terminal = false); // construit un noeud par défaut
+        NoeudKd(QString cheminRelatif, bool terminal = false); // construit un nœud
+        NoeudKd(Voxel &boite, QString cheminRelatif, bool terminal = false); // construit un noeud en lui associant un Voxel
+        NoeudKd(const NoeudKd &modele);
+        virtual ~NoeudKd(); // destructeur
 
-#define getEnfant(pos) getEnfant<NoeudKd>(pos)
-#define supprimerEnfant(pos) supprimerEnfant<NoeudKd>(pos)
 
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
+
+        /* Pour éviter le template */
+        inline NoeudKd getEnfant(long pos) const
+            throw(TerminalErreur, IndiceHorsDomaine) {
+            return Noeud::getEnfant<NoeudKd>(pos);
+        }
+        inline NoeudKd supprimerEnfant(long pos = -1)
+            throw(TerminalErreur, IndiceHorsDomaine) {
+            return Noeud::supprimerEnfant<NoeudKd>(pos);
+        }
     protected:
     private:
 };

@@ -40,15 +40,25 @@ bool Fichier_test_nombre_points() {
     qDebug() << "Fichier : " << fichier;
 
     // ouverture du fichier
-    Fichier f;
-    if(!f.ouvrir(fichier, QIODevice::ReadOnly | QIODevice::Text)) {
+    Fichier f(fichier, QIODevice::ReadOnly | QIODevice::Text);
+    f.setEntete("end_header\n", 1);
+
+    // lecture du nombre de lignes
+    long nbLignes;
+    try {
+        nbLignes = f.getNbPoints();
+    } catch(Fichier::FichierFermeErreur) {
         qDebug() << "ÉCHEC DE L'OUVERTURE DU FICHIER "<< fichier;
         return false;
     }
 
-    // lecture du nombre de lignes
-    long nbLignes = f.getNbPoints();
     qDebug() << "Nb lignes : " << nbLignes;
+    if(nbLignes == 11610045) {
+        qDebug() << "Vrai (11610045)";
+    } else {
+        qDebug() << "Faux (11610045)";
+        res = false;
+    }
 
     return res;
 }
@@ -74,11 +84,7 @@ bool Fichier_test_calculer_voxel() {
     f.ajoutPoint(p4);
     qDebug() << p4.toQString();
 
-    // réouverture du fichier
-    if(!f.rouvrir(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "ÉCHEC DE L'OUVERTURE DU FICHIER "<< fichier;
-        return false;
-    }
+
     f.calculerVoxel();
     Voxel v = f.getVoxel();
     qDebug() << "Voxel : " << v.getDebut().toQString() << " x "
