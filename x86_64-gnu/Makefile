@@ -55,7 +55,8 @@ SOURCES       = ../src/main.cpp \
 		../src/Point.cpp \
 		../src/Point3D.cpp \
 		../src/RTree.cpp \
-		../src/Voxel.cpp 
+		../src/Voxel.cpp \
+		../src/simpleOctree.cpp 
 OBJECTS       = main.o \
 		Fichier.o \
 		KdTree.o \
@@ -66,7 +67,8 @@ OBJECTS       = main.o \
 		Point.o \
 		Point3D.o \
 		RTree.o \
-		Voxel.o
+		Voxel.o \
+		simpleOctree.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -130,7 +132,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../src/Point.cpp \
 		../src/Point3D.cpp \
 		../src/RTree.cpp \
-		../src/Voxel.cpp
+		../src/Voxel.cpp \
+		../src/simpleOctree.cpp
 QMAKE_TARGET  = benchOKR
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = benchOKR
@@ -283,7 +286,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/benchOKR1.0.0 || mkdir -p .tmp/benchOKR1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../include/Arbre.h ../include/Fichier.h ../include/KdTree.h ../include/Noeud.h ../include/NoeudKd.h ../include/NoeudOctree.h ../include/NoeudR.h ../include/Octree.h ../include/Point.h ../include/Point3D.h ../include/RTree.h ../include/Voxel.h ../SimpleOctree/Stopwatch.h ../SimpleOctree/Vec3.h ../SimpleOctree/OctreePoint.h ../SimpleOctree/Octree.h .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../src/main.cpp ../src/Fichier.cpp ../src/KdTree.cpp ../src/NoeudKd.cpp ../src/NoeudOctree.cpp ../src/NoeudR.cpp ../src/Octree.cpp ../src/Point.cpp ../src/Point3D.cpp ../src/RTree.cpp ../src/Voxel.cpp .tmp/benchOKR1.0.0/ && (cd `dirname .tmp/benchOKR1.0.0` && $(TAR) benchOKR1.0.0.tar benchOKR1.0.0 && $(COMPRESS) benchOKR1.0.0.tar) && $(MOVE) `dirname .tmp/benchOKR1.0.0`/benchOKR1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/benchOKR1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../include/Arbre.h ../include/Fichier.h ../include/KdTree.h ../include/Noeud.h ../include/NoeudKd.h ../include/NoeudOctree.h ../include/NoeudR.h ../include/Octree.h ../include/Point.h ../include/Point3D.h ../include/RTree.h ../include/Voxel.h ../SimpleOctree/Stopwatch.h ../SimpleOctree/Vec3.h ../SimpleOctree/OctreePoint.h ../SimpleOctree/Octree.h .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../src/main.cpp ../src/Fichier.cpp ../src/KdTree.cpp ../src/NoeudKd.cpp ../src/NoeudOctree.cpp ../src/NoeudR.cpp ../src/Octree.cpp ../src/Point.cpp ../src/Point3D.cpp ../src/RTree.cpp ../src/Voxel.cpp ../src/simpleOctree.cpp .tmp/benchOKR1.0.0/ && (cd `dirname .tmp/benchOKR1.0.0` && $(TAR) benchOKR1.0.0.tar benchOKR1.0.0 && $(COMPRESS) benchOKR1.0.0.tar) && $(MOVE) `dirname .tmp/benchOKR1.0.0`/benchOKR1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/benchOKR1.0.0
 
 
 clean:compiler_clean 
@@ -336,8 +339,7 @@ main.o: ../src/main.cpp ../include/KdTree.h \
 		../include/NoeudOctree.h \
 		../SimpleOctree/Octree.h \
 		../SimpleOctree/OctreePoint.h \
-		../SimpleOctree/Vec3.h \
-		../SimpleOctree/Stopwatch.h
+		../SimpleOctree/Vec3.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
 Fichier.o: ../src/Fichier.cpp ../include/Fichier.h \
@@ -419,6 +421,12 @@ RTree.o: ../src/RTree.cpp ../include/RTree.h \
 Voxel.o: ../src/Voxel.cpp ../include/Voxel.h \
 		../include/Point3D.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Voxel.o ../src/Voxel.cpp
+
+simpleOctree.o: ../src/simpleOctree.cpp ../SimpleOctree/Octree.h \
+		../SimpleOctree/OctreePoint.h \
+		../SimpleOctree/Vec3.h \
+		../SimpleOctree/Stopwatch.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o simpleOctree.o ../src/simpleOctree.cpp
 
 ####### Install
 

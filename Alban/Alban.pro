@@ -12,7 +12,8 @@ SOURCES += ../src/Arbre.cpp \
     ../src/Point.cpp \
     ../src/Point3D.cpp \
     ../src/RTree.cpp \
-    ../src/Voxel.cpp
+    ../src/Voxel.cpp \
+    ../src/simpleOctree.cpp
 HEADERS += ../include/Arbre.h \
     ../include/Fichier.h \
     ../include/KdTree.h \
