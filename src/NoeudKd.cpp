@@ -46,3 +46,11 @@ QVector<Point> NoeudKd::requete(const Voxel &conteneur) const {
 
     return resultat;
 }
+
+
+int* NoeudKd::getindiceAnfant(int i){
+    int *TabIndiceEnfant= new int[2];
+    TabIndiceEnfant[0]=3+2*(i-1);
+    TabIndiceEnfant[1]=4+2*(i-1);
+    return TabIndiceEnfant;
+}

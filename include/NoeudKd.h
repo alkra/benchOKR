@@ -28,7 +28,7 @@ class NoeudKd : public Noeud<NoeudKd, 2>
         /* Les fonctions de requête */
         QVector<Point> requete(const Point &centre, double distance) const; // renvoie tous les points de tous les enfants se trouvant dans le voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
-
+        int* getindiceAnfant(int i);
         /* Pour éviter le template */
         inline NoeudKd getEnfant(long pos) const
             throw(TerminalErreur, IndiceHorsDomaine) {

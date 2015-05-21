@@ -44,3 +44,5 @@ HEADERS += \
     ../include/Point3D.h \
     ../include/RTree.h \
     ../include/Voxel.h
+
+QMAKE_CXXFLAGS += -std=c++11
