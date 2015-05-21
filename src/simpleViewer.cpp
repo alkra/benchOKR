@@ -28,10 +28,12 @@ using namespace std;
 // Draws a spiral
 void Viewer::draw()
 {
+    glTranslatef(-qmin.x, -qmin.y, -qmin.z);
+
     glColor3f(1.0f, 0.0f, 0.0f);
     glPointSize(4);
     glBegin(GL_POINTS);
-    glNormal3f( 0.0F, 0.0F, 1.0F);
+    //glNormal3f( 0.0F, 0.0F, 1.0F);
 
 
     for (int i = 0 ; i < m_tailleAfficher ; i++) {
@@ -48,7 +50,7 @@ void Viewer::init()
     restoreStateFromFile();
 
     // Opens help window
-    help();
+    //help();
 }
 
 QString Viewer::helpString() const

@@ -41,7 +41,7 @@ using namespace std;
 //#define CONSTRUIRE_KD
 //#define CONSTRUIRE_OCTREE
 //#define CONSTRUIRE_RTREE
-//#define SIMPLE_OCTREE
+#define SIMPLE_OCTREE
 
 
 #ifndef _WIN32
@@ -73,7 +73,9 @@ double stopwatch2()
 using namespace std;
 int main(int argc, char** argv)
 {
-    double startApplication, endComputing, startResize, getNP, stopRead, startRead, startOpenFile;
+    double startApplication, endComputing, startResize, getNP, stopRead,
+            startRead, startOpenFile, startNaiveQuery, stopNaiveQuery,
+            vec3start, vec3stop;
     startApplication = stopwatch2();
 
 
@@ -107,7 +109,7 @@ int main(int argc, char** argv)
     getNP = stopwatch2();
 
 
-#ifdef SIMPLE_OCTREE
+    vec3start = stopwatch2();
     /* Code récupéré sur https://github.com/brandonpelfrey/SimpleOctree/ */
     // Create a new Octree centered at the origin
     // with physical dimension 2x2x2
@@ -115,6 +117,7 @@ int main(int argc, char** argv)
     std::vector<Vec3> points;
     Point * p = NULL;
     {
+        // Calcul du voxel englobant et conversion
         for(int i=0 ; i < nbPoints ; i++) {
             p = pointsDonnees[i];
             if(p->getX() < qmin.x) qmin.x = p->getX();
@@ -125,45 +128,62 @@ int main(int argc, char** argv)
             if(p->getZ() > qmax.z) qmax.z = p->getZ();
             points.push_back(Vec3(p->getX(), p->getY(), p->getZ()));
         }
-        qDebug() << nbPoints << " lus, " << points.size() << " convertis.";
     }
+    vec3stop = stopwatch2();
 
+#ifdef SIMPLE_OCTREE
     Vec3 origin((qmax.x + qmin.x) /2, (qmax.y + qmin.y)/2, (qmax.z + qmin.z)/2);
     Vec3 half((qmax.x + qmin.x) /2, (qmax.y + qmin.y)/2, (qmax.z + qmin.z)/2);
     brandonpelfrey::Octree *octree = new brandonpelfrey::Octree(origin, half);
     OctreePoint *octreePoints = NULL;
     init(octree, octreePoints, points, qmin, qmax);
-    qDebug() << "Octree construit";
-    qDebug() << "Requête entre (2, 2, 2) et (3, 3, 3)";
-    qmin.x = 2; qmin.y = 2; qmin.z = 2;
-    qmax.x = 3; qmax.y = 3; qmax.z = 3;
-    testNaive(points, qmin, qmax);
     testOctree(octree, qmin, qmax);
 #endif
 
-    viewer.m_tailleAfficher = nbPoints;
+    viewer.setWindowTitle("simpleViewer");
+    viewer.setFPSIsDisplayed(true);
+
+    // Make the viewer window visible on screen.
+    viewer.show();
+
+
+
+    qmin.x = -1; qmin.y = 5; qmin.z = -11;
+    qmax.x = 0; qmax.y = 6; qmax.z = -10;
+    startNaiveQuery = stopwatch2();
+    std::vector<int> champDeVision;
+    testNaive(points, qmin, qmax, champDeVision);
+    stopNaiveQuery = stopwatch2();
+
+    viewer.qmin = qmin;
+    viewer.qmax = qmax;
+    viewer.m_tailleAfficher = champDeVision.size();
+    Point ** affichage = new Point*[viewer.m_tailleAfficher];
 
     startResize = stopwatch2();
+    //for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+    //    pointsDonnees[i]->setX(pointsDonnees[i]->getX() /10);
+    //    pointsDonnees[i]->setY(pointsDonnees[i]->getY() /10);
+    //    pointsDonnees[i]->setZ(pointsDonnees[i]->getZ() /10);
+    //}
     for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
-        pointsDonnees[i]->setX(pointsDonnees[i]->getX() /10);
-        pointsDonnees[i]->setY(pointsDonnees[i]->getY() /10);
-        pointsDonnees[i]->setZ(pointsDonnees[i]->getZ() /10);
+        affichage[i] = pointsDonnees[champDeVision[i]];
     }
     endComputing = stopwatch2();
 
     viewer.m_afficher = pointsDonnees;
 
-    viewer.setWindowTitle("simpleViewer");
 
-    // Make the viewer window visible on screen.
-    viewer.show();
+    qDebug() << "Loading data";
+    qDebug() << "    Reading file in " << stopRead - startRead;
+    qDebug() << "    Total access file time : " << getNP - startOpenFile;
+    qDebug() << "    Converted " << nbPoints << " points in " << vec3stop - vec3start;
+    qDebug() << "Query 1";
+    qDebug() << "    Result in " << stopNaiveQuery - startNaiveQuery;
+    qDebug() << "    Converted " << viewer.m_tailleAfficher << "points in " << endComputing - startResize;
 
     // Run main loop.
     int runCode = application.exec();
-
-    qDebug() << "Reading file in " << stopRead - startRead;
-    qDebug() << "Total access file time : " << getNP - startOpenFile;
-    qDebug() << "Converted " << nbPoints << " points in " << endComputing - startResize;
 
 
 #ifdef CONSTRUIRE_KD

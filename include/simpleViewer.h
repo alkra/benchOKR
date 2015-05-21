@@ -22,6 +22,7 @@
 
 #include <QGLViewer/qglviewer.h>
 #include "Point.h"
+#include "../SimpleOctree/Vec3.h"
 
 class Viewer : public QGLViewer
 {
@@ -32,4 +33,6 @@ protected :
 public:
     Point **m_afficher;
     int m_tailleAfficher;
+    Vec3 qmin;
+    Vec3 qmax;
 };

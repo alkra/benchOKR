@@ -61,10 +61,10 @@ void init(Octree *octree, OctreePoint *octreePoints, std::vector<Vec3> &points, 
 }
 
 // Query using brute-force
-void testNaive(std::vector<Vec3> points, Vec3 qmin, Vec3 qmax) {
+void testNaive(std::vector<Vec3> points, Vec3 qmin, Vec3 qmax, std::vector<int> &results) {
     double start = stopwatch();
 
-    std::vector<int> results;
+    results.clear();
     for(int i=0; i<points.size(); ++i) {
         if(naivePointInBox(points[i], qmin, qmax)) {
             results.push_back(i);
