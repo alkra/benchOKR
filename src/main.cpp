@@ -9,7 +9,7 @@
 // element de la camera
 #include <QCoreApplication>
 
-#include <qapplication.h>
+#include <QApplication>
 
 // element de la camera
 
@@ -25,18 +25,15 @@ using namespace std;
 #include "../include/RTree.h"
 #include "../include/Octree.h"
 #include "../include/NoeudOctree.h"
-<<<<<<< HEAD
 #include "../include/simpleOctree.h"
-=======
 #include"../include/Point3D.h"
 #include"../include/Fichier.h"
 #include"../include/simpleViewer.h"
 #include"..//include/Arbre.h"
 #include <QDebug>
 #include<QString>
->>>>>>> 5e2a3266478a7a1f5fcdd97edc27129d9e28a3e3
 
-#define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
+#define ARAIGNEE_PLY "../donneeTestDIAS/araignee.ply"
 #define POINT3D "C:/code04Mai2015/constructionOctree4Mai/Point3D_v3.txt"
 #define SALAMANDRE_TXT "C:/code04Mai2015/constructionOctree4Mai/SalamandreCloud.txt"
 
@@ -77,18 +74,45 @@ int main(int argc, char** argv)
     //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
 
     Fichier donnees(ARAIGNEE_PLY);
+    Point ** pointsDonnees = donnees.getPoints();
+    int nbPoints = donnees.getNbPoints();
 
 
 #ifdef SIMPLE_OCTREE
     /* Code récupéré sur https://github.com/brandonpelfrey/SimpleOctree/ */
-    brandonpelfrey::Octree *oct = NULL;
-    init();
-    testNaive();
-    testOctree();
+    // Create a new Octree centered at the origin
+    // with physical dimension 2x2x2
+    Vec3 qmin, qmax;
+    std::vector<Vec3> points;
+    Point * p = NULL;
+    {
+        for(int i=0 ; i < nbPoints ; i++) {
+            p = pointsDonnees[i];
+            if(p->getX() < qmin.x) qmin.x = p->getX();
+            if(p->getY() < qmin.y) qmin.y = p->getY();
+            if(p->getZ() < qmin.z) qmin.z = p->getZ();
+            if(p->getX() > qmax.x) qmax.x = p->getX();
+            if(p->getY() > qmax.y) qmax.y = p->getY();
+            if(p->getZ() > qmax.z) qmax.z = p->getZ();
+            points.push_back(Vec3(p->getX(), p->getY(), p->getZ()));
+        }
+        qDebug() << nbPoints << " lus, " << points.size() << " convertis.";
+    }
+
+    Vec3 origin((qmax.x + qmin.x) /2, (qmax.y + qmin.y)/2, (qmax.z + qmin.z)/2);
+    Vec3 half((qmax.x + qmin.x) /2, (qmax.y + qmin.y)/2, (qmax.z + qmin.z)/2);
+    brandonpelfrey::Octree *octree = new brandonpelfrey::Octree(origin, half);
+    OctreePoint *octreePoints = NULL;
+    init(octree, octreePoints, points, qmin, qmax);
+    qDebug() << "Octree construit";
+    qDebug() << "Requête entre (2, 2, 2) et (3, 3, 3)";
+    qmin.x = 2; qmin.y = 2; qmin.z = 2;
+    qmax.x = 3; qmax.y = 3; qmax.z = 3;
+    testNaive(points, qmin, qmax);
+    testOctree(octree, qmin, qmax);
 #endif
 
-    Point ** points = donnees.getPoints();
-    viewer.m_tailleAfficher = donnees.getNbPoints();
+    viewer.m_tailleAfficher = nbPoints;
 
     for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
         points[i]->setX(points[i]->getX() /10);

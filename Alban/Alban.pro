@@ -1,4 +1,7 @@
 QT  += core
+QT += widgets
+QT += xml
+QT += opengl
 TARGET = benchOKR
 SOURCES += ../src/Arbre.cpp \
     ../src/main.cpp \
@@ -29,6 +32,7 @@ HEADERS += ../include/Arbre.h \
     ../SimpleOctree/Stopwatch.h \
     ../SimpleOctree/Vec3.h \
     ../SimpleOctree/OctreePoint.h \
-    ../SimpleOctree/Octree.h
+    ../SimpleOctree/Octree.h \
+    ../include/simpleOctree.h
 
 QMAKE_CXXFLAGS += -std=c++11
