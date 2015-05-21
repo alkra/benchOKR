@@ -377,6 +377,8 @@ double** KdTree::lirefichierply(string Path,int lignes){
             cout << "le fichier ouvert est un fichier .ply" << endl;
 
         int i=0;
+        QString ligne;
+        QStringList liste;
         while (std::getline(fichier, info) && i<lignes)
         {
             //GotoLine(file, 8);
@@ -385,9 +387,13 @@ double** KdTree::lirefichierply(string Path,int lignes){
                 if ( atoi(info.c_str()))  //check that the input is number
                     // if (i>8 && i<963)
                 {
-                    v1[i][0] = strtod (info.c_str(), &pEnd);
-                    v1[i][1]= strtod (pEnd, &pEnd1);
-                    v1[i][2] = strtod (pEnd1, NULL);
+                    ligne.fromStdString(info);
+                    liste = ligne.split(' ');
+                    if(liste.size() >= 3) {
+                        v1[i][0] = liste[0].toDouble();
+                        v1[i][1]= liste[1].toDouble();
+                        v1[i][2] = liste[2].toDouble();
+                    }
 
                     // cout <<v1[i][0]<<" "<<v1[i][1]<<" "<<v1[i][2]<< endl;
                     i++;

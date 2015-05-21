@@ -41,7 +41,7 @@ using namespace std;
 #define CONSTRUIRE_KD
 //#define CONSTRUIRE_OCTREE
 //#define CONSTRUIRE_RTREE
-#define SIMPLE_OCTREE
+//#define SIMPLE_OCTREE
 
 
 #ifndef _WIN32
@@ -102,7 +102,7 @@ int main(int argc, char** argv)
     //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
 
     startOpenFile = stopwatch2();
-    Fichier donnees(SALAMANDRE_TXT);
+    Fichier donnees(ARAIGNEE_PLY);
     startRead = stopwatch2();
     Point ** pointsDonnees = donnees.getPoints();
     stopRead = stopwatch2();
@@ -206,10 +206,10 @@ int main(int argc, char** argv)
 #ifdef CONSTRUIRE_KD
     /*NoeudKd* p11;*/
     NoeudKd* kdDecoupage;
-    KdTree p;
+    KdTree kdtree;
     NoeudKd ndkd;
    int niveau=3;
-    kdDecoupage=p.construire1(QString("E:/Test/Z/Z1"),QString("E:/araignee.ply"),niveau);
+    kdDecoupage=kdtree.construire1(QString("../kdtree/Z/Z1"),QString(ARAIGNEE_PLY),niveau);
 
     Point3D point1(2.6365,3.01941,1.99355);
 
