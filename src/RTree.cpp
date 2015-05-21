@@ -273,8 +273,8 @@ void choisirSemenceFichier(QVector<Point> &stock, Fichier &un, Fichier &deux) {
     double volume = 0;
     Voxel *courant = NULL;
     long indice1 = 0, indice2 = 0;
-    for(long i = 0 ; i < stock.length() ; i++) {
-        for(long j = 0 ; j < stock.length() ; j++) {
+    for(long i = 0 ; i < stock.size() ; i++) {
+        for(long j = 0 ; j < stock.size() ; j++) {
             courant = new Voxel(
                         stock[i].getX(), stock[i].getY(), stock[i].getZ(),
                         stock[j].getX(), stock[j].getY(), stock[j].getZ());
@@ -302,7 +302,7 @@ Point choisirSuivantFichier(QVector<Point> &stock, Fichier &un, Fichier &deux) {
     Voxel v;
     int indice = 0;
 
-    for(int i = 0 ; i < stock.length() ; i++) {
+    for(int i = 0 ; i < stock.size() ; i++) {
         un.calculerVoxel();
         v = un.getVoxel();
         elargissement(stock[i], v, ex, ey, ez);
@@ -392,20 +392,20 @@ void RTree::divisionQuadratiqueFichier(const Point &p, NoeudR &premier, NoeudR &
     deux.calculerVoxel();
 
     // QS 2 terminaison
-    while(pointsFichier.length() > 0) {
-        if(MIN_FICHIER - un.getNbPoints() == pointsFichier.length()) {
+    while(pointsFichier.size() > 0) {
+        if(MIN_FICHIER - un.getNbPoints() == pointsFichier.size()) {
             un.rouvrir(un.getMode() | QIODevice::Append | QIODevice::WriteOnly);
-            for(int i = 0 ; i < pointsFichier.length() ; i++) {
-                un.ajoutPoint(pointsFichier.takeFirst());
+            for(int i = 0 ; i < pointsFichier.size() ; i++) {
+                un.ajoutPoint(pointsFichier.front());
             }
             break;
         }
 
-        if(MIN_FICHIER - deux.getNbPoints() == pointsFichier.length()) {
+        if(MIN_FICHIER - deux.getNbPoints() == pointsFichier.size()) {
             deux.rouvrir(deux.getMode() | QIODevice::Append | QIODevice::WriteOnly);
-            int leng = pointsFichier.length();
+            int leng = pointsFichier.size();
             for(int i = 0 ; i < leng ; i++) {
-                deux.ajoutPoint(pointsFichier.takeFirst());
+                deux.ajoutPoint(pointsFichier.front());
             }
             break;
         }

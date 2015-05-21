@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,3 +19,5 @@ HEADERS  += \
     simpleViewer.h
 
 FORMS    += mainwindow.ui
+
+LIBS *= -L/usr/lib -lQGLViewer

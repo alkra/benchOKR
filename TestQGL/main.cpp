@@ -1,4 +1,4 @@
-#include "simpleViewer.h"F
+#include "simpleViewer.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

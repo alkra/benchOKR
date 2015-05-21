@@ -362,10 +362,10 @@ throw(FichierFermeErreur, FichierFinErreur, FichierInvalideErreur)
         }
 
         Point resultat;
-        char *reste = ligne.data();
-        resultat.setX(strtod(reste, &reste));
-        resultat.setY(strtod(reste, &reste));
-        resultat.setZ(strtod(reste, NULL));
+        QList<QByteArray> ligneD = ligne.split(' ');
+        resultat.setX(ligneD[0].toDouble());
+        resultat.setY(ligneD[1].toDouble());
+        resultat.setZ(ligneD[2].toDouble());
 
         return resultat;
     }
