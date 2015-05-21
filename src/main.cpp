@@ -42,7 +42,7 @@ using namespace std;
 //#define CONSTRUIRE_KD
 //#define CONSTRUIRE_OCTREE
 //#define CONSTRUIRE_RTREE
-#define SIMPLE_OCTREE
+//#define SIMPLE_OCTREE
 
 
 
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 {
     // Read command lines arguments.
     QApplication application(argc,argv);
-
+    qDebug() << qApp;
 
 
     // Lecture de nuage de Point3D
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 
 
     // Instantiate the viewer.
-    Viewer viewer;
+    //Viewer viewer;
 
     //viewer.m_afficher = new Point*[4];
     //viewer.m_tailleAfficher = 4;
@@ -73,9 +73,9 @@ int main(int argc, char** argv)
     //viewer.m_afficher[2] = new Point(-0.5f, -0.5f, 0.5f);
     //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
 
-    Fichier donnees(ARAIGNEE_PLY);
-    Point ** pointsDonnees = donnees.getPoints();
-    int nbPoints = donnees.getNbPoints();
+    //Fichier donnees(ARAIGNEE_PLY);
+    //Point ** pointsDonnees = donnees.getPoints();
+    //int nbPoints = donnees.getNbPoints();
 
 
 #ifdef SIMPLE_OCTREE
@@ -112,20 +112,20 @@ int main(int argc, char** argv)
     testOctree(octree, qmin, qmax);
 #endif
 
-    viewer.m_tailleAfficher = nbPoints;
+    //viewer.m_tailleAfficher = nbPoints;
+    //
+    //for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+    //    pointsDonnees[i]->setX(pointsDonnees[i]->getX() /10);
+    //    pointsDonnees[i]->setY(pointsDonnees[i]->getY() /10);
+    //    pointsDonnees[i]->setZ(pointsDonnees[i]->getZ() /10);
+    //}
+    //
+    //viewer.m_afficher = pointsDonnees;
 
-    for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
-        points[i]->setX(points[i]->getX() /10);
-        points[i]->setY(points[i]->getY() /10);
-        points[i]->setZ(points[i]->getZ() /10);
-    }
-
-    viewer.m_afficher = points;
-
-    viewer.setWindowTitle("simpleViewer");
+    //viewer.setWindowTitle("simpleViewer");
 
     // Make the viewer window visible on screen.
-    viewer.show();
+    //viewer.show();
 
     // Run main loop.
     return application.exec();

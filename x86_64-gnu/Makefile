@@ -15,10 +15,10 @@ CXX           = g++
 DEFINES       = -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -m64 -pipe -std=c++11 -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../Alban -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtXml -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
+INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../Alban -isystem /usr/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtXml -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5OpenGL -lQt5Widgets -lQt5Xml -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L/usr/lib -lQGLViewer -lQt5OpenGL -lQt5Widgets -lQt5Xml -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -56,7 +56,8 @@ SOURCES       = ../src/main.cpp \
 		../src/Point3D.cpp \
 		../src/RTree.cpp \
 		../src/Voxel.cpp \
-		../src/simpleOctree.cpp 
+		../src/simpleOctree.cpp \
+		../src/simpleViewer.cpp 
 OBJECTS       = main.o \
 		Fichier.o \
 		KdTree.o \
@@ -68,7 +69,8 @@ OBJECTS       = main.o \
 		Point3D.o \
 		RTree.o \
 		Voxel.o \
-		simpleOctree.o
+		simpleOctree.o \
+		simpleViewer.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -134,7 +136,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../src/Point3D.cpp \
 		../src/RTree.cpp \
 		../src/Voxel.cpp \
-		../src/simpleOctree.cpp
+		../src/simpleOctree.cpp \
+		../src/simpleViewer.cpp
 QMAKE_TARGET  = benchOKR
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = benchOKR
@@ -222,6 +225,7 @@ Makefile: ../Alban/Alban.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../Alban/Alban.pro \
+		/usr/lib/libQGLViewer.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5OpenGL.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
@@ -283,6 +287,7 @@ Makefile: ../Alban/Alban.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../Alban/Alban.pro:
+/usr/lib/libQGLViewer.prl:
 /usr/lib/x86_64-linux-gnu/libQt5OpenGL.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
@@ -295,7 +300,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/benchOKR1.0.0 || mkdir -p .tmp/benchOKR1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../include/Arbre.h ../include/Fichier.h ../include/KdTree.h ../include/Noeud.h ../include/NoeudKd.h ../include/NoeudOctree.h ../include/NoeudR.h ../include/Octree.h ../include/Point.h ../include/Point3D.h ../include/RTree.h ../include/Voxel.h ../SimpleOctree/Stopwatch.h ../SimpleOctree/Vec3.h ../SimpleOctree/OctreePoint.h ../SimpleOctree/Octree.h .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../src/main.cpp ../src/Fichier.cpp ../src/KdTree.cpp ../src/NoeudKd.cpp ../src/NoeudOctree.cpp ../src/NoeudR.cpp ../src/Octree.cpp ../src/Point.cpp ../src/Point3D.cpp ../src/RTree.cpp ../src/Voxel.cpp ../src/simpleOctree.cpp .tmp/benchOKR1.0.0/ && (cd `dirname .tmp/benchOKR1.0.0` && $(TAR) benchOKR1.0.0.tar benchOKR1.0.0 && $(COMPRESS) benchOKR1.0.0.tar) && $(MOVE) `dirname .tmp/benchOKR1.0.0`/benchOKR1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/benchOKR1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../include/Arbre.h ../include/Fichier.h ../include/KdTree.h ../include/Noeud.h ../include/NoeudKd.h ../include/NoeudOctree.h ../include/NoeudR.h ../include/Octree.h ../include/Point.h ../include/Point3D.h ../include/RTree.h ../include/Voxel.h ../SimpleOctree/Stopwatch.h ../SimpleOctree/Vec3.h ../SimpleOctree/OctreePoint.h ../SimpleOctree/Octree.h ../include/simpleOctree.h ../include/simpleViewer.h .tmp/benchOKR1.0.0/ && $(COPY_FILE) --parents ../src/main.cpp ../src/Fichier.cpp ../src/KdTree.cpp ../src/NoeudKd.cpp ../src/NoeudOctree.cpp ../src/NoeudR.cpp ../src/Octree.cpp ../src/Point.cpp ../src/Point3D.cpp ../src/RTree.cpp ../src/Voxel.cpp ../src/simpleOctree.cpp ../src/simpleViewer.cpp .tmp/benchOKR1.0.0/ && (cd `dirname .tmp/benchOKR1.0.0` && $(TAR) benchOKR1.0.0.tar benchOKR1.0.0 && $(COMPRESS) benchOKR1.0.0.tar) && $(MOVE) `dirname .tmp/benchOKR1.0.0`/benchOKR1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/benchOKR1.0.0
 
 
 clean:compiler_clean 
@@ -441,6 +446,11 @@ simpleOctree.o: ../src/simpleOctree.cpp ../include/simpleOctree.h \
 		../SimpleOctree/Vec3.h \
 		../SimpleOctree/Stopwatch.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o simpleOctree.o ../src/simpleOctree.cpp
+
+simpleViewer.o: ../src/simpleViewer.cpp ../include/simpleViewer.h \
+		../include/Point.h \
+		../include/Point3D.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o simpleViewer.o ../src/simpleViewer.cpp
 
 ####### Install
 
