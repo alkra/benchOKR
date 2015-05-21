@@ -29,7 +29,6 @@ using namespace std;
 #include"../include/Point3D.h"
 #include"../include/Fichier.h"
 #include"../include/simpleViewer.h"
-#include"..//include/Arbre.h"
 #include <QDebug>
 #include<QString>
 
@@ -45,15 +44,41 @@ using namespace std;
 //#define SIMPLE_OCTREE
 
 
+#ifndef _WIN32
+#include <sys/time.h>
+
+double stopwatch2() // idem as Stopwatch.h
+{
+    struct timeval time;
+    gettimeofday(&time, 0 );
+    return 1.0 * time.tv_sec + time.tv_usec / (double)1e6;
+}
+
+#else
+
+#include <windows.h>
+double stopwatch2()
+{
+    unsigned long long ticks;
+    unsigned long long ticks_per_sec;
+    QueryPerformanceFrequency( (LARGE_INTEGER *)&ticks_per_sec);
+    QueryPerformanceCounter((LARGE_INTEGER *)&ticks);
+    return ((float)ticks) / (float)ticks_per_sec;
+}
+
+#endif
 
 
 
 using namespace std;
 int main(int argc, char** argv)
 {
+    double startApplication, endComputing, startResize, getNP, stopRead, startRead, startOpenFile;
+    startApplication = stopwatch2();
+
+
     // Read command lines arguments.
     QApplication application(argc,argv);
-    qDebug() << qApp;
 
 
     // Lecture de nuage de Point3D
@@ -73,9 +98,13 @@ int main(int argc, char** argv)
     //viewer.m_afficher[2] = new Point(-0.5f, -0.5f, 0.5f);
     //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
 
+    startOpenFile = stopwatch2();
     Fichier donnees(SALAMANDRE_TXT);
+    startRead = stopwatch2();
     Point ** pointsDonnees = donnees.getPoints();
+    stopRead = stopwatch2();
     int nbPoints = donnees.getNbPoints();
+    getNP = stopwatch2();
 
 
 #ifdef SIMPLE_OCTREE
@@ -114,11 +143,13 @@ int main(int argc, char** argv)
 
     viewer.m_tailleAfficher = nbPoints;
 
+    startResize = stopwatch2();
     for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
         pointsDonnees[i]->setX(pointsDonnees[i]->getX() /10);
         pointsDonnees[i]->setY(pointsDonnees[i]->getY() /10);
         pointsDonnees[i]->setZ(pointsDonnees[i]->getZ() /10);
     }
+    endComputing = stopwatch2();
 
     viewer.m_afficher = pointsDonnees;
 
@@ -128,7 +159,12 @@ int main(int argc, char** argv)
     viewer.show();
 
     // Run main loop.
-    return application.exec();
+    int runCode = application.exec();
+
+    qDebug() << "Reading file in " << stopRead - startRead;
+    qDebug() << "Total access file time : " << getNP - startOpenFile;
+    qDebug() << "Converted " << nbPoints << " points in " << endComputing - startResize;
+
 
 #ifdef CONSTRUIRE_KD
     /*NoeudKd* p11;*/
@@ -176,4 +212,10 @@ int main(int argc, char** argv)
 
     monArbre.construire(chemin,500,4,0);
 #endif
+
+    for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+        delete pointsDonnees[i];
+    }
+    delete pointsDonnees;
+    return runCode;
 }
