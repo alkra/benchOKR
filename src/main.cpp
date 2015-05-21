@@ -38,7 +38,7 @@ using namespace std;
 
 
 /* Type de construction attendue */
-//#define CONSTRUIRE_KD
+#define CONSTRUIRE_KD
 //#define CONSTRUIRE_OCTREE
 //#define CONSTRUIRE_RTREE
 #define SIMPLE_OCTREE
@@ -205,33 +205,61 @@ int main(int argc, char** argv)
 
 #ifdef CONSTRUIRE_KD
     /*NoeudKd* p11;*/
+    NoeudKd* kdDecoupage;
     KdTree p;
-    p.construire("kd/", SALAMANDRE_TXT);
+    NoeudKd ndkd;
+   int niveau=3;
+    kdDecoupage=p.construire1(QString("E:/Test/Z/Z1"),QString("E:/araignee.ply"),niveau);
 
-    /*string* path1;
-    path1=new string[14];
-    Voxel* voxel;
-    voxel=new Voxel[14];
+    Point3D point1(2.6365,3.01941,1.99355);
 
-    Point3D point1(1.63704,2.8783,1.74817);
-    Point3D point2(12,2,5);
-    double a1,a2,a3,b1,b2,b3;
+    Point3D point2(2,3,2);
+    Point3D point3;
+    Point3D point4;
+
+    Voxel intersect;
+    Voxel v,voxel;
+    v.setDebut(point1);
+    v.setFin(point2);
+    //intersect.setDebut(point3);
+    //intersect.setFin(point4);
+    int NiveauArray=0;
+    for(int i5=1;i5<niveau+1;i5++){
+    NiveauArray=NiveauArray+pow(2,i5);
+    }
 
     int j=0;
-    for (int i=0;i<14;i++)
+
+    for (int i=0;i<=NiveauArray;i++)
     {
-        path1[i]=p11[i].getpath();
-        cout<<"path :"<<path1[i]<<endl;
-        a1=p11[i].getVoxel().getFin().getX();//voxels extrait de la fonction construire
-        a2=p11[i].getVoxel().getFin().getY();
-        a3=p11[i].getVoxel().getFin().getZ();
-        cout<<"a1:"<<a1<<"a2:"<<a2<<"a3:"<<a3<<endl;
-        cout<<"point entree:"<<point1.getX()<<endl;
-        if((point1.getX()<=a1) && (point1.getY()<=a2) && (point1.getZ()<=a3))
+
+
+        cout<<"path :"<<kdDecoupage[i].getDossier().absolutePath().toLocal8Bit().data()<<endl;
+        point3.setX(kdDecoupage[i].getVoxel().getDebut().getX());
+        point3.setY(kdDecoupage[i].getVoxel().getDebut().getY());
+        point3.setZ(kdDecoupage[i].getVoxel().getDebut().getZ());
+        point4.setX(kdDecoupage[i].getVoxel().getFin().getX());
+        point4.setY(kdDecoupage[i].getVoxel().getFin().getY());
+        point4.setZ(kdDecoupage[i].getVoxel().getFin().getZ());
+
+       intersect.setDebut(point3);
+       intersect.setFin(point4);
+      /* cout<<"poin1:"<<intersect.getDebut().getX()<<" ";
+       cout<<intersect.getDebut().getY()<<" ";
+       cout<<intersect.getDebut().getZ()<<" ";
+       cout<<"point2:"<<intersect.getFin().getX()<<" ";
+       cout<<intersect.getFin().getY()<<" ";
+       cout<<intersect.getFin().getZ()<<" ";*/
+
+        if (Voxel::intersecte(intersect,v)) //(intersect.intersecte(point1))//
         {
-            j++;
+                j=i;
+
         }
-    }*/
+
+    }
+    cout<<"/n"<<j<<" "<<kdDecoupage[j].getDossier().absolutePath().toLocal8Bit().data()<<"hhhhhhhh"<<endl;
+
 #endif
 
 

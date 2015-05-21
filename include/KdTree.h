@@ -28,10 +28,10 @@ class KdTree : public Arbre<NoeudKd>  // Création d'une classe KdTree qui héri
         KdTree();
         ~KdTree();
 
-        //void construire1(string path,int niveau,string Path);
+        void construire(const QString& racine, const QString& cheminDonnes);
 
-        void construire(const QString& rootPath, const QString &cheminDonnees);
-        NoeudKd* construire1();
+        NoeudKd* construire1(const QString& rootPath, const QString &cheminDonnees,const int& niveau);
+        //NoeudKd* construire1();
         QVector<Point> requete(const Point &centre, double distance) const; // voisinage
         QVector<Point> requete(const Voxel &conteneur) const; // dans un voxel
         double** lirefichiertxt(std::string Path,int lignes);//mettre les majusculle entre deux mots
@@ -43,6 +43,7 @@ class KdTree : public Arbre<NoeudKd>  // Création d'une classe KdTree qui héri
         Voxel calculvoxel(double** v1,int debut,int fin);
         string* CreerNoeud(const string &path);
         int calculPoints(string Path);
+        Voxel* calculvoxelmedian(Voxel v,int i,double median);
 
 
     protected:
