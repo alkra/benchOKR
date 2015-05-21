@@ -9,6 +9,7 @@
 
 #include "../include/Octree.h"
 #include<cstring>
+#include<string>
 
 Octree::Octree(): m_centre(0,0,0,0), m_rayon(0.0)
 {

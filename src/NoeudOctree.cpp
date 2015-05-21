@@ -11,14 +11,14 @@
 #include "../include/NoeudOctree.h"
 #include "../include/Point.h"
 #include <QDebug>
+#include<string>
+
 
 using namespace std;
 
-#define getEnfant(pos) getEnfant<NoeudOctree>(pos)
-#define supprimerEnfant(pos) supprimerEnfant<NoeudOctree>(pos)
-
 NoeudOctree::NoeudOctree() :  Noeud(), m_pointCount(0), m_points(NULL) {
-    memset(m_enfant, 0, sizeof(m_enfant));
+   //memset(m_enfant, 0, sizeof(m_enfant));
+
 }
 
 NoeudOctree::~NoeudOctree()

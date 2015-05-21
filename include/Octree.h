@@ -42,7 +42,8 @@ public:
        bool            construire(QString adresse,   // nombre total de points
                                                const unsigned int threshold, // seuil d'arrêt
                                                const unsigned int maximumDepth, // profondeur de l'arbre           // volume englobant
-                                               const unsigned int currentDepth = 0); // profondeur courante
+                                                const unsigned int currentDepth = 0);  // profondeur courante
+
 
     // méthode permettant de construire le volume englobant
 

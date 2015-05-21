@@ -40,7 +40,7 @@ class NoeudOctree : public Noeud<NoeudOctree, 8>
         QVector<Point> requete(const Voxel &conteneur) const; // renvoie tous les points de tous les enfants contenus dans le conteneur
     protected:
     private:
-        NoeudOctree                  *m_enfant[8]; // tableau du nombre d'octant
+        //NoeudOctree                  *m_enfant[8]; // tableau du nombre d'octant
         unsigned int            m_pointCount; // nombre de points
         Point                   **m_points;
 };
