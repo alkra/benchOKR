@@ -76,10 +76,9 @@ void testNaive(std::vector<Vec3> points, Vec3 qmin, Vec3 qmax, std::vector<int> 
 }
 
 // Query using Octree
-void testOctree(Octree *octree, Vec3 qmin, Vec3 qmax) {
+void testOctree(Octree *octree, Vec3 qmin, Vec3 qmax, std::vector<OctreePoint*> results) {
     double start = stopwatch();
 
-    std::vector<OctreePoint*> results;
     octree->getPointsInsideBox(qmin, qmax, results);
 
     double T = stopwatch() - start;

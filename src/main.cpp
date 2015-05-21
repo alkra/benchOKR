@@ -75,7 +75,8 @@ int main(int argc, char** argv)
 {
     double startApplication, endComputing, startResize, getNP, stopRead,
             startRead, startOpenFile, startNaiveQuery, stopNaiveQuery,
-            vec3start, vec3stop;
+            vec3start, vec3stop, startCreateOctree, stopCreateOctree,
+            startOctreeQuery, stopOctreeQuery;
     startApplication = stopwatch2();
 
 
@@ -113,7 +114,7 @@ int main(int argc, char** argv)
     /* Code récupéré sur https://github.com/brandonpelfrey/SimpleOctree/ */
     // Create a new Octree centered at the origin
     // with physical dimension 2x2x2
-    Vec3 qmin, qmax;
+    Vec3 qmin(1000, 1000, 1000), qmax(-1000, -1000, -1000);
     std::vector<Vec3> points;
     Point * p = NULL;
     {
@@ -132,12 +133,15 @@ int main(int argc, char** argv)
     vec3stop = stopwatch2();
 
 #ifdef SIMPLE_OCTREE
+    startCreateOctree = stopwatch2();
     Vec3 origin((qmax.x + qmin.x) /2, (qmax.y + qmin.y)/2, (qmax.z + qmin.z)/2);
-    Vec3 half((qmax.x + qmin.x) /2, (qmax.y + qmin.y)/2, (qmax.z + qmin.z)/2);
+    Vec3 half((qmax.x - qmin.x) /2, (qmax.y - qmin.y)/2, (qmax.z - qmin.z)/2);
+    qDebug() << "Origin : " << origin.x << origin.y << origin.z;
+    qDebug() << "Half-width : " << half.x << half.y << half.z;
     brandonpelfrey::Octree *octree = new brandonpelfrey::Octree(origin, half);
     OctreePoint *octreePoints = NULL;
     init(octree, octreePoints, points, qmin, qmax);
-    testOctree(octree, qmin, qmax);
+    stopCreateOctree = stopwatch2();
 #endif
 
     viewer.setWindowTitle("simpleViewer");
@@ -150,13 +154,17 @@ int main(int argc, char** argv)
 
     qmin.x = -1; qmin.y = 5; qmin.z = -11;
     qmax.x = 0; qmax.y = 6; qmax.z = -10;
-    startNaiveQuery = stopwatch2();
+
+#ifdef SIMPLE_OCTREE
+    startOctreeQuery = stopwatch2();
+    //testOctree(octree, qmin, qmax, champDeVision);
+    stopOctreeQuery = stopwatch2();
+#else
     std::vector<int> champDeVision;
+    startNaiveQuery = stopwatch2();
     testNaive(points, qmin, qmax, champDeVision);
     stopNaiveQuery = stopwatch2();
 
-    viewer.qmin = qmin;
-    viewer.qmax = qmax;
     viewer.m_tailleAfficher = champDeVision.size();
     Point ** affichage = new Point*[viewer.m_tailleAfficher];
 
@@ -171,16 +179,25 @@ int main(int argc, char** argv)
     }
     endComputing = stopwatch2();
 
-    viewer.m_afficher = pointsDonnees;
+    viewer.m_afficher = affichage;
+#endif
+
+    viewer.qmin = qmin;
+    viewer.qmax = qmax;
 
 
     qDebug() << "Loading data";
     qDebug() << "    Reading file in " << stopRead - startRead;
     qDebug() << "    Total access file time : " << getNP - startOpenFile;
     qDebug() << "    Converted " << nbPoints << " points in " << vec3stop - vec3start;
-    qDebug() << "Query 1";
+#ifdef SIMPLE_OCTREE
+    qDebug() << "    Building Octree in " << stopCreateOctree - startCreateOctree;
+    qDebug() << "Query using Octree";
+#else
+    qDebug() << "Naive query";
     qDebug() << "    Result in " << stopNaiveQuery - startNaiveQuery;
     qDebug() << "    Converted " << viewer.m_tailleAfficher << "points in " << endComputing - startResize;
+#endif
 
     // Run main loop.
     int runCode = application.exec();
