@@ -3,7 +3,9 @@
 
 #include <cstddef>
 #include <vector>
+#include "../include/Point.h"
 #include "OctreePoint.h"
+#include <QDebug>
 
 namespace brandonpelfrey {
 
@@ -77,7 +79,7 @@ namespace brandonpelfrey {
 			// and it is a leaf, then we're done!
 			if(isLeafNode()) {
 				if(data==NULL) {
-					data = point;
+                    data = point;
 					return;
 				} else {
 					// We're at a leaf, but there's already something here
@@ -128,6 +130,7 @@ namespace brandonpelfrey {
 					results.push_back(data);
 				}
 			} else {
+                qDebug() << origin.x;
 				// We're at an interior node of the tree. We will check to see if
 				// the query bounding box lies outside the octants of this node.
 				for(int i=0; i<8; ++i) {
@@ -146,6 +149,19 @@ namespace brandonpelfrey {
 				} 
 			}
 		}
+
+
+
+        void getOrigins(std::vector<Point*> &afficher, int &tailleAfficher) {
+            Point *p = new Point(origin.x, origin.y, origin.z);
+            afficher.push_back(p);
+            tailleAfficher++;
+            if(!isLeafNode()) {
+                for(int i = 0 ; i < 8 ; ++i) {
+                    children[i]->getOrigins(afficher, tailleAfficher);
+                }
+            }
+        }
 
 	};
 

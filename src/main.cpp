@@ -38,10 +38,10 @@ using namespace std;
 
 
 /* Type de construction attendue */
-#define CONSTRUIRE_KD
+//#define CONSTRUIRE_KD
 //#define CONSTRUIRE_OCTREE
 //#define CONSTRUIRE_RTREE
-//#define SIMPLE_OCTREE
+#define SIMPLE_OCTREE
 
 
 #ifndef _WIN32
@@ -67,6 +67,7 @@ double stopwatch2()
 }
 
 #endif
+
 
 
 
@@ -152,13 +153,27 @@ int main(int argc, char** argv)
 
 
 
-    qmin.x = -1; qmin.y = 5; qmin.z = -11;
-    qmax.x = 0; qmax.y = 6; qmax.z = -10;
+    //qmin.x = -1; qmin.y = 5; qmin.z = -11;
+    //qmax.x = 0; qmax.y = 6; qmax.z = -10;
+
+    qmin.x = 0; qmin.y = 0; qmin.z = 0;
+    qmax.x = 9; qmin.y = 9; qmin.z = 9;
+
 
 #ifdef SIMPLE_OCTREE
+    std::vector<OctreePoint*> champDeVision;
+
     startOctreeQuery = stopwatch2();
-    //testOctree(octree, qmin, qmax, champDeVision);
+    testOctree(octree, qmin, qmax, champDeVision);
     stopOctreeQuery = stopwatch2();
+
+    viewer.m_tailleAfficher = champDeVision.size();
+    viewer.m_afficher = new Point*[viewer.m_tailleAfficher];
+    Vec3 data;
+    for(int i=0 ; i < viewer.m_tailleAfficher ; i++) {
+        data = champDeVision[i]->getPosition();
+        viewer.m_afficher[i] = new Point(data.x, data.y, data.z);
+    }
 #else
     std::vector<int> champDeVision;
     startNaiveQuery = stopwatch2();
@@ -193,14 +208,34 @@ int main(int argc, char** argv)
 #ifdef SIMPLE_OCTREE
     qDebug() << "    Building Octree in " << stopCreateOctree - startCreateOctree;
     qDebug() << "Query using Octree";
+    qDebug() << "    Result : " << viewer.m_tailleAfficher << " points in " << stopOctreeQuery - startOctreeQuery;
 #else
     qDebug() << "Naive query";
     qDebug() << "    Result in " << stopNaiveQuery - startNaiveQuery;
     qDebug() << "    Converted " << viewer.m_tailleAfficher << "points in " << endComputing - startResize;
 #endif
 
-    // Run main loop.
-    int runCode = application.exec();
+    /* AFFICHAGE DES BOÎTES ENGLOBANTES */
+
+#ifdef SIMPLE_OCTREE
+    // Instantiate the viewer.
+    //Viewer fenetreBB;
+    //fenetreBB.setWindowTitle("Centres des boîtes englobantes");
+    //fenetreBB.setFPSIsDisplayed(true);
+
+    //std::vector<Point*> a; int tailleAfficher;
+    //octree->getOrigins(a, tailleAfficher);
+    //
+    //fenetreBB.m_tailleAfficher = tailleAfficher;
+    //fenetreBB.m_afficher = new Point*[tailleAfficher];
+    //for (int i = 0 ; i < tailleAfficher ; i++) {
+    //    fenetreBB.m_afficher[i] = a[i];
+    //}
+
+    // Make the viewer window visible on screen.
+    //fenetreBB.show();
+#endif
+
 
 
 #ifdef CONSTRUIRE_KD
@@ -209,7 +244,7 @@ int main(int argc, char** argv)
     KdTree kdtree;
     NoeudKd ndkd;
    int niveau=3;
-    kdDecoupage=kdtree.construire1(QString("../kdtree/Z/Z1"),QString(ARAIGNEE_PLY),niveau);
+    kdDecoupage=kdtree.construire1(QString("../kdtree/Z/Z1"),QString("../donneeTestDIAS/araignee.txt"),niveau);
 
     Point3D point1(2.6365,3.01941,1.99355);
 
@@ -277,6 +312,9 @@ int main(int argc, char** argv)
 
     monArbre.construire(chemin,500,4,0);
 #endif
+
+    // Run main loop.
+    int runCode = application.exec();
 
     for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
         delete pointsDonnees[i];

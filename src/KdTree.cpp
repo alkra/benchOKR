@@ -369,54 +369,19 @@ double** KdTree::lirefichierply(string Path,int lignes){
     ifstream fichier (Path.c_str(),ios::in);
 
 
-    if(fichier)  // si l'ouverture a réussi
+    if (!fichier.is_open())
+        cout << "Impossible d'ouvrir le fichier en lecture !" << endl;
+    else
     {
-        string info;
-        getline(fichier, info);
-        if (info=="ply")
-            cout << "le fichier ouvert est un fichier .ply" << endl;
 
-        int i=0;
-        QString ligne;
-        QStringList liste;
-        while (std::getline(fichier, info) && i<lignes)
-        {
-            //GotoLine(file, 8);
-
-            {
-                if ( atoi(info.c_str()))  //check that the input is number
-                    // if (i>8 && i<963)
-                {
-                    ligne.fromStdString(info);
-                    liste = ligne.split(' ');
-                    if(liste.size() >= 3) {
-                        v1[i][0] = liste[0].toDouble();
-                        v1[i][1]= liste[1].toDouble();
-                        v1[i][2] = liste[2].toDouble();
-                    }
-
-                    // cout <<v1[i][0]<<" "<<v1[i][1]<<" "<<v1[i][2]<< endl;
-                    i++;
-
-
-                }
-
-
-
-            }
-
-        }
-        /* if( result==NULL){
-             cout<<"la ligne %d n'existe pas dans le fichier"<<line<<endl;
-         }*/
-
-        fichier.close();
-        // on ferme le fichier
-
-
+        for (int i = 0; i < lignes; i++)
+            for (int k = 0; k < 3; k++)
+                fichier >> v1[i][k];
+        // Affectation des valeurs du fichier txt à la matrice v1
     }
-    else  // sinon
-        cerr << "Impossible d'ouvrir le fichier !" << endl;
+    fichier.close();
+
+
 
     return v1;
 
