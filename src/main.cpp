@@ -5,7 +5,19 @@
  * 77455 MARNE-LA-VALLÉE CEDEX 2
  * FRANCE */
 
+
+// element de la camera
+#include <QCoreApplication>
+
+#include <qapplication.h>
+
+// element de la camera
+
 #include <iostream>
+#include<string>
+
+
+
 using namespace std;
 
 #include "../include/KdTree.h"
@@ -13,10 +25,17 @@ using namespace std;
 #include "../include/RTree.h"
 #include "../include/Octree.h"
 #include "../include/NoeudOctree.h"
+#include"../include/Point3D.h"
+#include"../include/Fichier.h"
+#include"../include/simpleViewer.h"
+#include"..//include/Arbre.h"
+#include <QDebug>
+#include<QString>
 
-/* Chemin vers les données */
 #define ARAIGNEE_PLY "C:/code04Mai2015/constructionOctree4Mai/araignee.ply"
-#define SALAMANDRE_TXT "../donneeTestDIAS/SalamandreCloud.txt"
+#define POINT3D "C:/code04Mai2015/constructionOctree4Mai/Point3D_v3.txt"
+#define SALAMANDRE_TXT "C:/code04Mai2015/constructionOctree4Mai/SalamandreCloud.txt"
+
 
 /* Type de construction attendue */
 #define CONSTRUIRE_KD
@@ -24,8 +43,57 @@ using namespace std;
 //#define CONSTRUIRE_RTREE
 
 
-int main(int argc, char *argv[])
+
+
+
+
+using namespace std;
+int main(int argc, char** argv)
 {
+
+    // Read command lines arguments.
+    QApplication application(argc,argv);
+
+
+
+    // Lecture de nuage de Point3D
+    
+//     Point3D point;
+//      point.load(nuage, cheminNuagePoint.c_str());
+      
+
+
+    // Instantiate the viewer.
+    Viewer viewer;
+
+    //viewer.m_afficher = new Point*[4];
+    //viewer.m_tailleAfficher = 4;
+    //viewer.m_afficher[0] = new Point(0.5f, 0.5f, 0.5f);
+    //viewer.m_afficher[1] = new Point(-0.5f, 0.5f, 0.5f);
+    //viewer.m_afficher[2] = new Point(-0.5f, -0.5f, 0.5f);
+    //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
+
+    Fichier donnees(ARAIGNEE_PLY);
+
+    Point ** points = donnees.getPoints();
+    viewer.m_tailleAfficher = donnees.getNbPoints();
+
+    for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+        points[i]->setX(points[i]->getX() /10);
+        points[i]->setY(points[i]->getY() /10);
+        points[i]->setZ(points[i]->getZ() /10);
+    }
+
+    viewer.m_afficher = points;
+
+    viewer.setWindowTitle("simpleViewer");
+
+    // Make the viewer window visible on screen.
+    viewer.show();
+
+    // Run main loop.
+    return application.exec();
+
 #ifdef CONSTRUIRE_KD
     /*NoeudKd* p11;*/
     NoeudKd* kdDecoupage;
@@ -100,7 +168,4 @@ int main(int argc, char *argv[])
 
     monArbre.construire(chemin,500,4,0);
 #endif
-
-
-    return 0;
 }

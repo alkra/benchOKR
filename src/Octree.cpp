@@ -9,6 +9,7 @@
 
 #include "../include/Octree.h"
 #include<cstring>
+#include<string>
 
 Octree::Octree(): m_centre(0,0,0,0), m_rayon(0.0)
 {
@@ -47,7 +48,7 @@ bool    Octree::construire(QString adresse,
     plyInitial.calculerVoxel();
     Bounds bounds = calcCubicBounds(plyInitial.getVoxel());
 
-    return racine->construire(points, count, threshold, maximumDepth, bounds, currentDepth);
+    return racine->construire(points, count, threshold, maximumDepth, bounds,"",currentDepth);
 }
 
 // calcul du voulume englobant
