@@ -29,6 +29,7 @@ using namespace std;
 #include"../include/Point3D.h"
 #include"../include/Fichier.h"
 #include"../include/simpleViewer.h"
+#include "../include/mainwindow.h"
 #include <QDebug>
 #include<QString>
 
@@ -41,32 +42,8 @@ using namespace std;
 //#define CONSTRUIRE_KD
 //#define CONSTRUIRE_OCTREE
 //#define CONSTRUIRE_RTREE
-#define SIMPLE_OCTREE
+//#define SIMPLE_OCTREE
 
-
-#ifndef _WIN32
-#include <sys/time.h>
-
-double stopwatch2() // idem as Stopwatch.h
-{
-    struct timeval time;
-    gettimeofday(&time, 0 );
-    return 1.0 * time.tv_sec + time.tv_usec / (double)1e6;
-}
-
-#else
-
-#include <windows.h>
-double stopwatch2()
-{
-    unsigned long long ticks;
-    unsigned long long ticks_per_sec;
-    QueryPerformanceFrequency( (LARGE_INTEGER *)&ticks_per_sec);
-    QueryPerformanceCounter((LARGE_INTEGER *)&ticks);
-    return ((float)ticks) / (float)ticks_per_sec;
-}
-
-#endif
 
 
 
@@ -78,12 +55,13 @@ int main(int argc, char** argv)
             startRead, startOpenFile, startNaiveQuery, stopNaiveQuery,
             vec3start, vec3stop, startCreateOctree, stopCreateOctree,
             startOctreeQuery, stopOctreeQuery;
-    startApplication = stopwatch2();
+    //startApplication = stopwatch2();
 
 
     // Read command lines arguments.
     QApplication application(argc,argv);
-
+    MainWindow fenetrePrincipale(&application);
+    fenetrePrincipale.show();
 
     // Lecture de nuage de Point3D
     
@@ -102,36 +80,36 @@ int main(int argc, char** argv)
     //viewer.m_afficher[2] = new Point(-0.5f, -0.5f, 0.5f);
     //viewer.m_afficher[3] = new Point(0.5f, -0.5f, 0.5f);
 
-    startOpenFile = stopwatch2();
-    Fichier donnees(ARAIGNEE_PLY);
-    startRead = stopwatch2();
-    Point ** pointsDonnees = donnees.getPoints();
-    stopRead = stopwatch2();
-    int nbPoints = donnees.getNbPoints();
-    getNP = stopwatch2();
+    //startOpenFile = stopwatch2();
+    //Fichier donnees(ARAIGNEE_PLY);
+    //startRead = stopwatch2();
+    //Point ** pointsDonnees = donnees.getPoints();
+    //stopRead = stopwatch2();
+    //int nbPoints = donnees.getNbPoints();
+    //getNP = stopwatch2();
 
 
-    vec3start = stopwatch2();
+    //vec3start = stopwatch2();
     /* Code récupéré sur https://github.com/brandonpelfrey/SimpleOctree/ */
     // Create a new Octree centered at the origin
     // with physical dimension 2x2x2
-    Vec3 qmin(1000, 1000, 1000), qmax(-1000, -1000, -1000);
-    std::vector<Vec3> points;
-    Point * p = NULL;
-    {
-        // Calcul du voxel englobant et conversion
-        for(int i=0 ; i < nbPoints ; i++) {
-            p = pointsDonnees[i];
-            if(p->getX() < qmin.x) qmin.x = p->getX();
-            if(p->getY() < qmin.y) qmin.y = p->getY();
-            if(p->getZ() < qmin.z) qmin.z = p->getZ();
-            if(p->getX() > qmax.x) qmax.x = p->getX();
-            if(p->getY() > qmax.y) qmax.y = p->getY();
-            if(p->getZ() > qmax.z) qmax.z = p->getZ();
-            points.push_back(Vec3(p->getX(), p->getY(), p->getZ()));
-        }
-    }
-    vec3stop = stopwatch2();
+    //Vec3 qmin(1000, 1000, 1000), qmax(-1000, -1000, -1000);
+    //std::vector<Vec3> points;
+    //Point * p = NULL;
+    //{
+    //    // Calcul du voxel englobant et conversion
+    //    for(int i=0 ; i < nbPoints ; i++) {
+    //        p = pointsDonnees[i];
+    //        if(p->getX() < qmin.x) qmin.x = p->getX();
+    //        if(p->getY() < qmin.y) qmin.y = p->getY();
+    //        if(p->getZ() < qmin.z) qmin.z = p->getZ();
+    //        if(p->getX() > qmax.x) qmax.x = p->getX();
+    //        if(p->getY() > qmax.y) qmax.y = p->getY();
+    //        if(p->getZ() > qmax.z) qmax.z = p->getZ();
+    //        points.push_back(Vec3(p->getX(), p->getY(), p->getZ()));
+    //    }
+    //}
+    //vec3stop = stopwatch2();
 
 #ifdef SIMPLE_OCTREE
     startCreateOctree = stopwatch2();
@@ -145,19 +123,19 @@ int main(int argc, char** argv)
     stopCreateOctree = stopwatch2();
 #endif
 
-    viewer.setWindowTitle("simpleViewer");
-    viewer.setFPSIsDisplayed(true);
-
-    // Make the viewer window visible on screen.
-    viewer.show();
-
-
-
-    //qmin.x = -1; qmin.y = 5; qmin.z = -11;
-    //qmax.x = 0; qmax.y = 6; qmax.z = -10;
-
-    qmin.x = 0; qmin.y = 0; qmin.z = 0;
-    qmax.x = 9; qmin.y = 9; qmin.z = 9;
+    //viewer.setWindowTitle("simpleViewer");
+    //viewer.setFPSIsDisplayed(true);
+    //
+    //// Make the viewer window visible on screen.
+    //viewer.show();
+    //
+    //
+    //
+    ////qmin.x = -1; qmin.y = 5; qmin.z = -11;
+    ////qmax.x = 0; qmax.y = 6; qmax.z = -10;
+    //
+    //qmin.x = 0; qmin.y = 0; qmin.z = 0;
+    //qmax.x = 9; qmin.y = 9; qmin.z = 9;
 
 
 #ifdef SIMPLE_OCTREE
@@ -175,44 +153,44 @@ int main(int argc, char** argv)
         viewer.m_afficher[i] = new Point(data.x, data.y, data.z);
     }
 #else
-    std::vector<int> champDeVision;
-    startNaiveQuery = stopwatch2();
-    testNaive(points, qmin, qmax, champDeVision);
-    stopNaiveQuery = stopwatch2();
-
-    viewer.m_tailleAfficher = champDeVision.size();
-    Point ** affichage = new Point*[viewer.m_tailleAfficher];
-
-    startResize = stopwatch2();
+    //std::vector<int> champDeVision;
+    //startNaiveQuery = stopwatch2();
+    //testNaive(points, qmin, qmax, champDeVision);
+    //stopNaiveQuery = stopwatch2();
+    //
+    //viewer.m_tailleAfficher = champDeVision.size();
+    //Point ** affichage = new Point*[viewer.m_tailleAfficher];
+    //
+    //startResize = stopwatch2();
     //for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
     //    pointsDonnees[i]->setX(pointsDonnees[i]->getX() /10);
     //    pointsDonnees[i]->setY(pointsDonnees[i]->getY() /10);
     //    pointsDonnees[i]->setZ(pointsDonnees[i]->getZ() /10);
     //}
-    for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
-        affichage[i] = pointsDonnees[champDeVision[i]];
-    }
-    endComputing = stopwatch2();
-
-    viewer.m_afficher = affichage;
+    //for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+    //    affichage[i] = pointsDonnees[champDeVision[i]];
+    //}
+    //endComputing = stopwatch2();
+    //
+    //viewer.m_afficher = affichage;
 #endif
 
-    viewer.qmin = qmin;
-    viewer.qmax = qmax;
-
-
-    qDebug() << "Loading data";
-    qDebug() << "    Reading file in " << stopRead - startRead;
-    qDebug() << "    Total access file time : " << getNP - startOpenFile;
-    qDebug() << "    Converted " << nbPoints << " points in " << vec3stop - vec3start;
+    //viewer.qmin = qmin;
+    //viewer.qmax = qmax;
+    //
+    //
+    //qDebug() << "Loading data";
+    //qDebug() << "    Reading file in " << stopRead - startRead;
+    //qDebug() << "    Total access file time : " << getNP - startOpenFile;
+    //qDebug() << "    Converted " << nbPoints << " points in " << vec3stop - vec3start;
 #ifdef SIMPLE_OCTREE
-    qDebug() << "    Building Octree in " << stopCreateOctree - startCreateOctree;
-    qDebug() << "Query using Octree";
-    qDebug() << "    Result : " << viewer.m_tailleAfficher << " points in " << stopOctreeQuery - startOctreeQuery;
+    //qDebug() << "    Building Octree in " << stopCreateOctree - startCreateOctree;
+    //qDebug() << "Query using Octree";
+    //qDebug() << "    Result : " << viewer.m_tailleAfficher << " points in " << stopOctreeQuery - startOctreeQuery;
 #else
-    qDebug() << "Naive query";
-    qDebug() << "    Result in " << stopNaiveQuery - startNaiveQuery;
-    qDebug() << "    Converted " << viewer.m_tailleAfficher << "points in " << endComputing - startResize;
+    //qDebug() << "Naive query";
+    //qDebug() << "    Result in " << stopNaiveQuery - startNaiveQuery;
+    //qDebug() << "    Converted " << viewer.m_tailleAfficher << "points in " << endComputing - startResize;
 #endif
 
     /* AFFICHAGE DES BOÎTES ENGLOBANTES */
@@ -316,9 +294,9 @@ int main(int argc, char** argv)
     // Run main loop.
     int runCode = application.exec();
 
-    for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
-        delete pointsDonnees[i];
-    }
-    delete pointsDonnees;
+    //for(int i = 0 ; i < viewer.m_tailleAfficher ; i++) {
+    //    delete pointsDonnees[i];
+    //}
+    //delete pointsDonnees;
     return runCode;
 }

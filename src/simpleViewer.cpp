@@ -28,7 +28,8 @@ using namespace std;
 // Draws a spiral
 void Viewer::draw()
 {
-    glTranslatef(-qmin.x, -qmin.y, -qmin.z);
+    glTranslatef(-decalage.x, -decalage.y, -decalage.z);
+    glScalef(echelle, echelle, echelle);
 
     glColor3f(1.0f, 0.0f, 0.0f);
     glPointSize(4);
@@ -37,7 +38,7 @@ void Viewer::draw()
 
 
     for (int i = 0 ; i < m_tailleAfficher ; i++) {
-        glVertex3f(m_afficher[i]->getX(), m_afficher[i]->getY(), m_afficher[i]->getZ());
+        glVertex3f(m_afficher[i]->x, m_afficher[i]->y, m_afficher[i]->z);
     }
 
     glEnd();

@@ -31,8 +31,8 @@ protected :
   virtual void init();
   virtual QString helpString() const;
 public:
-    Point **m_afficher;
+    Vec3 **m_afficher;
     int m_tailleAfficher;
-    Vec3 qmin;
-    Vec3 qmax;
+    Vec3 decalage;
+    float echelle;
 };

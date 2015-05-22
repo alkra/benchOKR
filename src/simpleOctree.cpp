@@ -31,7 +31,7 @@ bool naivePointInBox(const Vec3& point, const Vec3& bmin, const Vec3& bmax) {
         point.z <= bmax.z;
 }
 
-void init(Octree *octree, OctreePoint *octreePoints, std::vector<Vec3> &points, Vec3 &qmin, Vec3 &qmax) {
+void init(Octree *octree, OctreePoint *octreePoints, Vec3 **points, int nPoints, Vec3 &qmin, Vec3 &qmax) {
     // Create a bunch of random points
     //const int nPoints = 1 * 1000 * 1000;
     //for(int i=0; i<nPoints; ++i) {
@@ -40,7 +40,6 @@ void init(Octree *octree, OctreePoint *octreePoints, std::vector<Vec3> &points, 
     //printf("Created %ld points\n", points.size()); fflush(stdout);
 
     // Insert the points into the octree
-    const int nPoints = points.size();
     octreePoints = new OctreePoint[nPoints];
     for(int i=0; i<nPoints; ++i) {
         octreePoints[i].setPosition(points[i]);
@@ -76,7 +75,7 @@ void testNaive(std::vector<Vec3> points, Vec3 qmin, Vec3 qmax, std::vector<int> 
 }
 
 // Query using Octree
-void testOctree(Octree *octree, Vec3 qmin, Vec3 qmax, std::vector<OctreePoint*> results) {
+void testOctree(Octree *octree, Vec3 qmin, Vec3 qmax, std::vector<OctreePoint*> &results) {
     double start = stopwatch();
 
     octree->getPointsInsideBox(qmin, qmax, results);

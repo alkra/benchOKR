@@ -17,7 +17,8 @@ SOURCES += ../src/Arbre.cpp \
     ../src/RTree.cpp \
     ../src/Voxel.cpp \
     ../src/simpleOctree.cpp \
-    ../src/simpleViewer.cpp
+    ../src/simpleViewer.cpp \
+    ../src/mainwindow.cpp
 HEADERS += ../include/Arbre.h \
     ../include/Fichier.h \
     ../include/KdTree.h \
@@ -35,9 +36,13 @@ HEADERS += ../include/Arbre.h \
     ../SimpleOctree/OctreePoint.h \
     ../SimpleOctree/Octree.h \
     ../include/simpleOctree.h \
-    ../include/simpleViewer.h
+    ../include/simpleViewer.h \
+    ../include/mainwindow.h
 
 INCLUDEPATH *= /usr/include
 LIBS *= -L/usr/lib -lQGLViewer
 
 QMAKE_CXXFLAGS += -std=c++11
+
+FORMS += \
+    ../ressources/mainwindow.ui

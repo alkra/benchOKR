@@ -105,13 +105,13 @@ namespace brandonpelfrey {
 					// Re-insert the old point, and insert this new point
 					// (We wouldn't need to insert from the root, because we already
 					// know it's guaranteed to be in this section of the tree)
-					children[getOctantContainingPoint(oldPoint->getPosition())]->insert(oldPoint);
-					children[getOctantContainingPoint(point->getPosition())]->insert(point);
+                    children[getOctantContainingPoint(*(oldPoint->getPosition()))]->insert(oldPoint);
+                    children[getOctantContainingPoint(*(point->getPosition()))]->insert(point);
 				}
 			} else {
 				// We are at an interior node. Insert recursively into the 
 				// appropriate child octant
-				int octant = getOctantContainingPoint(point->getPosition());
+                int octant = getOctantContainingPoint(*(point->getPosition()));
 				children[octant]->insert(point);
 			}
 		}
@@ -124,13 +124,12 @@ namespace brandonpelfrey {
 			// the query bounding box
 			if(isLeafNode()) {
 				if(data!=NULL) {
-					const Vec3& p = data->getPosition();
+                    const Vec3& p = *(data->getPosition());
 					if(p.x>bmax.x || p.y>bmax.y || p.z>bmax.z) return;
 					if(p.x<bmin.x || p.y<bmin.y || p.z<bmin.z) return;
 					results.push_back(data);
 				}
-			} else {
-                qDebug() << origin.x;
+            } else {
 				// We're at an interior node of the tree. We will check to see if
 				// the query bounding box lies outside the octants of this node.
 				for(int i=0; i<8; ++i) {
@@ -152,9 +151,8 @@ namespace brandonpelfrey {
 
 
 
-        void getOrigins(std::vector<Point*> &afficher, int &tailleAfficher) {
-            Point *p = new Point(origin.x, origin.y, origin.z);
-            afficher.push_back(p);
+        void getOrigins(std::vector<Vec3*> &afficher, int &tailleAfficher) {
+            afficher.push_back(&origin);
             tailleAfficher++;
             if(!isLeafNode()) {
                 for(int i = 0 ; i < 8 ; ++i) {
